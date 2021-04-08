@@ -37728,8 +37728,8 @@ var staticRenderFns = [
                 staticStyle: { "margin-bottom": "15px" },
                 attrs: {
                   src: "imagens/logo_iba.png",
-                  width: "150px",
-                  height: "200px"
+                  width: "120px",
+                  height: "170px"
                 }
               }),
               _vm._v(" "),
@@ -37738,8 +37738,8 @@ var staticRenderFns = [
                 staticStyle: { "margin-top": "10px", "margin-right": "-20px" },
                 attrs: {
                   src: "imagens/logo_ebd.jpg",
-                  width: "200px",
-                  height: "250px"
+                  width: "170px",
+                  height: "220px"
                 }
               })
             ]),
@@ -37748,10 +37748,14 @@ var staticRenderFns = [
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-primary btn-block",
+                  staticClass: "btn btn-danger btn-block",
+                  staticStyle: {
+                    "font-size": "30px",
+                    "background-color": "#D30100"
+                  },
                   attrs: { type: "button" }
                 },
-                [_vm._v("Matricule-se")]
+                [_vm._v("Matricule-se!")]
               )
             ])
           ])
