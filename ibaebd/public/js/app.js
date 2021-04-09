@@ -2168,6 +2168,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Home',
@@ -2178,6 +2202,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       isRequesting: false,
       erros: [],
+      sucesso: false,
       matricula: {
         nome: '',
         sobrenome: '',
@@ -2194,7 +2219,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         conversao: '',
         telefones: {
           tel1: '',
-          tel2: ''
+          tel2: null
         },
         endereco: {
           logradouro: '',
@@ -2202,7 +2227,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           num: '',
           cep: '',
           complemento: '',
-          local: ''
+          cidade: ''
         }
       },
       orgaos_emissores: [{
@@ -2373,14 +2398,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         conversao: '',
         telefones: {
           tel1: '',
-          tel2: ''
+          tel2: null
         },
         endereco: {
           logradouro: '',
           bairro: '',
           num: '',
           complemento: '',
-          local: ''
+          cidade: ''
         }
       };
       $('#modalMatricula').modal('show');
@@ -2390,13 +2415,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       this.isRequesting = true;
       axios.get('http://viacep.com.br/ws/' + this.matricula.endereco.cep + '/json').then(function (res) {
-        console.log(res);
         _this.isRequesting = false;
         _this.erros = [];
         _this.matricula.endereco.logradouro = res.data.logradouro;
         _this.matricula.endereco.complemento = res.data.complemento;
         _this.matricula.endereco.bairro = res.data.bairro;
-        _this.matricula.endereco.local = res.data.localidade;
+        _this.matricula.endereco.cidade = res.data.localidade;
       })["catch"](function (err) {
         _this.isRequesting = false;
         console.error(err);
@@ -2408,8 +2432,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       if (confirm('Deseja confirmar a matrícula?')) {
         this.isRequesting = true;
-        axios.post('', this.matricula).then(function () {
+        axios.post('/atualizar', this.matricula).then(function () {
           _this2.isRequesting = false;
+          _this2.sucesso = true;
+          $('.toast').toast('show');
+          alert('Sucesso! Entraremos em contato em breve!');
+          $('#modalMatricula').modal('hide');
         })["catch"](function (err) {
           _this2.isRequesting = false;
           console.error(err);
@@ -2417,8 +2445,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         });
       }
     }
-  },
-  mounted: function mounted() {}
+  }
 });
 
 /***/ }),
@@ -38907,6 +38934,12 @@ var render = function() {
                         _c("input", {
                           directives: [
                             {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.matricula.telefones.tel1,
+                              expression: "matricula.telefones.tel1"
+                            },
+                            {
                               name: "mask",
                               rawName: "v-mask",
                               value: ["(##) ####-####", "(##) #####-####"],
@@ -38919,6 +38952,19 @@ var render = function() {
                             placeholder: "Insira seu Telefone",
                             type: "tel",
                             required: ""
+                          },
+                          domProps: { value: _vm.matricula.telefones.tel1 },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.matricula.telefones,
+                                "tel1",
+                                $event.target.value
+                              )
+                            }
                           }
                         })
                       ])
@@ -38931,17 +38977,17 @@ var render = function() {
                         _c("input", {
                           directives: [
                             {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.matricula.telefones.tel2,
+                              expression: "matricula.telefones.tel2"
+                            },
+                            {
                               name: "mask",
                               rawName: "v-mask",
                               value: ["(##) ####-####", "(##) #####-####"],
                               expression:
                                 "['(##) ####-####', '(##) #####-####']"
-                            },
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.matricula.telefones.tel2,
-                              expression: "matricula.telefones.tel2"
                             }
                           ],
                           staticClass: "form-control form-control-sm",
@@ -39120,7 +39166,7 @@ var render = function() {
                           staticClass: "form-control form-control-sm",
                           attrs: {
                             placeholder: "Insira o Número",
-                            type: "number",
+                            type: "text",
                             required: ""
                           },
                           domProps: { value: _vm.matricula.endereco.num },
@@ -39151,8 +39197,8 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.matricula.endereco.local,
-                              expression: "matricula.endereco.local"
+                              value: _vm.matricula.endereco.cidade,
+                              expression: "matricula.endereco.cidade"
                             }
                           ],
                           staticClass: "form-control form-control-sm",
@@ -39161,7 +39207,7 @@ var render = function() {
                             type: "text",
                             required: ""
                           },
-                          domProps: { value: _vm.matricula.endereco.local },
+                          domProps: { value: _vm.matricula.endereco.cidade },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
@@ -39169,7 +39215,7 @@ var render = function() {
                               }
                               _vm.$set(
                                 _vm.matricula.endereco,
-                                "local",
+                                "cidade",
                                 $event.target.value
                               )
                             }
@@ -39256,12 +39302,18 @@ var render = function() {
                 2
               ),
               _vm._v(" "),
+              _vm._m(3),
+              _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
                 _c(
                   "button",
                   {
                     staticClass: "btn btn-secondary",
-                    attrs: { type: "button", "data-dismiss": "modal" }
+                    attrs: {
+                      type: "button",
+                      disabled: _vm.isRequesting,
+                      "data-dismiss": "modal"
+                    }
                   },
                   [_vm._v("Fechar")]
                 ),
@@ -39270,7 +39322,11 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-primary",
-                    attrs: { type: "button", loading: _vm.isRequesting }
+                    attrs: {
+                      type: "button",
+                      disabled: _vm.isRequesting == true
+                    },
+                    on: { click: _vm.cadastrar }
                   },
                   [_vm._v("Matricular-se")]
                 )
@@ -39279,7 +39335,57 @@ var render = function() {
           ]
         )
       ]
-    )
+    ),
+    _vm._v(" "),
+    _vm.sucesso == true
+      ? _c(
+          "div",
+          {
+            staticClass: "toast hide",
+            staticStyle: { position: "absolute", bottom: "0", left: "0" },
+            attrs: {
+              "data-autohide": "false",
+              role: "alert",
+              "aria-live": "assertive",
+              "aria-atomic": "true"
+            }
+          },
+          [
+            _c("div", { staticClass: "toast-header" }, [
+              _c("img", {
+                staticClass: "rounded mr-2",
+                attrs: { src: "imagens/logo_iba.png", alt: "..." }
+              }),
+              _vm._v(" "),
+              _c("strong", { staticClass: "mr-auto" }, [_vm._v("Sucesso!!!")]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "ml-2 mb-1 close",
+                  attrs: {
+                    type: "button",
+                    "data-dismiss": "toast",
+                    "aria-label": "Close"
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.sucesso = false
+                    }
+                  }
+                },
+                [
+                  _c("span", { attrs: { "aria-hidden": "true" } }, [
+                    _vm._v("×")
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _vm._m(4)
+          ]
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -39342,6 +39448,34 @@ var staticRenderFns = [
       },
       [_c("i", { staticClass: "ion-ios-close-empty" })]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "row", staticStyle: { "margin-right": "10px" } },
+      [
+        _c("div", { staticClass: "col col-12 col-md-12" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("p", { staticClass: "text-danger" }, [_vm._v("* Obrigatório!")])
+          ])
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "toast-body" }, [
+      _vm._v("\n                    Matrícula efetuada com sucesso. "),
+      _c("hr"),
+      _vm._v(
+        "\n                    Em breve entraremos em contato!\n                "
+      )
+    ])
   }
 ]
 render._withStripped = true

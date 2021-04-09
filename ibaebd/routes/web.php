@@ -19,4 +19,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group([],function(){
+    Route::post('/atualizar','MatriculaController@atualizar');
+});

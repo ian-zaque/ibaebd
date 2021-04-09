@@ -149,13 +149,15 @@
                             <div class="col col-3 col-md-3">
 								<div class="form-group">
 									<label>Telefone 1</label>
-									<input class="form-control form-control-sm" v-mask="['(##) ####-####', '(##) #####-####']" placeholder="Insira seu Telefone" type="tel" required>
+									<input class="form-control form-control-sm" v-model="matricula.telefones.tel1"
+                                            v-mask="['(##) ####-####', '(##) #####-####']" placeholder="Insira seu Telefone" type="tel" required>
                                 </div>
                             </div>
                             <div class="col col-3 col-md-3">
 								<div class="form-group">
 									<label>Telefone 2</label>
-									<input class="form-control form-control-sm" v-mask="['(##) ####-####', '(##) #####-####']" placeholder="Outro telefone (opcional)" type="tel" v-model="matricula.telefones.tel2">
+									<input class="form-control form-control-sm" v-model="matricula.telefones.tel2" 
+                                        v-mask="['(##) ####-####', '(##) #####-####']" placeholder="Outro telefone (opcional)" type="tel">
 								</div>
                             </div>
                             <div class="col col-3 col-md-3">
@@ -185,7 +187,7 @@
                             <div class="col col-3 col-md-3">
 								<div class="form-group">
 									<label>Número</label>
-									<input class="form-control form-control-sm" placeholder="Insira o Número" type="number" v-model="matricula.endereco.num" required>
+									<input class="form-control form-control-sm" placeholder="Insira o Número" type="text" v-model="matricula.endereco.num" required>
 								</div>
 							</div>
                         </div>
@@ -193,7 +195,7 @@
                             <div class="col col-4 col-md-4">
 								<div class="form-group">
 									<label>Cidade</label>
-									<input class="form-control form-control-sm" placeholder="Insira a Cidade" type="text" v-model="matricula.endereco.local" required>
+									<input class="form-control form-control-sm" placeholder="Insira a Cidade" type="text" v-model="matricula.endereco.cidade" required>
 								</div>
 							</div>
                             <div class="col col-4 col-md-4">
@@ -210,15 +212,37 @@
 							</div>
                         </div>
                     </div>
+                    <div class="row" style="margin-right:10px;">
+                        <div class="col col-12 col-md-12">
+                            <div class="form-group">
+                                <p class="text-danger">* Obrigatório!</p>
+                            </div>
+                        </div>
+                    </div>
 
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button> 
-						<button type="button" :loading="isRequesting" class="btn btn-primary">Matricular-se</button>
+						<button type="button" class="btn btn-secondary" :disabled="isRequesting" data-dismiss="modal">Fechar</button> 
+						<button type="button" @click="cadastrar" :disabled="isRequesting==true" class="btn btn-primary">Matricular-se</button>
 					</div>
 		    	</div>
 		  	</div>
-		</div>
-		<!--Fim do MODAL MATRICULA -->
+		</div> <!--Fim do MODAL MATRICULA -->
+
+        <!-- <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;"> -->
+            <div v-if="sucesso==true" style="position: absolute; bottom: 0; left: 0;" class="toast hide" data-autohide="false" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <img src="imagens/logo_iba.png" class="rounded mr-2" alt="...">
+                    <strong class="mr-auto">Sucesso!!!</strong>
+                    <button type="button" @click="sucesso=false" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    Matrícula efetuada com sucesso. <hr>
+                    Em breve entraremos em contato!
+                </div>
+            </div>
+        <!-- </div> -->
     </div>
 </template>
 <script>
@@ -231,11 +255,11 @@ export default {
 
     data() {
         return {
-            isRequesting:false, erros:[], 
+            isRequesting:false, erros:[], sucesso:false,
             matricula:{
                 nome:'', sobrenome:'', cpf:'', rg:'', orgao_emissor:'', uf:'', nascimento:'',
                 email:'', isEvangelico:false, isMembro:false, classe:'batismo', sexo:false, conversao:'',
-                telefones:{tel1:'',tel2:'',}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', local:''},
+                telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:''},
             },
             orgaos_emissores:[
                 {sigla:'SSP', nome:'Secretaria de Segurança Pública'}, {sigla:'PM', nome:'Polícia Militar'},
@@ -275,7 +299,7 @@ export default {
             this.matricula={
                 nome:'', sobrenome:'', cpf:'', rg:'', orgao_emissor:'', uf:'', nascimento:'',
                 email:'', isEvangelico:false, isMembro:false, classe:'batismo', sexo:false, conversao:'',
-                telefones:{tel1:'',tel2:'',}, endereco:{logradouro:'', bairro:'', num:'', complemento:'', local:'',},
+                telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', complemento:'', cidade:'',},
             };
             $('#modalMatricula').modal('show');
         },
@@ -284,11 +308,11 @@ export default {
             this.isRequesting=true;
             axios.get('http://viacep.com.br/ws/'+this.matricula.endereco.cep+'/json')
                 .then(res=>{
-                    console.log(res); this.isRequesting=false; this.erros=[];
+                    this.isRequesting=false; this.erros=[];
                     this.matricula.endereco.logradouro = res.data.logradouro;
                     this.matricula.endereco.complemento = res.data.complemento;
                     this.matricula.endereco.bairro = res.data.bairro;
-                    this.matricula.endereco.local = res.data.localidade;
+                    this.matricula.endereco.cidade = res.data.localidade;
                 })
                 .catch(err=>{
                     this.isRequesting=false; console.error(err); this.erros=err;
@@ -298,9 +322,11 @@ export default {
         cadastrar(){
             if(confirm('Deseja confirmar a matrícula?')){
                 this.isRequesting=true;
-                axios.post('',this.matricula)
+                axios.post('/atualizar',this.matricula)
                     .then(()=>{
-                        this.isRequesting=false;
+                        this.isRequesting=false; this.sucesso=true; $('.toast').toast('show');
+                        alert('Sucesso! Entraremos em contato em breve!')
+                        $('#modalMatricula').modal('hide');
                     })
                     .catch(err=>{
                         this.isRequesting=false; console.error(err); this.erros=err;
@@ -308,9 +334,6 @@ export default {
             }
         },
 
-    },
-
-    mounted(){
     },
 
 }
