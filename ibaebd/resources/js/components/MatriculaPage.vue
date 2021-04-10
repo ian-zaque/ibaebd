@@ -311,10 +311,10 @@ export default {
 
         cadastrar(){
             if(confirm('Deseja confirmar a matrícula?')){
-                this.isRequesting=true;
+                this.isRequesting=true; this.erros={};
                 axios.post('/atualizar',this.matricula)
                     .then(res=>{
-                        this.isRequesting=false; this.sucesso=true; $('.toast').toast('show');
+                        this.isRequesting=false; this.sucesso=true; this.erros={};
                         alert('Matrícula efetuada com sucesso!!!'); $('#modalMatricula').modal('hide');
                         if(this.edicao!=null){ this.$emit('retornoMatriculas', res.data); }
                     })
