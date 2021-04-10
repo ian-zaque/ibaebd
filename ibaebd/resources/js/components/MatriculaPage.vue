@@ -314,7 +314,7 @@ export default {
                 this.isRequesting=true; this.erros={};
                 axios.post('/atualizar',this.matricula)
                     .then(res=>{
-                        this.isRequesting=false; this.sucesso=true; this.erros={};
+                        this.isRequesting=false; this.sucesso=true; this.erros=null;
                         alert('Matrícula efetuada com sucesso!!!'); $('#modalMatricula').modal('hide');
                         if(this.edicao!=null){ this.$emit('retornoMatriculas', res.data); }
                     })

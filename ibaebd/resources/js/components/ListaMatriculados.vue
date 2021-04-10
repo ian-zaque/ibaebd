@@ -78,7 +78,7 @@ export default {
         getMatriculas(){
             this.isRequesting=true;
             axios.get('/getMatriculas')
-                .then(res=>{ this.isRequesting=false; this.matriculados=res.data; })
+                .then(res=>{ this.isRequesting=false; this.matriculados=res.data; this.erros=null; })
                 .catch(err=>{ this.isRequesting=false; console.error(err); })
         },
 
@@ -86,8 +86,8 @@ export default {
             if(confirm('Deseja deletar esta Matrícula?')){
                 this.isRequesting=true;
                 axios.delete('/deletar/'+id)
-                    .then(res=>{ this.isRequesting=false; this.matriculados=res.data; })
-                    .catch(err=>{ this.isRequesting=false; console.error(err); })
+                    .then(res=>{ this.isRequesting=false; this.matriculados=res.data; this.erros=null; })
+                    .catch(err=>{ this.isRequesting=false; console.error(err); this.erros=null; })
             }
         },
 
@@ -101,12 +101,12 @@ export default {
             $('#modalMatricula').modal('hide');
         },
 
-        editarMatricula(item){ this.matricula = {...item};  $('#modalMatricula').modal('show'); },
+        editarMatricula(item){ this.erros=null; this.matricula = {...item};  $('#modalMatricula').modal('show'); },
 
         attMatriculas(val){ this.matriculados = val; },
 
         abrirModalMatricula(){
-            this.erros=[]; delete this.matricula.id;
+            this.erros=null; delete this.matricula.id;
             this.matricula={
                 nome:'', sobrenome:'', cpf:'', rg:'', orgao_emissor:'', uf:'', nascimento:'',
                 email:'', isEvangelico:false, isMembro:false, classe:'batismo', sexo:false, conversao:'',
