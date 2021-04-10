@@ -5,7 +5,7 @@
 		    	<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="ModalMatriculaLabel">
-                            {{edicao.id==null||edicao.id==undefined?'Matrícula EBDiscipuladora':'Editando Matricula de '+ edicao.nome}}
+                            {{!edicao?'Matrícula EBDiscipuladora':'Editando Matricula de '+ edicao.nome}}
                         </h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
