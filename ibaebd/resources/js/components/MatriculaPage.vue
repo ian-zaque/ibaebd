@@ -5,7 +5,7 @@
 		    	<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="ModalMatriculaLabel">
-                            {{edicao==null?'Matrícula EBDiscipuladora':'Editando Matricula de '+ edicao.nome}}
+                            {{edicao==null||edicao.length==0?'Matrícula EBDiscipuladora':'Editando Matricula de '+ edicao.nome}}
                         </h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
@@ -83,11 +83,11 @@
                                 <label>Sexo*</label>
 								<div class="form-group">
 									<div class="form-check form-check-inline">
-                                        <input v-model="matricula.sexo" class="form-check-input" type="radio" name="radio_btn_sexoF" id="radio_btn_sexoF" :value="1">
+                                        <input v-model="matricula.sexo" class="form-check-input" type="radio" name="radio_btn_sexoF" id="radio_btn_sexoF" :value="true">
                                         <label class="form-check-label" for="radio_btn_sexoF">Feminino</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input v-model="matricula.sexo" class="form-check-input" type="radio" name="radio_btn_sexoM" id="radio_btn_sexoM" :value="0">
+                                        <input v-model="matricula.sexo" class="form-check-input" type="radio" name="radio_btn_sexoM" id="radio_btn_sexoM" :value="false">
                                         <label class="form-check-label" for="radio_btn_sexoM">Masculino</label>
                                     </div>
 								</div>
@@ -97,11 +97,11 @@
                                 <label>Sou evangélico?*</label>
 								<div class="form-group">
 									<div class="form-check form-check-inline">
-                                        <input v-model="matricula.isEvangelico" class="form-check-input" type="radio" name="radio_btn_evglS" id="radio_btn_evglS" :value="1">
+                                        <input v-model="matricula.isEvangelico" class="form-check-input" type="radio" name="radio_btn_evglS" id="radio_btn_evglS" :value="true">
                                         <label class="form-check-label" for="radio_btn_evglS">Sim</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input v-model="matricula.isEvangelico" class="form-check-input" type="radio" name="radio_btn_evglN" id="radio_btn_evglN" :value="0">
+                                        <input v-model="matricula.isEvangelico" class="form-check-input" type="radio" name="radio_btn_evglN" id="radio_btn_evglN" :value="false">
                                         <label class="form-check-label" for="radio_btn_evglN">Não</label>
                                     </div>
 								</div>
@@ -111,11 +111,11 @@
                                 <label>Sou Membro da IBA?*</label>
 								<div class="form-group">
 									<div class="form-check form-check-inline">
-                                        <input v-model="matricula.isMembro" class="form-check-input" type="radio" name="radio_btn_mbrS" id="radio_btn_mbrS" :value="1">
+                                        <input v-model="matricula.isMembro" class="form-check-input" type="radio" name="radio_btn_mbrS" id="radio_btn_mbrS" :value="true">
                                         <label class="form-check-label" for="radio_btn_mbrS">Sim</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input v-model="matricula.isMembro" class="form-check-input" type="radio" name="radio_btn_mbrN" id="radio_btn_mbrN" :value="0">
+                                        <input v-model="matricula.isMembro" class="form-check-input" type="radio" name="radio_btn_mbrN" id="radio_btn_mbrN" :value="false">
                                         <label class="form-check-label" for="radio_btn_mbrN">Não</label>
                                     </div>
 								</div>
