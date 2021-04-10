@@ -5,7 +5,7 @@
 		    	<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="ModalMatriculaLabel">
-                            {{edicao==null?'Matrícula EBDiscipuladora':'Editando '+edicao.nome}}
+                            {{edicao==null?'Matrícula EBDiscipuladora':'Editando Matricula de '+ edicao.nome}}
                         </h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
@@ -223,7 +223,9 @@
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" :disabled="isRequesting" data-dismiss="modal">Fechar</button> 
-						<button type="button" class="btn btn-primary" @click="cadastrar" :disabled="isRequesting==true">Matricular</button>
+						<button type="button" class="btn btn-primary" @click="cadastrar" :disabled="isRequesting==true">
+                            {{edicao==null?'Matricular':'Atualizar'}}
+                        </button>
 					</div>
 		    	</div>
 		  	</div>

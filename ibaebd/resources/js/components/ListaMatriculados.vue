@@ -6,11 +6,14 @@
 				<div class="input-group-append">
                     <matricula-page :edicao="matricula" @retornoMatriculas="attMatriculas"></matricula-page>
 
-					<button class="btn btn-primary" @click="abrirModalMatricula()" type="button" data-toggle="tooltip" data-placement="bottom" title="Matricular">
+					<button @click="abrirModalMatricula()" class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="bottom" title="Matricular">
 						<i class="fas fa-plus fa-lg"></i>
 					</button>
-                    <button class="btn btn-outline-secondary" @click="getMatriculas" style="margin-left:7px;" type="button" data-toggle="tooltip" data-placement="bottom" title="Recarregar Matriculados">
+                    <button @click="getMatriculas" class="btn btn-outline-secondary" style="margin-left:7px;" type="button" data-toggle="tooltip" data-placement="bottom" title="Recarregar Matriculados">
                         <i class="fas fa-redo fa-lg"></i>
+                    </button>
+                     <button @click="baixarPlanilha" class="btn btn-outline-secondary" style="margin-left:7px;" type="button" data-toggle="tooltip" data-placement="bottom" title="Baixar Planilha de Matriculados">
+                        <i class="fas fa-table fa-lg"></i>
                     </button>
 				</div>
             </div>
@@ -38,11 +41,14 @@
                                     <td>{{mat.classe=='batismo'?'Batismo':'erro'}}</td>
 									<td class="content-right">
 										<div class="input-group-append justify-content-right" id="button-addon4">
-											<button @click="editarMatricula(mat)" type="button" style="margin-right:4px;" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Editar">
-												<i class="fas fa-edit fa-fw"></i>
+                                            <button type="button" style="margin-right:4px;" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" :title="'Baixar Ficha de '+mat.nome">
+                                                <i class="fas fa-id-badge fa-lg"></i>
+                                            </button>
+											<button @click="editarMatricula(mat)" type="button" style="margin-right:4px;" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Editar">
+												<i class="fas fa-edit fa-lg"></i>
 											</button>
-											<button @click="deletar(mat.id)" :disabled="isRequesting==true" type="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Deletar">
-												<i class="fas fa-trash-alt fa-fw"></i>
+											<button @click="deletar(mat.id)" :disabled="isRequesting==true" type="button" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="bottom" title="Deletar">
+												<i class="fas fa-trash-alt fa-lg"></i>
 											</button>
 										</div>
 									</td>
@@ -96,6 +102,42 @@ export default {
                 telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:'',},
             };
             $('#modalMatricula').modal('show');
+        },
+
+        baixarPlanilha(){
+            var mat = this.matriculados.map(function(val){
+                return [
+                    ''+val.id, 
+                    val.nome+' '+val.sobrenome, 
+                    val.sexo==0?'Masculino':'Feminino', 
+                    val.cpf, 
+                    val.rg, 
+                    new Date(val.nascimento).toLocaleDateString(),
+                    val.email==null||val.email==''?'-':val.email,
+                    ''+val.telefones.tel1,
+                    val.telefones.tel2==''||val.telefones.tel2==null?'-':''+val.telefones.tel2,
+                    val.conversao==null||val.conversao==''?'-': new Date(val.conversao).toLocaleDateString().replace('/','-'),
+                    val.isEvangelico==0?'Nao':'Sim',
+                    val.isMembro==0?'Nao':'Sim',
+                    val.endereco.logradouro +', '+ val.endereco.num+', '+ val.endereco.bairro,
+                    val.endereco.cidade,
+                    val.endereco.cep==''||val.endereco.cep==null?'':val.endereco.cep,
+                    val.endereco.complemento==''||val.endereco.complemento==null?'':val.endereco.complemento
+                ];
+            });
+
+            mat.unshift([
+                'ID','Nome','Sexo','CPF','RG','Data de Nascimento','Email','Telefone 1','Telefone 2',
+                'Data de Conversao', 'Evangelico?', 'Membro?', 'Endereco', 'Cidade', 'CEP', 'Complemento',
+            ]);
+            let csvContent = "data:text/csv;charset=utf-8,"  + mat.map(e => e.join(";")).join("\n");
+            var encodedUri = encodeURI(csvContent);
+            var link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "Planilha_Matricula_IBA_EBD.csv");
+            document.body.appendChild(link);
+
+            link.click();
         },
 
     },

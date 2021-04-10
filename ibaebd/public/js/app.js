@@ -2134,6 +2134,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ListaMatriculados',
   data: function data() {
@@ -2208,6 +2214,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       };
       $('#modalMatricula').modal('show');
+    },
+    baixarPlanilha: function baixarPlanilha() {
+      var mat = this.matriculados.map(function (val) {
+        return ['' + val.id, val.nome + ' ' + val.sobrenome, val.sexo == 0 ? 'Masculino' : 'Feminino', val.cpf, val.rg, new Date(val.nascimento).toLocaleDateString(), val.email == null || val.email == '' ? '-' : val.email, '' + val.telefones.tel1, val.telefones.tel2 == '' || val.telefones.tel2 == null ? '-' : '' + val.telefones.tel2, val.conversao == null || val.conversao == '' ? '-' : new Date(val.conversao).toLocaleDateString().replace('/', '-'), val.isEvangelico == 0 ? 'Nao' : 'Sim', val.isMembro == 0 ? 'Nao' : 'Sim', val.endereco.logradouro + ', ' + val.endereco.num + ', ' + val.endereco.bairro, val.endereco.cidade, val.endereco.cep == '' || val.endereco.cep == null ? '' : val.endereco.cep, val.endereco.complemento == '' || val.endereco.complemento == null ? '' : val.endereco.complemento];
+      });
+      mat.unshift(['ID', 'Nome', 'Sexo', 'CPF', 'RG', 'Data de Nascimento', 'Email', 'Telefone 1', 'Telefone 2', 'Data de Conversao', 'Evangelico?', 'Membro?', 'Endereco', 'Cidade', 'CEP', 'Complemento']);
+      var csvContent = "data:text/csv;charset=utf-8," + mat.map(function (e) {
+        return e.join(";");
+      }).join("\n");
+      var encodedUri = encodeURI(csvContent);
+      var link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", "Planilha_Matricula_IBA_EBD.csv");
+      document.body.appendChild(link);
+      link.click();
     }
   },
   mounted: function mounted() {
@@ -2232,6 +2253,8 @@ var _watch;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -38637,6 +38660,22 @@ var render = function() {
                   on: { click: _vm.getMatriculas }
                 },
                 [_c("i", { staticClass: "fas fa-redo fa-lg" })]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-secondary",
+                  staticStyle: { "margin-left": "7px" },
+                  attrs: {
+                    type: "button",
+                    "data-toggle": "tooltip",
+                    "data-placement": "bottom",
+                    title: "Baixar Planilha de Matriculados"
+                  },
+                  on: { click: _vm.baixarPlanilha }
+                },
+                [_c("i", { staticClass: "fas fa-table fa-lg" })]
               )
             ],
             1
@@ -38690,8 +38729,26 @@ var render = function() {
                                 _c(
                                   "button",
                                   {
-                                    staticClass:
-                                      "btn btn-outline-secondary btn-sm",
+                                    staticClass: "btn btn-outline-secondary",
+                                    staticStyle: { "margin-right": "4px" },
+                                    attrs: {
+                                      type: "button",
+                                      "data-toggle": "tooltip",
+                                      "data-placement": "bottom",
+                                      title: "Baixar Ficha de " + mat.nome
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-id-badge fa-lg"
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-outline-secondary",
                                     staticStyle: { "margin-right": "4px" },
                                     attrs: {
                                       type: "button",
@@ -38707,7 +38764,7 @@ var render = function() {
                                   },
                                   [
                                     _c("i", {
-                                      staticClass: "fas fa-edit fa-fw"
+                                      staticClass: "fas fa-edit fa-lg"
                                     })
                                   ]
                                 ),
@@ -38715,8 +38772,7 @@ var render = function() {
                                 _c(
                                   "button",
                                   {
-                                    staticClass:
-                                      "btn btn-outline-danger btn-sm",
+                                    staticClass: "btn btn-outline-danger",
                                     attrs: {
                                       disabled: _vm.isRequesting == true,
                                       type: "button",
@@ -38732,7 +38788,7 @@ var render = function() {
                                   },
                                   [
                                     _c("i", {
-                                      staticClass: "fas fa-trash-alt fa-fw"
+                                      staticClass: "fas fa-trash-alt fa-lg"
                                     })
                                   ]
                                 )
@@ -38834,7 +38890,7 @@ var render = function() {
                         _vm._s(
                           _vm.edicao == null
                             ? "Matrícula EBDiscipuladora"
-                            : "Editando " + _vm.edicao.nome
+                            : "Editando Matricula de " + _vm.edicao.nome
                         ) +
                         "\n                        "
                     )
@@ -40173,7 +40229,15 @@ var render = function() {
                     },
                     on: { click: _vm.cadastrar }
                   },
-                  [_vm._v("Matricular")]
+                  [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(
+                          _vm.edicao == null ? "Matricular" : "Atualizar"
+                        ) +
+                        "\n                        "
+                    )
+                  ]
                 )
               ])
             ])
