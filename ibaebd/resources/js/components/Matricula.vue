@@ -35,14 +35,14 @@
 								<div class="form-group">
 									<label>Nome *</label>
 									<input class="form-control form-control-sm" placeholder="Insira seu Nome" type="text" v-model="matricula.nome" required>
-                                    <small class="text-danger" style="font-size:10px" :hidden="(!erros.nome)">{{erros.nome}}</small>
+                                    <small v-if="erros.nome" class="text-danger" style="font-size:10px" :hidden="(!erros.nome)">{{erros.nome.toString()}}</small>
                                 </div>
 							</div>
 							<div class="col col-6 col-md-6">
 								<div class="form-group">
 									<label>Sobrenome *</label>
 									<input class="form-control form-control-sm" placeholder="Insira seu Sobrenome" type="text" v-model="matricula.sobrenome" required>
-                                    <small class="text-danger" style="font-size:10px" :hidden="(!erros.sobrenome)">{{erros.sobrenome}}</small>
+                                    <small v-if="erros.sobrenome" class="text-danger" style="font-size:10px" :hidden="(!erros.sobrenome)">{{erros.sobrenome.toString()}}</small>
                                 </div>
 							</div>
 						</div>
@@ -52,7 +52,7 @@
 									<label>CPF *</label>
 									<input class="form-control form-control-sm" v-mask="['###.###.###-##']" placeholder="Insira seu CPF" type="text" 
                                             v-model="matricula.cpf" required>
-                                    <small class="text-danger" style="font-size:10px" :hidden="(!erros.cpf)">{{erros.cpf}}</small>
+                                    <small v-if="erros.cpf" class="text-danger" style="font-size:10px" :hidden="(!erros.cpf)">{{erros.cpf.toString()}}</small>
 								</div>
 							</div>
                             <div class="col col-6 col-md-6">
@@ -60,7 +60,7 @@
 									<label>Data de Nascimento *</label>
 									<input class="form-control form-control-sm" placeholder="Insira sua data de nascimento" type="date" 
                                             v-model="matricula.nascimento" required>
-                                    <small class="text-danger" style="font-size:10px" :hidden="(!erros.nascimento)">{{erros.nascimento}}</small>
+                                    <small v-if="erros.nascimento" class="text-danger" style="font-size:10px" :hidden="(!erros.nascimento)">{{erros.nascimento.toString()}}</small>
 								</div>
 							</div>
 						</div>
@@ -70,7 +70,7 @@
 									<label>RG *</label>
 									<input class="form-control form-control-sm" v-mask="['##.###.###-#','##.###.###-##']" placeholder="Insira seu RG"
                                             type="text" v-model="matricula.rg" required>
-                                    <small class="text-danger" style="font-size:10px" :hidden="(!erros.rg)">{{erros.rg}}</small>
+                                    <small v-if="erros.rg" class="text-danger" style="font-size:10px" :hidden="(!erros.rg)">{{erros.rg.toString()}}</small>
 								</div>
 							</div>
                             <div class="col col-4 col-md-4">
@@ -80,7 +80,7 @@
                                         <option selected hidden value="">Selecione o Órgão Emissor</option>
                                         <option v-for="(org,idx) in orgaos_emissores" :key="idx" :value="org.sigla">{{org.sigla +' - '+ org.nome}}</option>
                                     </select>
-                                    <small class="text-danger" style="font-size:10px" :hidden="(!erros.orgao_emissor)">{{erros.orgao_emissor}}</small>
+                                    <small v-if="erros.orgao_emissor" class="text-danger" style="font-size:10px" :hidden="(!erros.orgao_emissor)">{{erros.orgao_emissor.toString()}}</small>
                                 </div>
 							</div>
                             <div class="col col-4 col-md-4">
@@ -90,7 +90,7 @@
                                         <option selected hidden value="">Selecione a Unidade Federal</option>
                                         <option v-for="(u,idx) in ufs" :key="idx" :value="u.key">{{u.key +' - '+ u.value}}</option>
                                     </select>
-                                    <small class="text-danger" style="font-size:10px" :hidden="(!erros.uf)">{{erros.uf}}</small>
+                                    <small v-if="erros.uf" class="text-danger" style="font-size:10px" :hidden="(!erros.uf)">{{erros.uf.toString()}}</small>
 								</div>
 							</div>
                         </div>
@@ -108,7 +108,7 @@
                                         <label class="form-check-label" for="radio_btn_sexoM">Masculino</label>
                                     </div>
 								</div>
-                                <small class="text-danger" style="font-size:10px" :hidden="(!erros.sexo)">{{erros.sexo}}</small>
+                                <small v-if="erros.sexo" class="text-danger" style="font-size:10px" :hidden="(!erros.sexo)">{{erros.sexo.toString()}}</small>
 							</div>
                             <div class="col col-3 col-md-3">
                                 <label>Sou evangélico? *</label>
@@ -122,7 +122,7 @@
                                         <label class="form-check-label" for="radio_btn_evglN">Não</label>
                                     </div>
 								</div>
-                                <small class="text-danger" style="font-size:10px" :hidden="(!erros.isEvangelico)">{{erros.isEvangelico}}</small>
+                                <small v-if="erros.isEvangelico" class="text-danger" style="font-size:10px" :hidden="(!erros.isEvangelico)">{{erros.isEvangelico.toString()}}</small>
 							</div>
                             <div class="col col-3 col-md-3">
                                 <label>Sou Membro da IBA? *</label>
@@ -136,13 +136,13 @@
                                         <label class="form-check-label" for="radio_btn_mbrN">Não</label>
                                     </div>
 								</div>
-                                <small class="text-danger" style="font-size:10px" :hidden="(!erros.isMembro)">{{erros.isMembro}}</small>
+                                <small v-if="erros.isMembro" class="text-danger" style="font-size:10px" :hidden="(!erros.isMembro)">{{erros.isMembro.toString()}}</small>
 							</div>
                             <div class="col col-3 col-md-3">
 								<div class="form-group">
 									<label>Data de Conversão</label>
-									<input class="form-control form-control-sm" placeholder="Data de conversão (opcional)" type="date" v-model="matricula.conversao">
-                                    <small class="text-danger" style="font-size:10px" :hidden="(!erros.conversao)">{{erros.conversao}}</small>
+									<input :class="'form-control form-control-sm'" placeholder="Data de conversão (opcional)" type="date" v-model="matricula.conversao">
+                                    <small v-if="erros.conversao" class="text-danger" style="font-size:10px" :hidden="(!erros.conversao)">{{erros.conversao.toString()}}</small>
                                 </div>
 							</div>
                         </div>
@@ -151,7 +151,7 @@
 								<div class="form-group">
 									<label>E-mail</label>
 									<input class="form-control form-control-sm" placeholder="Insira seu E-mail" type="email" v-model="matricula.email" required>
-                                    <small class="text-danger" style="font-size:10px" :hidden="(!erros.email)">{{erros.email}}</small>
+                                    <small v-if="erros.email" class="text-danger" style="font-size:10px" :hidden="(!erros.email)">{{erros.email.toString()}}</small>
                                 </div>
                             </div>
                             <div class="col col-3 col-md-3">
@@ -159,7 +159,7 @@
 									<label>Telefone 1 *</label>
 									<input class="form-control form-control-sm" v-model="matricula.telefones.tel1"
                                             v-mask="['(##) ####-####', '(##) #####-####']" placeholder="Insira seu Telefone" type="tel" required>
-                                    <small v-if="erros.telefones" class="text-danger" style="font-size:10px" :hidden="(!erros['telefones.tel1'])">{{erros['telefones.tel1']}}</small>
+                                    <small v-if="erros['telefones.tel1']" class="text-danger" style="font-size:10px" :hidden="(!erros['telefones.tel1'])">{{erros['telefones.tel1'].toString()}}</small>
                                 </div>
                             </div>
                             <div class="col col-3 col-md-3">
@@ -167,7 +167,7 @@
 									<label>Telefone 2</label>
 									<input class="form-control form-control-sm" v-model="matricula.telefones.tel2" 
                                             v-mask="['(##) ####-####', '(##) #####-####']" placeholder="Outro telefone (opcional)" type="tel">
-                                    <small v-if="erros.telefones" class="text-danger" style="font-size:10px" :hidden="(!erros['telefones.tel2'])">{{erros['telefones.tel2']}}</small>
+                                    <small v-if="erros['telefones.tel2']" class="text-danger" style="font-size:10px" :hidden="(!erros['telefones.tel2'])">{{erros['telefones.tel2'].toString()}}</small>
 								</div>
                             </div>
                             <div class="col col-3 col-md-3">
@@ -188,7 +188,7 @@
 									<label>Logradouro *</label>
 									<input class="form-control form-control-sm" placeholder="Insira o Logradouro" type="text"
                                             v-model="matricula.endereco.logradouro" required>
-                                    <small v-if="erros.endereco" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.logradouro'])">{{erros['endereco.logradouro']}}</small>
+                                    <small v-if="erros['endereco.logradouro']" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.logradouro'])">{{erros['endereco.logradouro'].toString()}}</small>
 								</div>
 							</div>
                             <div class="col col-3 col-md-3">
@@ -196,14 +196,14 @@
 									<label>CEP</label>
 									<input class="form-control form-control-sm" v-mask="'#####-###'" placeholder="Insira o CEP" type="text" 
                                         v-model="matricula.endereco.cep">
-                                    <small v-if="erros.endereco" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.cep'])">{{erros['endereco.cep']}}</small>
+                                    <small v-if="erros['endereco.cep']" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.cep'])">{{erros['endereco.cep'].toString()}}</small>
 								</div>
 							</div>
                             <div class="col col-3 col-md-3">
 								<div class="form-group">
 									<label>Nº da Casa *</label>
 									<input class="form-control form-control-sm" placeholder="Insira o Número da Casa" type="text" v-model="matricula.endereco.num" required>
-                                    <small v-if="erros.endereco" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.num'])">{{erros['endereco.num']}}</small>
+                                    <small v-if="erros['endereco.num']" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.num'])">{{erros['endereco.num'].toString()}}</small>
 								</div>
 							</div>
                         </div>
@@ -212,21 +212,21 @@
 								<div class="form-group">
 									<label>Cidade *</label>
 									<input class="form-control form-control-sm" placeholder="Insira a Cidade" type="text" v-model="matricula.endereco.cidade" required>
-                                    <small v-if="erros.endereco" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.cidade'])">{{erros['endereco.cidade']}}</small>
+                                    <small v-if="erros['endereco.cidade']" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.cidade'])">{{erros['endereco.cidade'].toString()}}</small>
 								</div>
 							</div>
                             <div class="col col-4 col-md-4">
 								<div class="form-group">
 									<label>Bairro *</label>
 									<input class="form-control form-control-sm" placeholder="Insira o Bairro" type="text" v-model="matricula.endereco.bairro" required>
-                                    <small v-if="erros.endereco" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.bairro'])">{{erros['endereco.bairro']}}</small>
+                                    <small v-if="erros['endereco.bairro']" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.bairro'])">{{erros['endereco.bairro'].toString()}}</small>
 								</div>
 							</div>
                             <div class="col col-4 col-md-4">
 								<div class="form-group">
 									<label>Complemento</label>
                                     <textarea class="form form-control" placeholder="Complemento (opcional)" type="text" rows="1" v-model="matricula.endereco.complemento"></textarea>
-                                    <small v-if="erros.endereco" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.complemento'])">{{erros['endereco.complemento']}}</small>
+                                    <small v-if="erros['endereco.complemento']" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.complemento'])">{{erros['endereco.complemento'].toString()}}</small>
 								</div>
 							</div>
                         </div>
@@ -351,7 +351,7 @@ export default {
                     })
                     .catch(err=>{
                         this.isRequesting=false; console.error(err); this.erros=Object.values(err);
-                        this.erros = this.erros[2].data; console.log('errrros',this.erros);
+                        this.erros = this.erros[2].data; console.log('errrros',this.erros['telefones.tel1']);
                     })
             }
         },

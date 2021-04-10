@@ -2464,7 +2464,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           console.error(err);
           _this2.erros = Object.values(err);
           _this2.erros = _this2.erros[2].data;
-          console.log('errrros', _this2.erros);
+          console.log('errrros', _this2.erros['telefones.tel1']);
         });
       }
     }
@@ -38292,15 +38292,17 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _c(
-                        "small",
-                        {
-                          staticClass: "text-danger",
-                          staticStyle: { "font-size": "10px" },
-                          attrs: { hidden: !_vm.erros.nome }
-                        },
-                        [_vm._v(_vm._s(_vm.erros.nome))]
-                      )
+                      _vm.erros.nome
+                        ? _c(
+                            "small",
+                            {
+                              staticClass: "text-danger",
+                              staticStyle: { "font-size": "10px" },
+                              attrs: { hidden: !_vm.erros.nome }
+                            },
+                            [_vm._v(_vm._s(_vm.erros.nome.toString()))]
+                          )
+                        : _vm._e()
                     ])
                   ]),
                   _vm._v(" "),
@@ -38338,15 +38340,17 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _c(
-                        "small",
-                        {
-                          staticClass: "text-danger",
-                          staticStyle: { "font-size": "10px" },
-                          attrs: { hidden: !_vm.erros.sobrenome }
-                        },
-                        [_vm._v(_vm._s(_vm.erros.sobrenome))]
-                      )
+                      _vm.erros.sobrenome
+                        ? _c(
+                            "small",
+                            {
+                              staticClass: "text-danger",
+                              staticStyle: { "font-size": "10px" },
+                              attrs: { hidden: !_vm.erros.sobrenome }
+                            },
+                            [_vm._v(_vm._s(_vm.erros.sobrenome.toString()))]
+                          )
+                        : _vm._e()
                     ])
                   ])
                 ]),
@@ -38388,15 +38392,17 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _c(
-                        "small",
-                        {
-                          staticClass: "text-danger",
-                          staticStyle: { "font-size": "10px" },
-                          attrs: { hidden: !_vm.erros.cpf }
-                        },
-                        [_vm._v(_vm._s(_vm.erros.cpf))]
-                      )
+                      _vm.erros.cpf
+                        ? _c(
+                            "small",
+                            {
+                              staticClass: "text-danger",
+                              staticStyle: { "font-size": "10px" },
+                              attrs: { hidden: !_vm.erros.cpf }
+                            },
+                            [_vm._v(_vm._s(_vm.erros.cpf.toString()))]
+                          )
+                        : _vm._e()
                     ])
                   ]),
                   _vm._v(" "),
@@ -38434,15 +38440,17 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _c(
-                        "small",
-                        {
-                          staticClass: "text-danger",
-                          staticStyle: { "font-size": "10px" },
-                          attrs: { hidden: !_vm.erros.nascimento }
-                        },
-                        [_vm._v(_vm._s(_vm.erros.nascimento))]
-                      )
+                      _vm.erros.nascimento
+                        ? _c(
+                            "small",
+                            {
+                              staticClass: "text-danger",
+                              staticStyle: { "font-size": "10px" },
+                              attrs: { hidden: !_vm.erros.nascimento }
+                            },
+                            [_vm._v(_vm._s(_vm.erros.nascimento.toString()))]
+                          )
+                        : _vm._e()
                     ])
                   ])
                 ]),
@@ -38484,15 +38492,17 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _c(
-                        "small",
-                        {
-                          staticClass: "text-danger",
-                          staticStyle: { "font-size": "10px" },
-                          attrs: { hidden: !_vm.erros.rg }
-                        },
-                        [_vm._v(_vm._s(_vm.erros.rg))]
-                      )
+                      _vm.erros.rg
+                        ? _c(
+                            "small",
+                            {
+                              staticClass: "text-danger",
+                              staticStyle: { "font-size": "10px" },
+                              attrs: { hidden: !_vm.erros.rg }
+                            },
+                            [_vm._v(_vm._s(_vm.erros.rg.toString()))]
+                          )
+                        : _vm._e()
                     ])
                   ]),
                   _vm._v(" "),
@@ -38551,15 +38561,17 @@ var render = function() {
                         2
                       ),
                       _vm._v(" "),
-                      _c(
-                        "small",
-                        {
-                          staticClass: "text-danger",
-                          staticStyle: { "font-size": "10px" },
-                          attrs: { hidden: !_vm.erros.orgao_emissor }
-                        },
-                        [_vm._v(_vm._s(_vm.erros.orgao_emissor))]
-                      )
+                      _vm.erros.orgao_emissor
+                        ? _c(
+                            "small",
+                            {
+                              staticClass: "text-danger",
+                              staticStyle: { "font-size": "10px" },
+                              attrs: { hidden: !_vm.erros.orgao_emissor }
+                            },
+                            [_vm._v(_vm._s(_vm.erros.orgao_emissor.toString()))]
+                          )
+                        : _vm._e()
                     ])
                   ]),
                   _vm._v(" "),
@@ -38617,15 +38629,17 @@ var render = function() {
                         2
                       ),
                       _vm._v(" "),
-                      _c(
-                        "small",
-                        {
-                          staticClass: "text-danger",
-                          staticStyle: { "font-size": "10px" },
-                          attrs: { hidden: !_vm.erros.uf }
-                        },
-                        [_vm._v(_vm._s(_vm.erros.uf))]
-                      )
+                      _vm.erros.uf
+                        ? _c(
+                            "small",
+                            {
+                              staticClass: "text-danger",
+                              staticStyle: { "font-size": "10px" },
+                              attrs: { hidden: !_vm.erros.uf }
+                            },
+                            [_vm._v(_vm._s(_vm.erros.uf.toString()))]
+                          )
+                        : _vm._e()
                     ])
                   ])
                 ]),
@@ -38720,15 +38734,17 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _c(
-                      "small",
-                      {
-                        staticClass: "text-danger",
-                        staticStyle: { "font-size": "10px" },
-                        attrs: { hidden: !_vm.erros.sexo }
-                      },
-                      [_vm._v(_vm._s(_vm.erros.sexo))]
-                    )
+                    _vm.erros.sexo
+                      ? _c(
+                          "small",
+                          {
+                            staticClass: "text-danger",
+                            staticStyle: { "font-size": "10px" },
+                            attrs: { hidden: !_vm.erros.sexo }
+                          },
+                          [_vm._v(_vm._s(_vm.erros.sexo.toString()))]
+                        )
+                      : _vm._e()
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col col-3 col-md-3" }, [
@@ -38826,15 +38842,17 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _c(
-                      "small",
-                      {
-                        staticClass: "text-danger",
-                        staticStyle: { "font-size": "10px" },
-                        attrs: { hidden: !_vm.erros.isEvangelico }
-                      },
-                      [_vm._v(_vm._s(_vm.erros.isEvangelico))]
-                    )
+                    _vm.erros.isEvangelico
+                      ? _c(
+                          "small",
+                          {
+                            staticClass: "text-danger",
+                            staticStyle: { "font-size": "10px" },
+                            attrs: { hidden: !_vm.erros.isEvangelico }
+                          },
+                          [_vm._v(_vm._s(_vm.erros.isEvangelico.toString()))]
+                        )
+                      : _vm._e()
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col col-3 col-md-3" }, [
@@ -38928,15 +38946,17 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _c(
-                      "small",
-                      {
-                        staticClass: "text-danger",
-                        staticStyle: { "font-size": "10px" },
-                        attrs: { hidden: !_vm.erros.isMembro }
-                      },
-                      [_vm._v(_vm._s(_vm.erros.isMembro))]
-                    )
+                    _vm.erros.isMembro
+                      ? _c(
+                          "small",
+                          {
+                            staticClass: "text-danger",
+                            staticStyle: { "font-size": "10px" },
+                            attrs: { hidden: !_vm.erros.isMembro }
+                          },
+                          [_vm._v(_vm._s(_vm.erros.isMembro.toString()))]
+                        )
+                      : _vm._e()
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col col-3 col-md-3" }, [
@@ -38952,7 +38972,7 @@ var render = function() {
                             expression: "matricula.conversao"
                           }
                         ],
-                        staticClass: "form-control form-control-sm",
+                        class: "form-control form-control-sm",
                         attrs: {
                           placeholder: "Data de conversão (opcional)",
                           type: "date"
@@ -38972,15 +38992,17 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _c(
-                        "small",
-                        {
-                          staticClass: "text-danger",
-                          staticStyle: { "font-size": "10px" },
-                          attrs: { hidden: !_vm.erros.conversao }
-                        },
-                        [_vm._v(_vm._s(_vm.erros.conversao))]
-                      )
+                      _vm.erros.conversao
+                        ? _c(
+                            "small",
+                            {
+                              staticClass: "text-danger",
+                              staticStyle: { "font-size": "10px" },
+                              attrs: { hidden: !_vm.erros.conversao }
+                            },
+                            [_vm._v(_vm._s(_vm.erros.conversao.toString()))]
+                          )
+                        : _vm._e()
                     ])
                   ])
                 ]),
@@ -39020,15 +39042,17 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _c(
-                        "small",
-                        {
-                          staticClass: "text-danger",
-                          staticStyle: { "font-size": "10px" },
-                          attrs: { hidden: !_vm.erros.email }
-                        },
-                        [_vm._v(_vm._s(_vm.erros.email))]
-                      )
+                      _vm.erros.email
+                        ? _c(
+                            "small",
+                            {
+                              staticClass: "text-danger",
+                              staticStyle: { "font-size": "10px" },
+                              attrs: { hidden: !_vm.erros.email }
+                            },
+                            [_vm._v(_vm._s(_vm.erros.email.toString()))]
+                          )
+                        : _vm._e()
                     ])
                   ]),
                   _vm._v(" "),
@@ -39072,7 +39096,7 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _vm.erros.telefones
+                      _vm.erros["telefones.tel1"]
                         ? _c(
                             "small",
                             {
@@ -39080,7 +39104,11 @@ var render = function() {
                               staticStyle: { "font-size": "10px" },
                               attrs: { hidden: !_vm.erros["telefones.tel1"] }
                             },
-                            [_vm._v(_vm._s(_vm.erros["telefones.tel1"]))]
+                            [
+                              _vm._v(
+                                _vm._s(_vm.erros["telefones.tel1"].toString())
+                              )
+                            ]
                           )
                         : _vm._e()
                     ])
@@ -39125,7 +39153,7 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _vm.erros.telefones
+                      _vm.erros["telefones.tel2"]
                         ? _c(
                             "small",
                             {
@@ -39133,7 +39161,11 @@ var render = function() {
                               staticStyle: { "font-size": "10px" },
                               attrs: { hidden: !_vm.erros["telefones.tel2"] }
                             },
-                            [_vm._v(_vm._s(_vm.erros["telefones.tel2"]))]
+                            [
+                              _vm._v(
+                                _vm._s(_vm.erros["telefones.tel2"].toString())
+                              )
+                            ]
                           )
                         : _vm._e()
                     ])
@@ -39243,7 +39275,7 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _vm.erros.endereco
+                      _vm.erros["endereco.logradouro"]
                         ? _c(
                             "small",
                             {
@@ -39253,7 +39285,13 @@ var render = function() {
                                 hidden: !_vm.erros["endereco.logradouro"]
                               }
                             },
-                            [_vm._v(_vm._s(_vm.erros["endereco.logradouro"]))]
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.erros["endereco.logradouro"].toString()
+                                )
+                              )
+                            ]
                           )
                         : _vm._e()
                     ])
@@ -39295,7 +39333,7 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _vm.erros.endereco
+                      _vm.erros["endereco.cep"]
                         ? _c(
                             "small",
                             {
@@ -39303,7 +39341,11 @@ var render = function() {
                               staticStyle: { "font-size": "10px" },
                               attrs: { hidden: !_vm.erros["endereco.cep"] }
                             },
-                            [_vm._v(_vm._s(_vm.erros["endereco.cep"]))]
+                            [
+                              _vm._v(
+                                _vm._s(_vm.erros["endereco.cep"].toString())
+                              )
+                            ]
                           )
                         : _vm._e()
                     ])
@@ -39343,7 +39385,7 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _vm.erros.endereco
+                      _vm.erros["endereco.num"]
                         ? _c(
                             "small",
                             {
@@ -39351,7 +39393,11 @@ var render = function() {
                               staticStyle: { "font-size": "10px" },
                               attrs: { hidden: !_vm.erros["endereco.num"] }
                             },
-                            [_vm._v(_vm._s(_vm.erros["endereco.num"]))]
+                            [
+                              _vm._v(
+                                _vm._s(_vm.erros["endereco.num"].toString())
+                              )
+                            ]
                           )
                         : _vm._e()
                     ])
@@ -39393,7 +39439,7 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _vm.erros.endereco
+                      _vm.erros["endereco.cidade"]
                         ? _c(
                             "small",
                             {
@@ -39401,7 +39447,11 @@ var render = function() {
                               staticStyle: { "font-size": "10px" },
                               attrs: { hidden: !_vm.erros["endereco.cidade"] }
                             },
-                            [_vm._v(_vm._s(_vm.erros["endereco.cidade"]))]
+                            [
+                              _vm._v(
+                                _vm._s(_vm.erros["endereco.cidade"].toString())
+                              )
+                            ]
                           )
                         : _vm._e()
                     ])
@@ -39441,7 +39491,7 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _vm.erros.endereco
+                      _vm.erros["endereco.bairro"]
                         ? _c(
                             "small",
                             {
@@ -39449,7 +39499,11 @@ var render = function() {
                               staticStyle: { "font-size": "10px" },
                               attrs: { hidden: !_vm.erros["endereco.bairro"] }
                             },
-                            [_vm._v(_vm._s(_vm.erros["endereco.bairro"]))]
+                            [
+                              _vm._v(
+                                _vm._s(_vm.erros["endereco.bairro"].toString())
+                              )
+                            ]
                           )
                         : _vm._e()
                     ])
@@ -39489,7 +39543,7 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _vm.erros.endereco
+                      _vm.erros["endereco.complemento"]
                         ? _c(
                             "small",
                             {
@@ -39499,7 +39553,13 @@ var render = function() {
                                 hidden: !_vm.erros["endereco.complemento"]
                               }
                             },
-                            [_vm._v(_vm._s(_vm.erros["endereco.complemento"]))]
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.erros["endereco.complemento"].toString()
+                                )
+                              )
+                            ]
                           )
                         : _vm._e()
                     ])

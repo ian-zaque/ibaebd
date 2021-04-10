@@ -22,11 +22,11 @@ class MatriculaController extends Controller
         $dados['rg'] = preg_replace('/[\s,.\-\/-]+/', '', $dados['rg']);
 
         $msgsErros=[
-            'required'=> 'É necessário preencher o campo :attribute !',
+            'required'=> 'É necessário preencher o campo :attribute',
             'string' => '',
-            'email' => ' O campo :attribute é inválido!',
-            'date' => 'O campo :attribute deve ser uma data!',
-            'boolean' => 'Selecione um dos valores do campo :attribute !'
+            'email' => ' O campo :attribute é inválido',
+            'date' => 'O campo :attribute deve ser uma data',
+            'boolean' => 'Selecione um dos valores do campo :attribute'
         ];
 
         $atributos = [
