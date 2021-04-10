@@ -12,6 +12,11 @@ use App\Endereco;
 class MatriculaController extends Controller
 {
 
+    public function getMatriculas(){
+        $matriculas= Matricula::with(['telefones', 'endereco'])->get();
+        return response()->json($matriculas);
+    }
+
     public function atualizar(Request $request){
 
         $dados = $request->all();
@@ -75,7 +80,7 @@ class MatriculaController extends Controller
                 $matricula = Matricula::find($request->id); $matricula->fill($dadosMat); $matricula->save();
 
                 $dadosTel = ['tel1'=>$dados['telefones']['tel1'], 'tel2'=>$dados['telefones']['tel2'],'matricula_id'=>$matricula->id];
-                $telefones = Telefone::where('matricula_id','=',$matricula->id); 
+                $telefones = Telefone::where('matricula_id','=',$matricula->id)->first(); 
                 $telefones->fill($dadosTel); $telefones->save();
                 
                 $dadosEndereco = [
@@ -84,7 +89,7 @@ class MatriculaController extends Controller
                     'num' =>$dados['endereco']['num'], 'complemento'=>$dados['endereco']['complemento'],
                     'matricula_id'=>$matricula->id,
                 ];
-                $endereco = Endereco::where('matricula_id','=',$matricula->id); 
+                $endereco = Endereco::where('matricula_id','=',$matricula->id)->first(); 
                 $endereco->fill($dadosEndereco); $endereco->save();
             }
             else{
@@ -104,6 +109,7 @@ class MatriculaController extends Controller
                 $endereco->fill($dadosEndereco); $endereco->save();
             }
         }
+        return $this->getMatriculas();
     }
     
 }

@@ -1,30 +1,12 @@
 <template>
-    <div class="container" id="">
-         <div class="card text-center" style="border-radius:15px;">
-            <div class="card-body">
-                <h5 class="card-title" style="font-size:40px;">Igreja Batista Alvorada</h5>
-                <p class="card-text" style="font-size:20px;">Feira de Santana - Bahia</p>
-                <p class="card-text " style="font-size:40px;">EBDiscipuladora</p>
-
-                <div class="container">
-                    <img src="imagens/logo_iba.png" style="margin-bottom:15px;" width="120px" height="170px" class="img-fluid float-left">
-                    <img src="imagens/logo_ebd.jpg" style="margin-top:10px; margin-right:-20px;" width="170px" height="220px" class="img-fluid float-right">
-                </div>
-                
-                <div class="d-grid gap-2">
-                    <button class="btn btn-danger btn-block" @click="abrirModalMatricula()" id="btn_matricula" style="font-size:30px; background-color:#D30100;" type="button">
-                        Matricule-se!
-                    </button>
-                </div>
-            </div>
-        </div>
-
-       <!-- MODAL MATRICULA-->
-		<div class="modal w3-animate-opacity" id="modalMatricula" tabindex="-1" role="dialog" aria-labelledby="ModalMatriculaLabel" aria-hidden="true">
-		  	<div class="modal-dialog  modal-lg" role="document">
+    <div>
+		<div class="modal w3-animate-opacity" data-backdrop="static" id="modalMatricula" tabindex="-1" role="dialog" aria-labelledby="ModalMatriculaLabel" aria-hidden="true">
+		  	<div class="modal-dialog modal-lg" role="document">
 		    	<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="ModalMatriculaLabel">Matrícula EBDiscipuladora</h5>
+						<h5 class="modal-title" id="ModalMatriculaLabel">
+                            {{edicao==null?'Matrícula EBDiscipuladora':'Editando '+edicao.nome}}
+                        </h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -97,42 +79,42 @@
                         <hr>
                         <div class="row">
                             <div class="col col-3 col-md-3">
-                                <label>Sexo *</label>
+                                <label>Sexo*</label>
 								<div class="form-group">
 									<div class="form-check form-check-inline">
-                                        <input v-model="matricula.sexo" class="form-check-input" type="radio" name="radio_btn_sexoF" id="radio_btn_sexoF" :value="true">
+                                        <input v-model="matricula.sexo" class="form-check-input" type="radio" name="radio_btn_sexoF" id="radio_btn_sexoF" :value="1">
                                         <label class="form-check-label" for="radio_btn_sexoF">Feminino</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input v-model="matricula.sexo" class="form-check-input" type="radio" name="radio_btn_sexoM" id="radio_btn_sexoM" :value="false">
+                                        <input v-model="matricula.sexo" class="form-check-input" type="radio" name="radio_btn_sexoM" id="radio_btn_sexoM" :value="0">
                                         <label class="form-check-label" for="radio_btn_sexoM">Masculino</label>
                                     </div>
 								</div>
                                 <small v-if="erros.sexo" class="text-danger" style="font-size:10px" :hidden="(!erros.sexo)">{{erros.sexo.toString()}}</small>
 							</div>
                             <div class="col col-3 col-md-3">
-                                <label>Sou evangélico? *</label>
+                                <label>Sou evangélico?*</label>
 								<div class="form-group">
 									<div class="form-check form-check-inline">
-                                        <input v-model="matricula.isEvangelico" class="form-check-input" type="radio" name="radio_btn_evglS" id="radio_btn_evglS" :value="true">
+                                        <input v-model="matricula.isEvangelico" class="form-check-input" type="radio" name="radio_btn_evglS" id="radio_btn_evglS" :value="1">
                                         <label class="form-check-label" for="radio_btn_evglS">Sim</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input v-model="matricula.isEvangelico" class="form-check-input" type="radio" name="radio_btn_evglN" id="radio_btn_evglN" :value="false">
+                                        <input v-model="matricula.isEvangelico" class="form-check-input" type="radio" name="radio_btn_evglN" id="radio_btn_evglN" :value="0">
                                         <label class="form-check-label" for="radio_btn_evglN">Não</label>
                                     </div>
 								</div>
                                 <small v-if="erros.isEvangelico" class="text-danger" style="font-size:10px" :hidden="(!erros.isEvangelico)">{{erros.isEvangelico.toString()}}</small>
 							</div>
                             <div class="col col-3 col-md-3">
-                                <label>Sou Membro da IBA? *</label>
+                                <label>Sou Membro da IBA?*</label>
 								<div class="form-group">
 									<div class="form-check form-check-inline">
-                                        <input v-model="matricula.isMembro" class="form-check-input" type="radio" name="radio_btn_mbrS" id="radio_btn_mbrS" :value="true">
+                                        <input v-model="matricula.isMembro" class="form-check-input" type="radio" name="radio_btn_mbrS" id="radio_btn_mbrS" :value="1">
                                         <label class="form-check-label" for="radio_btn_mbrS">Sim</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input v-model="matricula.isMembro" class="form-check-input" type="radio" name="radio_btn_mbrN" id="radio_btn_mbrN" :value="false">
+                                        <input v-model="matricula.isMembro" class="form-check-input" type="radio" name="radio_btn_mbrN" id="radio_btn_mbrN" :value="0">
                                         <label class="form-check-label" for="radio_btn_mbrN">Não</label>
                                     </div>
 								</div>
@@ -193,17 +175,17 @@
 							</div>
                             <div class="col col-3 col-md-3">
                                 <div class="form-group">
-									<label>CEP</label>
-									<input class="form-control form-control-sm" v-mask="'#####-###'" placeholder="Insira o CEP" type="text" 
-                                        v-model="matricula.endereco.cep">
-                                    <small v-if="erros['endereco.cep']" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.cep'])">{{erros['endereco.cep'].toString()}}</small>
+									<label>Nº da Casa *</label>
+									<input class="form-control form-control-sm" placeholder="Insira o Número da Casa" type="text" v-model="matricula.endereco.num" required>
+                                    <small v-if="erros['endereco.num']" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.num'])">{{erros['endereco.num'].toString()}}</small>
 								</div>
 							</div>
                             <div class="col col-3 col-md-3">
 								<div class="form-group">
-									<label>Nº da Casa *</label>
-									<input class="form-control form-control-sm" placeholder="Insira o Número da Casa" type="text" v-model="matricula.endereco.num" required>
-                                    <small v-if="erros['endereco.num']" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.num'])">{{erros['endereco.num'].toString()}}</small>
+									<label>CEP</label>
+									<input class="form-control form-control-sm" v-mask="'#####-###'" placeholder="Insira o CEP" type="text" 
+                                        v-model="matricula.endereco.cep">
+                                    <small v-if="erros['endereco.cep']" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.cep'])">{{erros['endereco.cep'].toString()}}</small>
 								</div>
 							</div>
                         </div>
@@ -231,46 +213,34 @@
 							</div>
                         </div>
                     </div>
-                    <div class="row" style="margin-right:15px;">
+                    <div class="row">
                         <div class="col col-12 col-md-12">
-                            <div class="form-group">
-                                <p class="text-danger">* Obrigatório!</p>
+                            <div style="margin-right:15px;">
+                                <p class="small text-danger">* Obrigatório!</p>
                             </div>
                         </div>
                     </div>
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" :disabled="isRequesting" data-dismiss="modal">Fechar</button> 
-						<button type="button" @click="cadastrar" :disabled="isRequesting==true" class="btn btn-primary">Matricular-se</button>
+						<button type="button" class="btn btn-primary" @click="cadastrar" :disabled="isRequesting==true">Matricular</button>
 					</div>
 		    	</div>
 		  	</div>
-		</div> <!--Fim do MODAL MATRICULA -->
-
-        <!-- <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;"> -->
-            <div v-if="sucesso==true" style="position: absolute; bottom: 0; left: 0;" class="toast hide" data-autohide="false" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                    <img src="imagens/logo_iba.png" class="rounded mr-2" alt="...">
-                    <strong class="mr-auto">Sucesso!!!</strong>
-                    <button type="button" @click="sucesso=false" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="toast-body">
-                    Matrícula efetuada com sucesso. <hr>
-                    Em breve entraremos em contato!
-                </div>
-            </div>
-        <!-- </div> -->
+		</div>
     </div>
 </template>
 <script>
 import {TheMask} from 'vue-the-mask'
 
 export default {
-    name:'Home',
+    name:'MatriculaPage',
 
     components:{ TheMask },
+
+    props:{
+        edicao:{ type:Object, default:null },
+    },
 
     data() {
         return {
@@ -310,20 +280,15 @@ export default {
             if(val!='' && val!=old && val!=null && val!=undefined && (val.replace(/\s/g, '').length) && val.indexOf('-')!=-1 && val.length == 9){
                 this.getCepInfo();
             }
-        }
+        },
+        edicao(val,old){
+            if(val!=null && val!={}){
+                this.matricula=Object.assign({},val);
+            }
+        },
     },
 
     methods: {
-        abrirModalMatricula(){
-            this.erros=[];
-            this.matricula={
-                nome:'', sobrenome:'', cpf:'', rg:'', orgao_emissor:'', uf:'', nascimento:'',
-                email:'', isEvangelico:false, isMembro:false, classe:'batismo', sexo:false, conversao:'',
-                telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:'',},
-            };
-            $('#modalMatricula').modal('show');
-        },
-
         getCepInfo: _.debounce(function(){
             this.isRequesting=true;
             axios.get('http://viacep.com.br/ws/'+this.matricula.endereco.cep+'/json')
@@ -344,10 +309,10 @@ export default {
             if(confirm('Deseja confirmar a matrícula?')){
                 this.isRequesting=true;
                 axios.post('/atualizar',this.matricula)
-                    .then(()=>{
+                    .then(res=>{
                         this.isRequesting=false; this.sucesso=true; $('.toast').toast('show');
-                        alert('Sucesso! Entraremos em contato em breve!')
-                        $('#modalMatricula').modal('hide');
+                        alert('Matrícula efetuada com sucesso!!!'); $('#modalMatricula').modal('hide');
+                        if(this.edicao!=null){ this.$emit('retornoMatriculas', res.data); }
                     })
                     .catch(err=>{
                         this.isRequesting=false; console.error(err); this.erros=Object.values(err);
@@ -357,6 +322,5 @@ export default {
         },
 
     },
-
 }
 </script>

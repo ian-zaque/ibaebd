@@ -20,7 +20,10 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('matricula',require('./components/Matricula.vue').default)
+Vue.component('empty-space',require('./components/EmptySpace.vue').default);
+Vue.component('home-page',require('./components/HomePage.vue').default);
+Vue.component('matricula-page',require('./components/MatriculaPage.vue').default);
+Vue.component('lista-matriculados',require('./components/ListaMatriculados.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -14,10 +14,10 @@ class Matricula extends Model
     ];
 
     public function telefones(){
-        return $this->hasOne('App\Telefone','id', 'matricula_id');
+        return $this->hasOne('App\Telefone', 'matricula_id');
     }
 
     public function endereco(){
-        return $this->hasOne('App\Endereco','id', 'matricula_id');
+        return $this->hasOne('App\Endereco', 'matricula_id');
     }
 }

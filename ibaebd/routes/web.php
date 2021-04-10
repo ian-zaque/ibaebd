@@ -19,6 +19,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::group([],function(){
-    Route::post('/atualizar','MatriculaController@atualizar');
+Route::post('/atualizar','MatriculaController@atualizar');
+
+Route::group(['middleware'=>'auth'],function(){
+    Route::get('/getMatriculas','MatriculaController@getMatriculas')->middleware('verified');
 });

@@ -82,13 +82,17 @@
         <main class="py-4">
             @yield('content')
         </main>
-        <footer id="myFooter">
-            <div class="cont">
+        <br>
+        <footer class="fixed-bottom" id="myFooter">
+            <div class="container d-flex justify-content-center">
                 <ul>
                     <li><a href="#">Informações da Igreja</a></li>
                     <li><a href="#">Contato</a></li>
                 </ul>
-                <p class="footer-copyright">© 2021 - Igreja Batista Alvorada</p>
+            </div>
+            <div class="container d-flex justify-content-center">
+                <small style="font-size:12px;">E, assim, se alguém está em Cristo, é nova criatura; 
+                    as coisas antigas já passaram; eis que se fizeram novas. 2 Coríntios 5:17</small>
             </div>
             <div class="footer-social">
                 <a href="https://www.facebook.com/pages/Igreja-Batista-Alvorada/167492596640760" class="social-icons"><i class="soc fab fa-facebook"></i></a>
