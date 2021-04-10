@@ -23,4 +23,5 @@ Route::post('/atualizar','MatriculaController@atualizar');
 
 Route::group(['middleware'=>'auth'],function(){
     Route::get('/getMatriculas','MatriculaController@getMatriculas')->middleware('verified');
+    Route::delete('/deletar/{id}','MatriculaController@deletar');
 });

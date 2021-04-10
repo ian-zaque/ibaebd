@@ -2157,6 +2157,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         console.error(err);
       });
     },
+    deletar: function deletar(id) {
+      var _this2 = this;
+
+      if (confirm('Deseja deletar esta Matrícula?')) {
+        this.isRequesting = true;
+        axios["delete"]('/deletar/' + id).then(function (res) {
+          _this2.isRequesting = false;
+          _this2.matriculados = res.data;
+        })["catch"](function (err) {
+          _this2.isRequesting = false;
+          console.error(err);
+        });
+      }
+    },
     editarMatricula: function editarMatricula(item) {
       this.matricula = _objectSpread({}, item);
       $('#modalMatricula').modal('show');
@@ -38635,7 +38649,7 @@ var render = function() {
           ? _c("div", { staticClass: "d-flex justify-content-center" }, [
               _vm._m(0)
             ])
-          : _vm.matriculados != []
+          : _vm.matriculados.length > 0
           ? _c("div", { staticClass: "table-responsive row" }, [
               _c("div", { staticClass: "left col col-8 col-md-12" }, [
                 _c(
@@ -38709,6 +38723,11 @@ var render = function() {
                                       "data-toggle": "tooltip",
                                       "data-placement": "bottom",
                                       title: "Deletar"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.deletar(mat.id)
+                                      }
                                     }
                                   },
                                   [

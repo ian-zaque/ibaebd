@@ -17,6 +17,13 @@ class MatriculaController extends Controller
         return response()->json($matriculas);
     }
 
+    public function deletar($id){
+        Endereco::where('matricula_id','=',$id)->delete();
+        Telefone::where('matricula_id','=',$id)->delete();
+        Matricula::find($id)->delete();
+        return $this->getMatriculas();
+    }
+
     public function atualizar(Request $request){
 
         $dados = $request->all();

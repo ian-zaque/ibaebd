@@ -20,7 +20,7 @@
 						<span class="sr-only">Carregando...</span>
 					</div>
 				</div>
-				<div v-else-if="matriculados!=[]" class="table-responsive row">
+				<div v-else-if="matriculados.length>0" class="table-responsive row">
 					<div class="left col col-8 col-md-12">
 						<table class="table table-hover table-sm table-responsive-md">
 							<thead class="thead-light">
@@ -41,7 +41,7 @@
 											<button @click="editarMatricula(mat)" type="button" style="margin-right:4px;" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Editar">
 												<i class="fas fa-edit fa-fw"></i>
 											</button>
-											<button :disabled="isRequesting==true" type="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Deletar">
+											<button @click="deletar(mat.id)" :disabled="isRequesting==true" type="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Deletar">
 												<i class="fas fa-trash-alt fa-fw"></i>
 											</button>
 										</div>
@@ -73,6 +73,15 @@ export default {
             axios.get('/getMatriculas')
                 .then(res=>{ this.isRequesting=false; this.matriculados=res.data; })
                 .catch(err=>{ this.isRequesting=false; console.error(err); })
+        },
+
+        deletar(id){
+            if(confirm('Deseja deletar esta Matrícula?')){
+                this.isRequesting=true;
+                axios.delete('/deletar/'+id)
+                    .then(res=>{ this.isRequesting=false; this.matriculados=res.data; })
+                    .catch(err=>{ this.isRequesting=false; console.error(err); })
+            }
         },
 
         editarMatricula(item){ this.matricula = {...item};  $('#modalMatricula').modal('show'); },
