@@ -247,7 +247,7 @@ export default {
             isRequesting:false, sucesso:false, erros:{},
             matricula:{
                 nome:'', sobrenome:'', cpf:'', rg:'', orgao_emissor:'', uf:'', nascimento:'',
-                email:'', isEvangelico:false, isMembro:false, classe:'batismo', sexo:false, conversao:'',
+                email:'', isEvangelico:0, isMembro:0, classe:'batismo', sexo:0, conversao:'',
                 telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:''},
             },
             orgaos_emissores:[
