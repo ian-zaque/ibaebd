@@ -106,10 +106,10 @@ export default {
         attMatriculas(val){ this.matriculados = val; },
 
         abrirModalMatricula(){
-            this.erros=[];
+            this.erros=[]; delete this.matricula.id;
             this.matricula={
                 nome:'', sobrenome:'', cpf:'', rg:'', orgao_emissor:'', uf:'', nascimento:'',
-                email:'', isEvangelico:0, isMembro:0, classe:'batismo', sexo:0, conversao:'',
+                email:'', isEvangelico:false, isMembro:false, classe:'batismo', sexo:false, conversao:'',
                 telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:'',},
             };
             $('#modalMatricula').modal('show');
@@ -120,7 +120,7 @@ export default {
                 return [
                     ''+val.id, 
                     val.nome+' '+val.sobrenome, 
-                    val.sexo==0?'Masculino':'Feminino', 
+                    val.sexo==false?'Masculino':'Feminino', 
                     val.cpf, 
                     val.rg, 
                     new Date(val.nascimento).toLocaleDateString(),
@@ -128,8 +128,8 @@ export default {
                     ''+val.telefones.tel1,
                     val.telefones.tel2==''||val.telefones.tel2==null?'-':''+val.telefones.tel2,
                     val.conversao==null||val.conversao==''?'-': new Date(val.conversao).toLocaleDateString().replace('/','-'),
-                    val.isEvangelico==0?'Nao':'Sim',
-                    val.isMembro==0?'Nao':'Sim',
+                    val.isEvangelico==false?'Nao':'Sim',
+                    val.isMembro==false?'Nao':'Sim',
                     val.endereco.logradouro +', '+ val.endereco.num+', '+ val.endereco.bairro,
                     val.endereco.cidade,
                     val.endereco.cep==''||val.endereco.cep==null?'':val.endereco.cep,

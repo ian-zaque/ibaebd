@@ -54,10 +54,10 @@ export default {
 
     methods: {
         abrirModalMatricula(){
-            this.erros=[];
+            this.erros=[]; delete this.matricula.id;
             this.matricula={
                 nome:'', sobrenome:'', cpf:'', rg:'', orgao_emissor:'', uf:'', nascimento:'',
-                email:'', isEvangelico:0, isMembro:0, classe:'batismo', sexo:0, conversao:'',
+                email:'', isEvangelico:false, isMembro:false, classe:'batismo', sexo:false, conversao:'',
                 telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:'',},
             };
             $('#modalMatricula').modal('show');
