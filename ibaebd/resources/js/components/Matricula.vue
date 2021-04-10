@@ -30,71 +30,74 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						<p class="alert alert-danger" v-for="(error, ie) in erros" :key="ie">
-							<button type="button" class="close" data-dismiss="alert" aria-label="close"><i class="ion-ios-close-empty"></i></button>
-							{{ error }}
-						</p>
 						<div class="row">
 							<div class="col col-6 col-md-6">
 								<div class="form-group">
-									<label>Nome</label>
+									<label>Nome *</label>
 									<input class="form-control form-control-sm" placeholder="Insira seu Nome" type="text" v-model="matricula.nome" required>
-								</div>
+                                    <small class="text-danger" style="font-size:10px" :hidden="(!erros.nome)">{{erros.nome}}</small>
+                                </div>
 							</div>
 							<div class="col col-6 col-md-6">
 								<div class="form-group">
-									<label>Sobrenome</label>
+									<label>Sobrenome *</label>
 									<input class="form-control form-control-sm" placeholder="Insira seu Sobrenome" type="text" v-model="matricula.sobrenome" required>
-								</div>
+                                    <small class="text-danger" style="font-size:10px" :hidden="(!erros.sobrenome)">{{erros.sobrenome}}</small>
+                                </div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col col-6 col-md-6">
 								<div class="form-group">
-									<label>CPF</label>
+									<label>CPF *</label>
 									<input class="form-control form-control-sm" v-mask="['###.###.###-##']" placeholder="Insira seu CPF" type="text" 
                                             v-model="matricula.cpf" required>
+                                    <small class="text-danger" style="font-size:10px" :hidden="(!erros.cpf)">{{erros.cpf}}</small>
 								</div>
 							</div>
                             <div class="col col-6 col-md-6">
 								<div class="form-group">
-									<label>Data de Nascimento</label>
+									<label>Data de Nascimento *</label>
 									<input class="form-control form-control-sm" placeholder="Insira sua data de nascimento" type="date" 
                                             v-model="matricula.nascimento" required>
+                                    <small class="text-danger" style="font-size:10px" :hidden="(!erros.nascimento)">{{erros.nascimento}}</small>
 								</div>
 							</div>
 						</div>
                         <div class="row">
                             <div class="col col-4 col-md-4">
 								<div class="form-group">
-									<label>RG</label>
+									<label>RG *</label>
 									<input class="form-control form-control-sm" v-mask="['##.###.###-#','##.###.###-##']" placeholder="Insira seu RG"
                                             type="text" v-model="matricula.rg" required>
+                                    <small class="text-danger" style="font-size:10px" :hidden="(!erros.rg)">{{erros.rg}}</small>
 								</div>
 							</div>
                             <div class="col col-4 col-md-4">
 								<div class="form-group">
-									<label>Órgão Emissor</label>
+									<label>Órgão Emissor *</label>
                                     <select class="form-control form-control-sm" v-model="matricula.orgao_emissor" required>
                                         <option selected hidden value="">Selecione o Órgão Emissor</option>
                                         <option v-for="(org,idx) in orgaos_emissores" :key="idx" :value="org.sigla">{{org.sigla +' - '+ org.nome}}</option>
                                     </select>
+                                    <small class="text-danger" style="font-size:10px" :hidden="(!erros.orgao_emissor)">{{erros.orgao_emissor}}</small>
                                 </div>
 							</div>
                             <div class="col col-4 col-md-4">
 								<div class="form-group">
-									<label>UF</label>
+									<label>UF *</label>
 									<select class="form-control form-control-sm" v-model="matricula.uf">
                                         <option selected hidden value="">Selecione a Unidade Federal</option>
                                         <option v-for="(u,idx) in ufs" :key="idx" :value="u.key">{{u.key +' - '+ u.value}}</option>
                                     </select>
+                                    <small class="text-danger" style="font-size:10px" :hidden="(!erros.uf)">{{erros.uf}}</small>
 								</div>
 							</div>
                         </div>
                         <hr>
                         <div class="row">
                             <div class="col col-3 col-md-3">
-                                <label>Sexo</label>
+                                <label>Sexo *</label>
 								<div class="form-group">
 									<div class="form-check form-check-inline">
                                         <input v-model="matricula.sexo" class="form-check-input" type="radio" name="radio_btn_sexoF" id="radio_btn_sexoF" :value="true">
@@ -105,9 +108,10 @@
                                         <label class="form-check-label" for="radio_btn_sexoM">Masculino</label>
                                     </div>
 								</div>
+                                <small class="text-danger" style="font-size:10px" :hidden="(!erros.sexo)">{{erros.sexo}}</small>
 							</div>
                             <div class="col col-3 col-md-3">
-                                <label>Já é evangélico?</label>
+                                <label>Sou evangélico? *</label>
 								<div class="form-group">
 									<div class="form-check form-check-inline">
                                         <input v-model="matricula.isEvangelico" class="form-check-input" type="radio" name="radio_btn_evglS" id="radio_btn_evglS" :value="true">
@@ -118,9 +122,10 @@
                                         <label class="form-check-label" for="radio_btn_evglN">Não</label>
                                     </div>
 								</div>
+                                <small class="text-danger" style="font-size:10px" :hidden="(!erros.isEvangelico)">{{erros.isEvangelico}}</small>
 							</div>
                             <div class="col col-3 col-md-3">
-                                <label>Já é membro da IBA?</label>
+                                <label>Sou Membro da IBA? *</label>
 								<div class="form-group">
 									<div class="form-check form-check-inline">
                                         <input v-model="matricula.isMembro" class="form-check-input" type="radio" name="radio_btn_mbrS" id="radio_btn_mbrS" :value="true">
@@ -131,12 +136,14 @@
                                         <label class="form-check-label" for="radio_btn_mbrN">Não</label>
                                     </div>
 								</div>
+                                <small class="text-danger" style="font-size:10px" :hidden="(!erros.isMembro)">{{erros.isMembro}}</small>
 							</div>
                             <div class="col col-3 col-md-3">
 								<div class="form-group">
 									<label>Data de Conversão</label>
 									<input class="form-control form-control-sm" placeholder="Data de conversão (opcional)" type="date" v-model="matricula.conversao">
-								</div>
+                                    <small class="text-danger" style="font-size:10px" :hidden="(!erros.conversao)">{{erros.conversao}}</small>
+                                </div>
 							</div>
                         </div>
                         <div class="row">
@@ -144,29 +151,33 @@
 								<div class="form-group">
 									<label>E-mail</label>
 									<input class="form-control form-control-sm" placeholder="Insira seu E-mail" type="email" v-model="matricula.email" required>
-								</div>
+                                    <small class="text-danger" style="font-size:10px" :hidden="(!erros.email)">{{erros.email}}</small>
+                                </div>
                             </div>
                             <div class="col col-3 col-md-3">
 								<div class="form-group">
-									<label>Telefone 1</label>
+									<label>Telefone 1 *</label>
 									<input class="form-control form-control-sm" v-model="matricula.telefones.tel1"
                                             v-mask="['(##) ####-####', '(##) #####-####']" placeholder="Insira seu Telefone" type="tel" required>
+                                    <small v-if="erros.telefones" class="text-danger" style="font-size:10px" :hidden="(!erros['telefones.tel1'])">{{erros['telefones.tel1']}}</small>
                                 </div>
                             </div>
                             <div class="col col-3 col-md-3">
 								<div class="form-group">
 									<label>Telefone 2</label>
 									<input class="form-control form-control-sm" v-model="matricula.telefones.tel2" 
-                                        v-mask="['(##) ####-####', '(##) #####-####']" placeholder="Outro telefone (opcional)" type="tel">
+                                            v-mask="['(##) ####-####', '(##) #####-####']" placeholder="Outro telefone (opcional)" type="tel">
+                                    <small v-if="erros.telefones" class="text-danger" style="font-size:10px" :hidden="(!erros['telefones.tel2'])">{{erros['telefones.tel2']}}</small>
 								</div>
                             </div>
                             <div class="col col-3 col-md-3">
 								<div class="form-group">
-									<label>Classe da EBD</label>
+									<label>Classe da EBD *</label>
 									<select class="form-control form-control-sm" v-model="matricula.classe">
                                         <option selected hidden value="">Selecione a Classe da EBD</option>
                                         <option selected :value="'batismo'">Classe de Batismo</option>
                                     </select>
+                                    <small class="text-danger" style="font-size:10px" :hidden="(!erros.classe)">{{erros.classe}}</small>
 								</div>
 							</div>
 					    </div>
@@ -174,45 +185,53 @@
                         <div class="row">
                             <div class="col col-6 col-md-6">
 								<div class="form-group">
-									<label>Logradouro</label>
-									<input class="form-control form-control-sm" placeholder="Insira o Logradouro" type="text" v-model="matricula.endereco.logradouro" required>
+									<label>Logradouro *</label>
+									<input class="form-control form-control-sm" placeholder="Insira o Logradouro" type="text"
+                                            v-model="matricula.endereco.logradouro" required>
+                                    <small v-if="erros.endereco" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.logradouro'])">{{erros['endereco.logradouro']}}</small>
 								</div>
 							</div>
                             <div class="col col-3 col-md-3">
                                 <div class="form-group">
 									<label>CEP</label>
-									<input class="form-control form-control-sm" v-mask="'#####-###'" placeholder="Insira o CEP" type="text" v-model="matricula.endereco.cep">
+									<input class="form-control form-control-sm" v-mask="'#####-###'" placeholder="Insira o CEP" type="text" 
+                                        v-model="matricula.endereco.cep">
+                                    <small v-if="erros.endereco" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.cep'])">{{erros['endereco.cep']}}</small>
 								</div>
 							</div>
                             <div class="col col-3 col-md-3">
 								<div class="form-group">
-									<label>Número</label>
-									<input class="form-control form-control-sm" placeholder="Insira o Número" type="text" v-model="matricula.endereco.num" required>
+									<label>Nº da Casa *</label>
+									<input class="form-control form-control-sm" placeholder="Insira o Número da Casa" type="text" v-model="matricula.endereco.num" required>
+                                    <small v-if="erros.endereco" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.num'])">{{erros['endereco.num']}}</small>
 								</div>
 							</div>
                         </div>
                         <div class="row">
                             <div class="col col-4 col-md-4">
 								<div class="form-group">
-									<label>Cidade</label>
+									<label>Cidade *</label>
 									<input class="form-control form-control-sm" placeholder="Insira a Cidade" type="text" v-model="matricula.endereco.cidade" required>
+                                    <small v-if="erros.endereco" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.cidade'])">{{erros['endereco.cidade']}}</small>
 								</div>
 							</div>
                             <div class="col col-4 col-md-4">
 								<div class="form-group">
-									<label>Bairro</label>
+									<label>Bairro *</label>
 									<input class="form-control form-control-sm" placeholder="Insira o Bairro" type="text" v-model="matricula.endereco.bairro" required>
+                                    <small v-if="erros.endereco" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.bairro'])">{{erros['endereco.bairro']}}</small>
 								</div>
 							</div>
                             <div class="col col-4 col-md-4">
 								<div class="form-group">
 									<label>Complemento</label>
                                     <textarea class="form form-control" placeholder="Complemento (opcional)" type="text" rows="1" v-model="matricula.endereco.complemento"></textarea>
+                                    <small v-if="erros.endereco" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.complemento'])">{{erros['endereco.complemento']}}</small>
 								</div>
 							</div>
                         </div>
                     </div>
-                    <div class="row" style="margin-right:10px;">
+                    <div class="row" style="margin-right:15px;">
                         <div class="col col-12 col-md-12">
                             <div class="form-group">
                                 <p class="text-danger">* Obrigatório!</p>
@@ -255,7 +274,7 @@ export default {
 
     data() {
         return {
-            isRequesting:false, erros:[], sucesso:false,
+            isRequesting:false, sucesso:false, erros:{},
             matricula:{
                 nome:'', sobrenome:'', cpf:'', rg:'', orgao_emissor:'', uf:'', nascimento:'',
                 email:'', isEvangelico:false, isMembro:false, classe:'batismo', sexo:false, conversao:'',
@@ -278,10 +297,10 @@ export default {
                 {key:"ES", value:"Espírito Santo"}, {key: "GO", value:"Goiás"}, {key:"MA", value:"Maranhão"},
                 {key: "MT", value:"Mato Grosso"}, {key:"MS", value:"Mato Grosso do Sul"}, {key:"MG", value:"Minas Gerais"},
                 {key:"PA", value:"Pará"}, {key:"PB", value:"Paraíba"}, { key: "PR", value: "Paraná" },
-                { key: "PE", value: "Pernambuco" }, { key: "PI", value: "Piauí" }, { key: "RJ", value: "Rio de Janeiro" },
-                { key: "RN", value: "Rio Grande do Norte" }, { key: "RS", value: "Rio Grande do Sul" }, { key: "RO", value: "Rondônia" },
-                { key: "RR", value: "Roraima" }, { key: "SC", value: "Santa Catarina" }, { key: "SP", value: "São Paulo" },
-                { key: "SE", value: "Sergipe" }, { key: "TO", value: "Tocantins" }
+                {key: "PE", value: "Pernambuco" }, { key: "PI", value: "Piauí" }, { key: "RJ", value: "Rio de Janeiro" },
+                {key: "RN", value: "Rio Grande do Norte" }, { key: "RS", value: "Rio Grande do Sul" }, { key: "RO", value: "Rondônia" },
+                {key: "RR", value: "Roraima" }, { key: "SC", value: "Santa Catarina" }, { key: "SP", value: "São Paulo" },
+                {key: "SE", value: "Sergipe" }, { key: "TO", value: "Tocantins" }
             ]
         }
     },
@@ -296,10 +315,11 @@ export default {
 
     methods: {
         abrirModalMatricula(){
+            this.erros=[];
             this.matricula={
                 nome:'', sobrenome:'', cpf:'', rg:'', orgao_emissor:'', uf:'', nascimento:'',
                 email:'', isEvangelico:false, isMembro:false, classe:'batismo', sexo:false, conversao:'',
-                telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', complemento:'', cidade:'',},
+                telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:'',},
             };
             $('#modalMatricula').modal('show');
         },
@@ -314,8 +334,9 @@ export default {
                     this.matricula.endereco.bairro = res.data.bairro;
                     this.matricula.endereco.cidade = res.data.localidade;
                 })
-                .catch(err=>{
-                    this.isRequesting=false; console.error(err); this.erros=err;
+                .catch(err=>{ 
+                    this.isRequesting=false; console.error(err); 
+                    this.erros.endereco.cep=['O CEP informado é inválido!']; 
                 })
         },1000),
 
@@ -329,7 +350,8 @@ export default {
                         $('#modalMatricula').modal('hide');
                     })
                     .catch(err=>{
-                        this.isRequesting=false; console.error(err); this.erros=err;
+                        this.isRequesting=false; console.error(err); this.erros=Object.values(err);
+                        this.erros = this.erros[2].data; console.log('errrros',this.erros);
                     })
             }
         },

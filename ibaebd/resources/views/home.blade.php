@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col">
-            <home></home>
+            <matricula></matricula>
         </div>
     </div>
 </div>

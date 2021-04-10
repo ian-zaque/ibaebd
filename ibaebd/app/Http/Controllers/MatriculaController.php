@@ -21,6 +21,22 @@ class MatriculaController extends Controller
         $dados['cpf'] = preg_replace('/[\s,.\-\/-]+/', '', $dados['cpf']);
         $dados['rg'] = preg_replace('/[\s,.\-\/-]+/', '', $dados['rg']);
 
+        $msgsErros=[
+            'required'=> 'É necessário preencher o campo :attribute !',
+            'string' => '',
+            'email' => ' O campo :attribute é inválido!',
+            'date' => 'O campo :attribute deve ser uma data!',
+            'boolean' => 'Selecione um dos valores do campo :attribute !'
+        ];
+
+        $atributos = [
+            'nome'=> 'Nome', 'sobrenome'=>'Sobrenome', 'cpf'=>'CPF', 'rg'=>'RG', 'orgao_emissor'=>'Órgão Emissor',
+            'uf'=>'UF','classe'=>'Classe','email'=>'E-mail','nascimento'=>'Data de Nascimento', 'conversao'=>'Data de Conversão',
+            'sexo'=>'Sexo', 'isMembro'=>'Sou Membro da IBA!', 'isEvangelico'=>'Sou Evangélico', 'telefones.tel1'=>'Telefone 1',
+            'telefones.tel2'=>'Telefone 2', 'endereco.logradouro'=>'Logradouro', 'endereco.cidade'=>'Cidade', 'endereco.bairro'=>'Bairro',
+            'endereco.cep'=>'CEP', 'endereco.complemento'=>'Complemento', 'endereco.num'=>'Nº da Casa',
+        ];
+
         $validator = Validator::make($dados, [
             'nome' => 'string|required',
             'sobrenome' => 'string|required',
@@ -45,7 +61,7 @@ class MatriculaController extends Controller
             'endereco.cep' =>' string|required',
             'endereco.complemento' =>' string|required',
             'endereco.num' =>' string|required',
-        ]);
+        ],$msgsErros, $atributos);
 
         if ($validator->fails()){ return response()->json($validator->errors(), 403); }
         else{
