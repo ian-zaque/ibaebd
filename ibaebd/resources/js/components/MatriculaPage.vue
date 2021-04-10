@@ -11,7 +11,8 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body">
+					<div  class="modal-body">
+                    <form action="#" id="corpo_modal">
 						<div class="row">
 							<div class="col col-6 col-md-6">
 								<div class="form-group">
@@ -212,6 +213,7 @@
 								</div>
 							</div>
                         </div>
+                    </form>
                     </div>
                     <div class="row">
                         <div class="col col-12 col-md-12">

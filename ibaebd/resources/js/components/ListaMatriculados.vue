@@ -41,7 +41,7 @@
                                     <td>{{mat.classe=='batismo'?'Batismo':'erro'}}</td>
 									<td class="content-right">
 										<div class="input-group-append justify-content-right" id="button-addon4">
-                                            <button type="button" style="margin-right:4px;" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" :title="'Baixar Ficha de '+mat.nome">
+                                            <button @click="baixarFicha(mat)" type="button" style="margin-right:4px;" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" :title="'Baixar Ficha de '+mat.nome">
                                                 <i class="fas fa-id-badge fa-lg"></i>
                                             </button>
 											<button @click="editarMatricula(mat)" type="button" style="margin-right:4px;" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Editar">
@@ -64,6 +64,7 @@
 </template>
 
 <script>
+import print from 'print-js'
 export default {
     name:'ListaMatriculados',
 
@@ -88,6 +89,16 @@ export default {
                     .then(res=>{ this.isRequesting=false; this.matriculados=res.data; })
                     .catch(err=>{ this.isRequesting=false; console.error(err); })
             }
+        },
+
+        baixarFicha(item){
+            this.matricula = {...item}; $('#modalMatricula').modal('show'); 
+            printJS({
+                printable:'corpo_modal', 
+                type:'html',
+                header:'IGREJA BATISTA ALVORADA - EBDIscipuladora'
+            }); 
+            $('#modalMatricula').modal('hide');
         },
 
         editarMatricula(item){ this.matricula = {...item};  $('#modalMatricula').modal('show'); },
