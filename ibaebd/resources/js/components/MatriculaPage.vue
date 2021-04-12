@@ -8,7 +8,7 @@
                             {{( (matricula!=null) && (matricula!=undefined) && (!matricula.hasOwnProperty('id')) ) ? 
                             'Matrícula EBDiscipuladora':'Editando Matricula de '+ matricula.nome}}
                         </h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<button @click="fechar" type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
@@ -298,7 +298,7 @@ export default {
             this.isRequesting=true;
             axios.get('http://viacep.com.br/ws/'+this.matricula.endereco.cep+'/json')
                 .then(res=>{
-                    this.isRequesting=false; this.erros=[];
+                    this.isRequesting=false; this.erros={};
                     this.matricula.endereco.logradouro = res.data.logradouro;
                     this.matricula.endereco.complemento = res.data.complemento;
                     this.matricula.endereco.bairro = res.data.bairro;
@@ -324,7 +324,7 @@ export default {
                 this.isRequesting=true; this.erros={};
                 axios.post('/atualizar',this.matricula)
                     .then(res=>{
-                        this.isRequesting=false; this.sucesso=true; this.erros=null;
+                        this.isRequesting=false; this.sucesso=true; this.erros={};
                         alert('Matrícula efetuada com sucesso!!!'); $('#modalMatricula').modal('hide');
                         if(this.edicao!=null){ this.$emit('retornoMatriculas', res.data); }
                     })

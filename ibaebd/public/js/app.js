@@ -2054,7 +2054,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     abrirModalMatricula: function abrirModalMatricula() {
-      this.erros = [];
+      this.erros = {};
 
       if (this.matricula != null && this.matricula.hasOwnProperty('id')) {
         delete this.matricula.id;
@@ -2195,7 +2195,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios.get('/getMatriculas').then(function (res) {
         _this.isRequesting = false;
         _this.matriculados = res.data;
-        _this.erros = null;
+        _this.erros = {};
       })["catch"](function (err) {
         _this.isRequesting = false;
         console.error(err);
@@ -2205,15 +2205,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this2 = this;
 
       if (confirm('Deseja deletar esta Matrícula?')) {
+        this.erros = {};
         this.isRequesting = true;
         axios["delete"]('/deletar/' + id).then(function (res) {
           _this2.isRequesting = false;
           _this2.matriculados = res.data;
-          _this2.erros = null;
+          _this2.erros = {};
         })["catch"](function (err) {
           _this2.isRequesting = false;
           console.error(err);
-          _this2.erros = null;
+          _this2.erros = {};
         });
       }
     },
@@ -2236,7 +2237,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       $('#modalMatricula').modal('hide');
     },
     editarMatricula: function editarMatricula(item) {
-      this.erros = null;
+      this.erros = {};
       this.matricula = _objectSpread({}, item);
       $('#modalMatricula').modal('show');
     },
@@ -2244,7 +2245,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.matriculados = val;
     },
     abrirModalMatricula: function abrirModalMatricula() {
-      this.erros = null;
+      this.erros = {};
 
       if (this.matricula != null && this.matricula.hasOwnProperty('id')) {
         delete this.matricula.id;
@@ -2297,7 +2298,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   mounted: function mounted() {
     this.getMatriculas();
-    console.log('MATRICULADOS', this.matriculados);
   }
 });
 
@@ -2760,7 +2760,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.isRequesting = true;
       axios.get('http://viacep.com.br/ws/' + this.matricula.endereco.cep + '/json').then(function (res) {
         _this.isRequesting = false;
-        _this.erros = [];
+        _this.erros = {};
         _this.matricula.endereco.logradouro = res.data.logradouro;
         _this.matricula.endereco.complemento = res.data.complemento;
         _this.matricula.endereco.bairro = res.data.bairro;
@@ -2811,7 +2811,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         axios.post('/atualizar', this.matricula).then(function (res) {
           _this2.isRequesting = false;
           _this2.sucesso = true;
-          _this2.erros = null;
+          _this2.erros = {};
           alert('Matrícula efetuada com sucesso!!!');
           $('#modalMatricula').modal('hide');
 
@@ -39998,7 +39998,23 @@ var render = function() {
                   ]
                 ),
                 _vm._v(" "),
-                _vm._m(0)
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close"
+                    },
+                    on: { click: _vm.fechar }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
@@ -41334,7 +41350,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(1),
+              _vm._m(0),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
                 _c(
@@ -41382,23 +41398,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close",
-        attrs: {
-          type: "button",
-          "data-dismiss": "modal",
-          "aria-label": "Close"
-        }
-      },
-      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-    )
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

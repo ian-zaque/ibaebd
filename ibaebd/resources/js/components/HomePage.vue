@@ -60,7 +60,7 @@ export default {
 
     methods: {
         abrirModalMatricula(){
-            this.erros=[]; 
+            this.erros={}; 
             if(this.matricula!=null && this.matricula.hasOwnProperty('id')){ delete this.matricula.id; }
             this.matricula={
                 nome:'', sobrenome:'', cpf:'', rg:'', orgao_emissor:'', uf:'', nascimento:'',
