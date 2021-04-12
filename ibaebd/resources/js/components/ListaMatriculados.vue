@@ -18,7 +18,6 @@
 				</div>
             </div>
             <div class="card-body">
-                <pre>{{matriculados}}</pre>
 				<div v-if="isRequesting==true" class="d-flex justify-content-center">
 					<div class="spinner-border m-5" role="status">
 						<span class="sr-only">Carregando...</span>
@@ -160,7 +159,7 @@ export default {
     },
 
     mounted() {
-        this.getMatriculas();
+        this.getMatriculas(); console.log('MATRICULADOS',this.matriculados)
     },
 
 }

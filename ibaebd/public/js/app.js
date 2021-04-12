@@ -2176,7 +2176,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ListaMatriculados',
@@ -2298,6 +2297,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   mounted: function mounted() {
     this.getMatriculas();
+    console.log('MATRICULADOS', this.matriculados);
   }
 });
 
@@ -39778,8 +39778,6 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
-        _c("pre", [_vm._v(_vm._s(_vm.matriculados))]),
-        _vm._v(" "),
         _vm.isRequesting == true
           ? _c("div", { staticClass: "d-flex justify-content-center" }, [
               _vm._m(0)
