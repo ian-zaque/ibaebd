@@ -2105,12 +2105,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var print_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! print-js */ "./node_modules/print-js/dist/print.js");
 /* harmony import */ var print_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(print_js__WEBPACK_IMPORTED_MODULE_0__);
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -2219,6 +2213,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     baixarFicha: function baixarFicha(item) {
+      console.log('item', item);
       var tempMat = item;
 
       if (tempMat.sexo == true) {
@@ -2227,18 +2222,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         console.log('É 0000');
       }
 
-      this.matricula = _objectSpread({}, item);
+      console.log('matricula antes', item);
+      this.matricula = Object.assign({}, item);
       $('#modalMatricula').modal('show');
-      printJS({
-        printable: 'corpo_modal',
-        type: 'html',
-        header: 'IGREJA BATISTA ALVORADA - EBDiscipuladora'
-      });
+      console.log('matricula depois', item);
+
+      if (this.matricula.id != null && this.matricula.id != undefined && this.matricula.id != '') {
+        printJS({
+          printable: 'corpo_modal',
+          type: 'html',
+          header: 'IGREJA BATISTA ALVORADA - EBDiscipuladora'
+        });
+      }
+
       $('#modalMatricula').modal('hide');
     },
     editarMatricula: function editarMatricula(item) {
       this.erros = {};
-      this.matricula = _objectSpread({}, item);
+      this.matricula = Object.assign({}, item);
       $('#modalMatricula').modal('show');
     },
     attMatriculas: function attMatriculas(val) {

@@ -92,20 +92,24 @@ export default {
         },
 
         baixarFicha(item){
+            console.log('item',item)
             var tempMat = item;
             if(tempMat.sexo==true){ console.log('É UMMMM')}
             else if(tempMat.sexo==false){ console.log('É 0000')}
-
-            this.matricula = {...item}; $('#modalMatricula').modal('show'); 
-            printJS({
-                printable:'corpo_modal', 
-                type:'html',
-                header:'IGREJA BATISTA ALVORADA - EBDiscipuladora'
-            }); 
+            console.log('matricula antes',item)
+            this.matricula = Object.assign({},item); $('#modalMatricula').modal('show');
+            console.log('matricula depois',item)
+            if(this.matricula.id!=null && this.matricula.id!=undefined && this.matricula.id!=''){
+                printJS({
+                    printable:'corpo_modal', 
+                    type:'html',
+                    header:'IGREJA BATISTA ALVORADA - EBDiscipuladora'
+                }); 
+            }
             $('#modalMatricula').modal('hide');
         },
 
-        editarMatricula(item){ this.erros={}; this.matricula = {...item};  $('#modalMatricula').modal('show'); },
+        editarMatricula(item){ this.erros={}; this.matricula = Object.assign({},item);  $('#modalMatricula').modal('show'); },
 
         attMatriculas(val){ this.matriculados = val; },
 
