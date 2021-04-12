@@ -5,23 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="imagens/logo_iba.png">
 
-    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ 'Igreja Batista Alvorada' }}</title>
 
-    <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script>
-        var laravel = @json(['baseURL' => url('/')])
+    <script> var laravel = @json(['baseURL' => url('/')])
     </script>
 
-    <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
-    <!-- Styles -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
@@ -83,16 +78,18 @@
             @yield('content')
         </main>
         <br>
-        <footer class="fixed-bottom" id="myFooter">
+        <footer id="myFooter">
             <div class="container d-flex justify-content-center">
                 <ul>
-                    <li><a href="#">Informações da Igreja</a></li>
-                    <li><a href="#">Contato</a></li>
+                    <li><a href="https://goo.gl/maps/jyoeMtAzZ6RCRbzNA">Localização da Igreja</a></li>
+                    <li><a href="https://linktr.ee/ibaalvorada">Informações</a></li>
                 </ul>
             </div>
             <div class="container d-flex justify-content-center">
-                <small style="font-size:12px;">E, assim, se alguém está em Cristo, é nova criatura; 
-                    as coisas antigas já passaram; eis que se fizeram novas. 2 Coríntios 5:17</small>
+                <p style="font-size:10px;">
+                    E, assim, se alguém está em Cristo, é nova criatura; 
+                    as coisas antigas já passaram; eis que se fizeram novas. 2 Coríntios 5:17
+                </p>
             </div>
             <div class="footer-social">
                 <a href="https://www.facebook.com/pages/Igreja-Batista-Alvorada/167492596640760" class="social-icons"><i class="soc fab fa-facebook"></i></a>
@@ -103,3 +100,13 @@
     </div>
 </body>
 </html>
+<style>
+    .hide {
+        display: none;
+    }
+
+    .myDIV:hover + .hide {
+        display: block;
+        color: red;
+    }
+</style>

@@ -4,7 +4,7 @@
             <div class="card-body">
                 <h5 class="card-title" style="font-size:40px;">Igreja Batista Alvorada</h5>
                 <p class="card-text" style="font-size:20px;">Feira de Santana - Bahia</p>
-                <p class="card-text " style="font-size:40px;">EBDiscipuladora</p>
+                <p class="card-text " style="font-size:35px;">EBDiscipuladora</p>
 
                 <div class="container">
                     <img src="imagens/logo_iba.png" style="margin-bottom:15px;" width="120px" height="170px" class="img-fluid float-left">
@@ -49,12 +49,19 @@ export default {
 
     data() {
         return {
+            erros:{},
+            matricula:{
+                nome:'', sobrenome:'', cpf:'', rg:'', orgao_emissor:'', uf:'', nascimento:'',
+                email:'', isEvangelico:false, isMembro:false, classe:'batismo', sexo:false, conversao:'',
+                telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:''},
+            },
         }
     },
 
     methods: {
         abrirModalMatricula(){
-            this.erros=[]; delete this.matricula.id;
+            this.erros=[]; 
+            if(this.matricula!=null && this.matricula.hasOwnProperty('id')){ delete this.matricula.id; }
             this.matricula={
                 nome:'', sobrenome:'', cpf:'', rg:'', orgao_emissor:'', uf:'', nascimento:'',
                 email:'', isEvangelico:false, isMembro:false, classe:'batismo', sexo:false, conversao:'',

@@ -5,7 +5,8 @@
 		    	<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="ModalMatriculaLabel">
-                            {{!edicao?'Matrícula EBDiscipuladora':'Editando Matricula de '+ edicao.nome}}
+                            {{( (matricula!=null) && (matricula!=undefined) && (!matricula.hasOwnProperty('id')) ) ? 
+                            'Matrícula EBDiscipuladora':'Editando Matricula de '+ matricula.nome}}
                         </h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
@@ -16,14 +17,14 @@
 						<div class="row">
 							<div class="col col-6 col-md-6">
 								<div class="form-group">
-									<label>Nome *</label>
+									<label>Nome*</label>
 									<input class="form-control form-control-sm" placeholder="Insira seu Nome" type="text" v-model="matricula.nome" required>
                                     <small v-if="erros.nome" class="text-danger" style="font-size:10px" :hidden="(!erros.nome)">{{erros.nome.toString()}}</small>
                                 </div>
 							</div>
 							<div class="col col-6 col-md-6">
 								<div class="form-group">
-									<label>Sobrenome *</label>
+									<label>Sobrenome*</label>
 									<input class="form-control form-control-sm" placeholder="Insira seu Sobrenome" type="text" v-model="matricula.sobrenome" required>
                                     <small v-if="erros.sobrenome" class="text-danger" style="font-size:10px" :hidden="(!erros.sobrenome)">{{erros.sobrenome.toString()}}</small>
                                 </div>
@@ -32,7 +33,7 @@
 						<div class="row">
 							<div class="col col-6 col-md-6">
 								<div class="form-group">
-									<label>CPF *</label>
+									<label>CPF*</label>
 									<input class="form-control form-control-sm" v-mask="['###.###.###-##']" placeholder="Insira seu CPF" type="text" 
                                             v-model="matricula.cpf" required>
                                     <small v-if="erros.cpf" class="text-danger" style="font-size:10px" :hidden="(!erros.cpf)">{{erros.cpf.toString()}}</small>
@@ -40,7 +41,7 @@
 							</div>
                             <div class="col col-6 col-md-6">
 								<div class="form-group">
-									<label>Data de Nascimento *</label>
+									<label>Data de Nascimento*</label>
 									<input class="form-control form-control-sm" placeholder="Insira sua data de nascimento" type="date" 
                                             v-model="matricula.nascimento" required>
                                     <small v-if="erros.nascimento" class="text-danger" style="font-size:10px" :hidden="(!erros.nascimento)">{{erros.nascimento.toString()}}</small>
@@ -50,7 +51,7 @@
                         <div class="row">
                             <div class="col col-4 col-md-4">
 								<div class="form-group">
-									<label>RG *</label>
+									<label>RG*</label>
 									<input class="form-control form-control-sm" v-mask="['##.###.###-#','##.###.###-##']" placeholder="Insira seu RG"
                                             type="text" v-model="matricula.rg" required>
                                     <small v-if="erros.rg" class="text-danger" style="font-size:10px" :hidden="(!erros.rg)">{{erros.rg.toString()}}</small>
@@ -58,7 +59,7 @@
 							</div>
                             <div class="col col-4 col-md-4">
 								<div class="form-group">
-									<label>Órgão Emissor *</label>
+									<label>Órgão Emissor*</label>
                                     <select class="form-control form-control-sm" v-model="matricula.orgao_emissor" required>
                                         <option selected hidden value="">Selecione o Órgão Emissor</option>
                                         <option v-for="(org,idx) in orgaos_emissores" :key="idx" :value="org.sigla">{{org.sigla +' - '+ org.nome}}</option>
@@ -68,7 +69,7 @@
 							</div>
                             <div class="col col-4 col-md-4">
 								<div class="form-group">
-									<label>UF *</label>
+									<label>UF*</label>
 									<select class="form-control form-control-sm" v-model="matricula.uf">
                                         <option selected hidden value="">Selecione a Unidade Federal</option>
                                         <option v-for="(u,idx) in ufs" :key="idx" :value="u.key">{{u.key +' - '+ u.value}}</option>
@@ -83,11 +84,11 @@
                                 <label>Sexo*</label>
 								<div class="form-group">
 									<div class="form-check form-check-inline">
-                                        <input v-model="matricula.sexo" class="form-check-input" type="radio" name="radio_btn_sexoF" id="radio_btn_sexoF" :value="true">
+                                        <input v-model="matricula.sexo" class="form-check-input" type="radio" name="radio_btn_sexoF" id="radio_btn_sexoF" :value="1">
                                         <label class="form-check-label" for="radio_btn_sexoF">Feminino</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input v-model="matricula.sexo" class="form-check-input" type="radio" name="radio_btn_sexoM" id="radio_btn_sexoM" :value="false">
+                                        <input v-model="matricula.sexo" class="form-check-input" type="radio" name="radio_btn_sexoM" id="radio_btn_sexoM" :value="0">
                                         <label class="form-check-label" for="radio_btn_sexoM">Masculino</label>
                                     </div>
 								</div>
@@ -97,11 +98,11 @@
                                 <label>Sou evangélico?*</label>
 								<div class="form-group">
 									<div class="form-check form-check-inline">
-                                        <input v-model="matricula.isEvangelico" class="form-check-input" type="radio" name="radio_btn_evglS" id="radio_btn_evglS" :value="true">
+                                        <input v-model="matricula.isEvangelico" class="form-check-input" type="radio" name="radio_btn_evglS" id="radio_btn_evglS" :value="1">
                                         <label class="form-check-label" for="radio_btn_evglS">Sim</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input v-model="matricula.isEvangelico" class="form-check-input" type="radio" name="radio_btn_evglN" id="radio_btn_evglN" :value="false">
+                                        <input v-model="matricula.isEvangelico" class="form-check-input" type="radio" name="radio_btn_evglN" id="radio_btn_evglN" :value="0">
                                         <label class="form-check-label" for="radio_btn_evglN">Não</label>
                                     </div>
 								</div>
@@ -111,11 +112,11 @@
                                 <label>Sou Membro da IBA?*</label>
 								<div class="form-group">
 									<div class="form-check form-check-inline">
-                                        <input v-model="matricula.isMembro" class="form-check-input" type="radio" name="radio_btn_mbrS" id="radio_btn_mbrS" :value="true">
+                                        <input v-model="matricula.isMembro" class="form-check-input" type="radio" name="radio_btn_mbrS" id="radio_btn_mbrS" :value="1">
                                         <label class="form-check-label" for="radio_btn_mbrS">Sim</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input v-model="matricula.isMembro" class="form-check-input" type="radio" name="radio_btn_mbrN" id="radio_btn_mbrN" :value="false">
+                                        <input v-model="matricula.isMembro" class="form-check-input" type="radio" name="radio_btn_mbrN" id="radio_btn_mbrN" :value="0">
                                         <label class="form-check-label" for="radio_btn_mbrN">Não</label>
                                     </div>
 								</div>
@@ -139,7 +140,7 @@
                             </div>
                             <div class="col col-3 col-md-3">
 								<div class="form-group">
-									<label>Telefone 1 *</label>
+									<label>Telefone 1*</label>
 									<input class="form-control form-control-sm" v-model="matricula.telefones.tel1"
                                             v-mask="['(##) ####-####', '(##) #####-####']" placeholder="Insira seu Telefone" type="tel" required>
                                     <small v-if="erros['telefones.tel1']" class="text-danger" style="font-size:10px" :hidden="(!erros['telefones.tel1'])">{{erros['telefones.tel1'].toString()}}</small>
@@ -155,7 +156,7 @@
                             </div>
                             <div class="col col-3 col-md-3">
 								<div class="form-group">
-									<label>Classe da EBD *</label>
+									<label>Classe da EBD*</label>
 									<select class="form-control form-control-sm" v-model="matricula.classe">
                                         <option selected hidden value="">Selecione a Classe da EBD</option>
                                         <option selected :value="'batismo'">Classe de Batismo</option>
@@ -168,7 +169,7 @@
                         <div class="row">
                             <div class="col col-6 col-md-6">
 								<div class="form-group">
-									<label>Logradouro *</label>
+									<label>Logradouro*</label>
 									<input class="form-control form-control-sm" placeholder="Insira o Logradouro" type="text"
                                             v-model="matricula.endereco.logradouro" required>
                                     <small v-if="erros['endereco.logradouro']" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.logradouro'])">{{erros['endereco.logradouro'].toString()}}</small>
@@ -176,7 +177,7 @@
 							</div>
                             <div class="col col-3 col-md-3">
                                 <div class="form-group">
-									<label>Nº da Casa *</label>
+									<label>Nº da Casa*</label>
 									<input class="form-control form-control-sm" placeholder="Insira o Número da Casa" type="text" v-model="matricula.endereco.num" required>
                                     <small v-if="erros['endereco.num']" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.num'])">{{erros['endereco.num'].toString()}}</small>
 								</div>
@@ -193,14 +194,14 @@
                         <div class="row">
                             <div class="col col-4 col-md-4">
 								<div class="form-group">
-									<label>Cidade *</label>
+									<label>Cidade*</label>
 									<input class="form-control form-control-sm" placeholder="Insira a Cidade" type="text" v-model="matricula.endereco.cidade" required>
                                     <small v-if="erros['endereco.cidade']" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.cidade'])">{{erros['endereco.cidade'].toString()}}</small>
 								</div>
 							</div>
                             <div class="col col-4 col-md-4">
 								<div class="form-group">
-									<label>Bairro *</label>
+									<label>Bairro*</label>
 									<input class="form-control form-control-sm" placeholder="Insira o Bairro" type="text" v-model="matricula.endereco.bairro" required>
                                     <small v-if="erros['endereco.bairro']" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.bairro'])">{{erros['endereco.bairro'].toString()}}</small>
 								</div>
@@ -218,15 +219,15 @@
                     <div class="row">
                         <div class="col col-12 col-md-12">
                             <div style="margin-right:15px;">
-                                <p class="small text-danger">* Obrigatório!</p>
+                                <p class="small text-danger">*Obrigatório!</p>
                             </div>
                         </div>
                     </div>
 
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" :disabled="isRequesting" data-dismiss="modal">Fechar</button> 
+						<button type="button" class="btn btn-secondary" @click="fechar" :disabled="isRequesting==true" data-dismiss="modal">Fechar</button> 
 						<button type="button" class="btn btn-primary" @click="cadastrar" :disabled="isRequesting==true">
-                            {{edicao.id==null||edicao.id==undefined?'Matricular':'Atualizar'}}
+                            {{(edicao!=null && !(edicao.hasOwnProperty('id'))) ? 'Matricular':'Atualizar'}}
                         </button>
 					</div>
 		    	</div>
@@ -285,7 +286,7 @@ export default {
                 this.getCepInfo();
             }
         },
-        edicao(val,old){
+        edicao(val){
             if(val!=null && val!={}){
                 this.matricula=Object.assign({},val);
             }
@@ -309,6 +310,15 @@ export default {
                 })
         },1000),
 
+        fechar(){
+            this.matricula={
+                nome:'', sobrenome:'', cpf:'', rg:'', orgao_emissor:'', uf:'', nascimento:'',
+                email:'', isEvangelico:false, isMembro:false, classe:'batismo', sexo:false, conversao:'',
+                telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:'',},
+            };
+            this.erros={}; $('#modalMatricula').modal('hide');
+        },
+
         cadastrar(){
             if(confirm('Deseja confirmar a matrícula?')){
                 this.isRequesting=true; this.erros={};
@@ -319,8 +329,8 @@ export default {
                         if(this.edicao!=null){ this.$emit('retornoMatriculas', res.data); }
                     })
                     .catch(err=>{
-                        this.isRequesting=false; console.error(err); this.erros=Object.values(err);
-                        this.erros = this.erros[2].data; console.log('errrros',this.erros['telefones.tel1']);
+                        this.isRequesting=false; this.erros=Object.values(err);
+                        this.erros = this.erros[2].data;
                     })
             }
         },

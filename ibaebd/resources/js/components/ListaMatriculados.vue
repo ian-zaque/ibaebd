@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         <div class="card">
             <div class="card-header lead d-flex justify-content-between">
                 <span class="h4">Lista de Matriculados</span>
@@ -18,13 +18,14 @@
 				</div>
             </div>
             <div class="card-body">
+                <pre>{{matriculados}}</pre>
 				<div v-if="isRequesting==true" class="d-flex justify-content-center">
 					<div class="spinner-border m-5" role="status">
 						<span class="sr-only">Carregando...</span>
 					</div>
 				</div>
-				<div v-else-if="matriculados.length>0" class="table-responsive row">
-					<div class="left col col-8 col-md-12">
+				<div v-else-if="matriculados.length>0">
+					<div class="left col col-12 col-md-12">
 						<table class="table table-hover table-sm table-responsive-md">
 							<thead class="thead-light">
 								<tr>
@@ -92,11 +93,15 @@ export default {
         },
 
         baixarFicha(item){
+            var tempMat = item;
+            if(tempMat.sexo==true){ console.log('É UMMMM')}
+            else if(tempMat.sexo==false){ console.log('É 0000')}
+
             this.matricula = {...item}; $('#modalMatricula').modal('show'); 
             printJS({
                 printable:'corpo_modal', 
                 type:'html',
-                header:'IGREJA BATISTA ALVORADA - EBDIscipuladora'
+                header:'IGREJA BATISTA ALVORADA - EBDiscipuladora'
             }); 
             $('#modalMatricula').modal('hide');
         },
@@ -106,7 +111,8 @@ export default {
         attMatriculas(val){ this.matriculados = val; },
 
         abrirModalMatricula(){
-            this.erros=null; delete this.matricula.id;
+            this.erros=null; 
+            if(this.matricula!=null && this.matricula.hasOwnProperty('id')){ delete this.matricula.id; }
             this.matricula={
                 nome:'', sobrenome:'', cpf:'', rg:'', orgao_emissor:'', uf:'', nascimento:'',
                 email:'', isEvangelico:false, isMembro:false, classe:'batismo', sexo:false, conversao:'',

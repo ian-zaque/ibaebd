@@ -2021,11 +2021,45 @@ __webpack_require__.r(__webpack_exports__);
     TheMask: vue_the_mask__WEBPACK_IMPORTED_MODULE_0__["TheMask"]
   },
   data: function data() {
-    return {};
+    return {
+      erros: {},
+      matricula: {
+        nome: '',
+        sobrenome: '',
+        cpf: '',
+        rg: '',
+        orgao_emissor: '',
+        uf: '',
+        nascimento: '',
+        email: '',
+        isEvangelico: false,
+        isMembro: false,
+        classe: 'batismo',
+        sexo: false,
+        conversao: '',
+        telefones: {
+          tel1: '',
+          tel2: null
+        },
+        endereco: {
+          logradouro: '',
+          bairro: '',
+          num: '',
+          cep: '',
+          complemento: '',
+          cidade: ''
+        }
+      }
+    };
   },
   methods: {
     abrirModalMatricula: function abrirModalMatricula() {
       this.erros = [];
+
+      if (this.matricula != null && this.matricula.hasOwnProperty('id')) {
+        delete this.matricula.id;
+      }
+
       this.matricula = {
         nome: '',
         sobrenome: '',
@@ -2035,10 +2069,10 @@ __webpack_require__.r(__webpack_exports__);
         uf: '',
         nascimento: '',
         email: '',
-        isEvangelico: 0,
-        isMembro: 0,
+        isEvangelico: false,
+        isMembro: false,
         classe: 'batismo',
-        sexo: 0,
+        sexo: false,
         conversao: '',
         telefones: {
           tel1: '',
@@ -2142,6 +2176,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ListaMatriculados',
@@ -2161,6 +2196,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios.get('/getMatriculas').then(function (res) {
         _this.isRequesting = false;
         _this.matriculados = res.data;
+        _this.erros = null;
       })["catch"](function (err) {
         _this.isRequesting = false;
         console.error(err);
@@ -2174,23 +2210,34 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         axios["delete"]('/deletar/' + id).then(function (res) {
           _this2.isRequesting = false;
           _this2.matriculados = res.data;
+          _this2.erros = null;
         })["catch"](function (err) {
           _this2.isRequesting = false;
           console.error(err);
+          _this2.erros = null;
         });
       }
     },
     baixarFicha: function baixarFicha(item) {
+      var tempMat = item;
+
+      if (tempMat.sexo == true) {
+        console.log('É UMMMM');
+      } else if (tempMat.sexo == false) {
+        console.log('É 0000');
+      }
+
       this.matricula = _objectSpread({}, item);
       $('#modalMatricula').modal('show');
       printJS({
         printable: 'corpo_modal',
         type: 'html',
-        header: 'IGREJA BATISTA ALVORADA - EBDIscipuladora'
+        header: 'IGREJA BATISTA ALVORADA - EBDiscipuladora'
       });
       $('#modalMatricula').modal('hide');
     },
     editarMatricula: function editarMatricula(item) {
+      this.erros = null;
       this.matricula = _objectSpread({}, item);
       $('#modalMatricula').modal('show');
     },
@@ -2198,7 +2245,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.matriculados = val;
     },
     abrirModalMatricula: function abrirModalMatricula() {
-      this.erros = [];
+      this.erros = null;
+
+      if (this.matricula != null && this.matricula.hasOwnProperty('id')) {
+        delete this.matricula.id;
+      }
+
       this.matricula = {
         nome: '',
         sobrenome: '',
@@ -2208,10 +2260,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         uf: '',
         nascimento: '',
         email: '',
-        isEvangelico: 0,
-        isMembro: 0,
+        isEvangelico: false,
+        isMembro: false,
         classe: 'batismo',
-        sexo: 0,
+        sexo: false,
         conversao: '',
         telefones: {
           tel1: '',
@@ -2230,7 +2282,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     baixarPlanilha: function baixarPlanilha() {
       var mat = this.matriculados.map(function (val) {
-        return ['' + val.id, val.nome + ' ' + val.sobrenome, val.sexo == 0 ? 'Masculino' : 'Feminino', val.cpf, val.rg, new Date(val.nascimento).toLocaleDateString(), val.email == null || val.email == '' ? '-' : val.email, '' + val.telefones.tel1, val.telefones.tel2 == '' || val.telefones.tel2 == null ? '-' : '' + val.telefones.tel2, val.conversao == null || val.conversao == '' ? '-' : new Date(val.conversao).toLocaleDateString().replace('/', '-'), val.isEvangelico == 0 ? 'Nao' : 'Sim', val.isMembro == 0 ? 'Nao' : 'Sim', val.endereco.logradouro + ', ' + val.endereco.num + ', ' + val.endereco.bairro, val.endereco.cidade, val.endereco.cep == '' || val.endereco.cep == null ? '' : val.endereco.cep, val.endereco.complemento == '' || val.endereco.complemento == null ? '' : val.endereco.complemento];
+        return ['' + val.id, val.nome + ' ' + val.sobrenome, val.sexo == false ? 'Masculino' : 'Feminino', val.cpf, val.rg, new Date(val.nascimento).toLocaleDateString(), val.email == null || val.email == '' ? '-' : val.email, '' + val.telefones.tel1, val.telefones.tel2 == '' || val.telefones.tel2 == null ? '-' : '' + val.telefones.tel2, val.conversao == null || val.conversao == '' ? '-' : new Date(val.conversao).toLocaleDateString().replace('/', '-'), val.isEvangelico == false ? 'Nao' : 'Sim', val.isMembro == false ? 'Nao' : 'Sim', val.endereco.logradouro + ', ' + val.endereco.num + ', ' + val.endereco.bairro, val.endereco.cidade, val.endereco.cep == '' || val.endereco.cep == null ? '' : val.endereco.cep, val.endereco.complemento == '' || val.endereco.complemento == null ? '' : val.endereco.complemento];
       });
       mat.unshift(['ID', 'Nome', 'Sexo', 'CPF', 'RG', 'Data de Nascimento', 'Email', 'Telefone 1', 'Telefone 2', 'Data de Conversao', 'Evangelico?', 'Membro?', 'Endereco', 'Cidade', 'CEP', 'Complemento']);
       var csvContent = "data:text/csv;charset=utf-8," + mat.map(function (e) {
@@ -2502,6 +2554,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'MatriculaPage',
@@ -2528,10 +2581,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         uf: '',
         nascimento: '',
         email: '',
-        isEvangelico: 0,
-        isMembro: 0,
+        isEvangelico: false,
+        isMembro: false,
         classe: 'batismo',
-        sexo: 0,
+        sexo: false,
         conversao: '',
         telefones: {
           tel1: '',
@@ -2695,7 +2748,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     if (val != '' && val != old && val != null && val != undefined && val.replace(/\s/g, '').length && val.indexOf('-') != -1 && val.length == 9) {
       this.getCepInfo();
     }
-  }), _defineProperty(_watch, "edicao", function edicao(val, old) {
+  }), _defineProperty(_watch, "edicao", function edicao(val) {
     if (val != null && val != {}) {
       this.matricula = Object.assign({}, val);
     }
@@ -2718,15 +2771,47 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.erros.endereco.cep = ['O CEP informado é inválido!'];
       });
     }, 1000),
+    fechar: function fechar() {
+      this.matricula = {
+        nome: '',
+        sobrenome: '',
+        cpf: '',
+        rg: '',
+        orgao_emissor: '',
+        uf: '',
+        nascimento: '',
+        email: '',
+        isEvangelico: false,
+        isMembro: false,
+        classe: 'batismo',
+        sexo: false,
+        conversao: '',
+        telefones: {
+          tel1: '',
+          tel2: null
+        },
+        endereco: {
+          logradouro: '',
+          bairro: '',
+          num: '',
+          cep: '',
+          complemento: '',
+          cidade: ''
+        }
+      };
+      this.erros = {};
+      $('#modalMatricula').modal('hide');
+    },
     cadastrar: function cadastrar() {
       var _this2 = this;
 
       if (confirm('Deseja confirmar a matrícula?')) {
         this.isRequesting = true;
+        this.erros = {};
         axios.post('/atualizar', this.matricula).then(function (res) {
           _this2.isRequesting = false;
           _this2.sucesso = true;
-          $('.toast').toast('show');
+          _this2.erros = null;
           alert('Matrícula efetuada com sucesso!!!');
           $('#modalMatricula').modal('hide');
 
@@ -2735,10 +2820,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
         })["catch"](function (err) {
           _this2.isRequesting = false;
-          console.error(err);
           _this2.erros = Object.values(err);
           _this2.erros = _this2.erros[2].data;
-          console.log('errrros', _this2.erros['telefones.tel1']);
         });
       }
     }
@@ -39541,7 +39624,7 @@ var render = function() {
               "p",
               {
                 staticClass: "card-text ",
-                staticStyle: { "font-size": "40px" }
+                staticStyle: { "font-size": "35px" }
               },
               [_vm._v("EBDiscipuladora")]
             ),
@@ -39621,7 +39704,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
+  return _c("div", [
     _c("div", { staticClass: "card" }, [
       _c(
         "div",
@@ -39695,13 +39778,15 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
+        _c("pre", [_vm._v(_vm._s(_vm.matriculados))]),
+        _vm._v(" "),
         _vm.isRequesting == true
           ? _c("div", { staticClass: "d-flex justify-content-center" }, [
               _vm._m(0)
             ])
           : _vm.matriculados.length > 0
-          ? _c("div", { staticClass: "table-responsive row" }, [
-              _c("div", { staticClass: "left col col-8 col-md-12" }, [
+          ? _c("div", [
+              _c("div", { staticClass: "left col col-12 col-md-12" }, [
                 _c(
                   "table",
                   {
@@ -39904,9 +39989,11 @@ var render = function() {
                     _vm._v(
                       "\n                            " +
                         _vm._s(
-                          _vm.edicao == null
+                          _vm.matricula != null &&
+                            _vm.matricula != undefined &&
+                            !_vm.matricula.hasOwnProperty("id")
                             ? "Matrícula EBDiscipuladora"
-                            : "Editando Matricula de " + _vm.edicao.nome
+                            : "Editando Matricula de " + _vm.matricula.nome
                         ) +
                         "\n                        "
                     )
@@ -39921,7 +40008,7 @@ var render = function() {
                   _c("div", { staticClass: "row" }, [
                     _c("div", { staticClass: "col col-6 col-md-6" }, [
                       _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("Nome *")]),
+                        _c("label", [_vm._v("Nome*")]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -39969,7 +40056,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "col col-6 col-md-6" }, [
                       _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("Sobrenome *")]),
+                        _c("label", [_vm._v("Sobrenome*")]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -40019,7 +40106,7 @@ var render = function() {
                   _c("div", { staticClass: "row" }, [
                     _c("div", { staticClass: "col col-6 col-md-6" }, [
                       _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("CPF *")]),
+                        _c("label", [_vm._v("CPF*")]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -40073,7 +40160,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "col col-6 col-md-6" }, [
                       _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("Data de Nascimento *")]),
+                        _c("label", [_vm._v("Data de Nascimento*")]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -40123,7 +40210,7 @@ var render = function() {
                   _c("div", { staticClass: "row" }, [
                     _c("div", { staticClass: "col col-4 col-md-4" }, [
                       _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("RG *")]),
+                        _c("label", [_vm._v("RG*")]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -40173,7 +40260,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "col col-4 col-md-4" }, [
                       _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("Órgão Emissor *")]),
+                        _c("label", [_vm._v("Órgão Emissor*")]),
                         _vm._v(" "),
                         _c(
                           "select",
@@ -40248,7 +40335,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "col col-4 col-md-4" }, [
                       _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("UF *")]),
+                        _c("label", [_vm._v("UF*")]),
                         _vm._v(" "),
                         _c(
                           "select",
@@ -40727,7 +40814,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "col col-3 col-md-3" }, [
                       _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("Telefone 1 *")]),
+                        _c("label", [_vm._v("Telefone 1*")]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -40844,7 +40931,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "col col-3 col-md-3" }, [
                       _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("Classe da EBD *")]),
+                        _c("label", [_vm._v("Classe da EBD*")]),
                         _vm._v(" "),
                         _c(
                           "select",
@@ -40916,7 +41003,7 @@ var render = function() {
                   _c("div", { staticClass: "row" }, [
                     _c("div", { staticClass: "col col-6 col-md-6" }, [
                       _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("Logradouro *")]),
+                        _c("label", [_vm._v("Logradouro*")]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -40974,7 +41061,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "col col-3 col-md-3" }, [
                       _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("Nº da Casa *")]),
+                        _c("label", [_vm._v("Nº da Casa*")]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -41082,7 +41169,7 @@ var render = function() {
                   _c("div", { staticClass: "row" }, [
                     _c("div", { staticClass: "col col-4 col-md-4" }, [
                       _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("Cidade *")]),
+                        _c("label", [_vm._v("Cidade*")]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -41136,7 +41223,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "col col-4 col-md-4" }, [
                       _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("Bairro *")]),
+                        _c("label", [_vm._v("Bairro*")]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -41258,9 +41345,10 @@ var render = function() {
                     staticClass: "btn btn-secondary",
                     attrs: {
                       type: "button",
-                      disabled: _vm.isRequesting,
+                      disabled: _vm.isRequesting == true,
                       "data-dismiss": "modal"
-                    }
+                    },
+                    on: { click: _vm.fechar }
                   },
                   [_vm._v("Fechar")]
                 ),
@@ -41279,7 +41367,9 @@ var render = function() {
                     _vm._v(
                       "\n                            " +
                         _vm._s(
-                          _vm.edicao == null ? "Matricular" : "Atualizar"
+                          _vm.edicao != null && !_vm.edicao.hasOwnProperty("id")
+                            ? "Matricular"
+                            : "Atualizar"
                         ) +
                         "\n                        "
                     )
@@ -41319,7 +41409,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "col col-12 col-md-12" }, [
         _c("div", { staticStyle: { "margin-right": "15px" } }, [
           _c("p", { staticClass: "small text-danger" }, [
-            _vm._v("* Obrigatório!")
+            _vm._v("*Obrigatório!")
           ])
         ])
       ])
