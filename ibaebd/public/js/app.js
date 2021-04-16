@@ -2023,14 +2023,12 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       erros: {},
+      isEditing: null,
       matricula: {
         nome: '',
         sobrenome: '',
-        cpf: '',
-        rg: '',
-        orgao_emissor: '',
-        uf: '',
         nascimento: '',
+        // cpf:'', rg:'', orgao_emissor:'', uf:'',
         email: '',
         classe: 'batismo',
         isEvangelico: 0,
@@ -2055,6 +2053,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     abrirModalMatricula: function abrirModalMatricula() {
       this.erros = {};
+      this.isEditing = false;
 
       if (this.matricula != null && this.matricula.hasOwnProperty('id')) {
         delete this.matricula.id;
@@ -2063,11 +2062,8 @@ __webpack_require__.r(__webpack_exports__);
       this.matricula = {
         nome: '',
         sobrenome: '',
-        cpf: '',
-        rg: '',
-        orgao_emissor: '',
-        uf: '',
         nascimento: '',
+        // cpf:'', rg:'', orgao_emissor:'', uf:'',
         email: '',
         classe: 'batismo',
         isEvangelico: 0,
@@ -2170,6 +2166,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ListaMatriculados',
@@ -2178,7 +2176,8 @@ __webpack_require__.r(__webpack_exports__);
       isRequesting: false,
       erros: {},
       matriculados: [],
-      matricula: null
+      matricula: null,
+      isEditing: null
     };
   },
   methods: {
@@ -2213,19 +2212,13 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     baixarFicha: function baixarFicha(item) {
-      console.log('item', item);
-      var tempMat = item;
-
-      if (tempMat.sexo == true) {
-        console.log('É UMMMM');
-      } else if (tempMat.sexo == false) {
-        console.log('É 0000');
-      }
-
-      console.log('matricula antes', item);
+      // console.log('item',item)
+      // var tempMat = item;
+      // if(tempMat.sexo==true){ console.log('É UMMMM')}
+      // else if(tempMat.sexo==false){ console.log('É 0000')}
+      // console.log('matricula antes',item)
       this.matricula = Object.assign({}, item);
       $('#modalMatricula').modal('show');
-      console.log('matricula depois', item);
 
       if (this.matricula.id != null && this.matricula.id != undefined && this.matricula.id != '') {
         printJS({
@@ -2238,6 +2231,7 @@ __webpack_require__.r(__webpack_exports__);
       $('#modalMatricula').modal('hide');
     },
     editarMatricula: function editarMatricula(item) {
+      this.isEditing = true;
       this.erros = {};
       this.matricula = Object.assign({}, item);
       $('#modalMatricula').modal('show');
@@ -2247,6 +2241,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     abrirModalMatricula: function abrirModalMatricula() {
       this.erros = {};
+      this.isEditing = false;
 
       if (this.matricula != null && this.matricula.hasOwnProperty('id')) {
         delete this.matricula.id;
@@ -2255,11 +2250,8 @@ __webpack_require__.r(__webpack_exports__);
       this.matricula = {
         nome: '',
         sobrenome: '',
-        cpf: '',
-        rg: '',
-        orgao_emissor: '',
-        uf: '',
         nascimento: '',
+        // cpf:'', rg:'', orgao_emissor:'', uf:'',
         email: '',
         classe: 'batismo',
         isEvangelico: 0,
@@ -2283,9 +2275,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     baixarPlanilha: function baixarPlanilha() {
       var mat = this.matriculados.map(function (val) {
-        return ['' + val.id, val.nome + ' ' + val.sobrenome, val.sexo == false ? 'Masculino' : 'Feminino', val.cpf, val.rg, new Date(val.nascimento).toLocaleDateString(), val.email == null || val.email == '' ? '-' : val.email, '' + val.telefones.tel1, val.telefones.tel2 == '' || val.telefones.tel2 == null ? '-' : '' + val.telefones.tel2, val.conversao == null || val.conversao == '' ? '-' : new Date(val.conversao).toLocaleDateString().replace('/', '-'), val.isEvangelico == false ? 'Nao' : 'Sim', val.isMembro == false ? 'Nao' : 'Sim', val.endereco.logradouro + ', ' + val.endereco.num + ', ' + val.endereco.bairro, val.endereco.cidade, val.endereco.cep == '' || val.endereco.cep == null ? '' : val.endereco.cep, val.endereco.complemento == '' || val.endereco.complemento == null ? '' : val.endereco.complemento];
+        return ['' + val.id, val.nome + ' ' + val.sobrenome, val.sexo == false ? 'Masculino' : 'Feminino', new Date(val.nascimento).toLocaleDateString(), val.email == null || val.email == '' ? '-' : val.email, '' + val.telefones.tel1, val.telefones.tel2 == '' || val.telefones.tel2 == null ? '-' : '' + val.telefones.tel2, val.conversao == null || val.conversao == '' ? '-' : new Date(val.conversao).toLocaleDateString().replace('/', '-'), val.isEvangelico == false ? 'Nao' : 'Sim', val.membresia == 'm' ? 'Membro' : 'Congregado', val.endereco.logradouro + ', ' + val.endereco.num + ', ' + val.endereco.bairro, val.endereco.cidade, val.endereco.cep == '' || val.endereco.cep == null ? '' : val.endereco.cep, val.endereco.complemento == '' || val.endereco.complemento == null ? '' : val.endereco.complemento];
       });
-      mat.unshift(['ID', 'Nome', 'Sexo', 'CPF', 'RG', 'Data de Nascimento', 'Email', 'Telefone 1', 'Telefone 2', 'Data de Conversao', 'Evangelico?', 'Membro?', 'Endereco', 'Cidade', 'CEP', 'Complemento']);
+      mat.unshift(['ID', 'Nome', 'Sexo', 'Data de Nascimento', 'Email', 'Telefone Zap', 'Telefone 2', 'Data de Conversao', 'Evangelico?', 'Membresia', 'Endereco', 'Cidade', 'CEP', 'Complemento']);
       var csvContent = "data:text/csv;charset=utf-8," + mat.map(function (e) {
         return e.join(";");
       }).join("\n");
@@ -2549,7 +2541,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'MatriculaPage',
@@ -2559,6 +2550,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   props: {
     edicao: {
       type: Object,
+      "default": null
+    },
+    isEditing: {
+      type: Boolean,
       "default": null
     }
   },
@@ -2570,11 +2565,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       matricula: {
         nome: '',
         sobrenome: '',
-        cpf: '',
-        rg: '',
-        orgao_emissor: '',
-        uf: '',
         nascimento: '',
+        // cpf:'', rg:'', orgao_emissor:'', uf:'',
         email: '',
         classe: 'batismo',
         isEvangelico: 0,
@@ -2634,6 +2626,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.matricula = Object.assign({}, val);
     }
   }), _watch),
+  computed: {
+    editando: function editando() {
+      return this.isEditing;
+    }
+  },
   methods: {
     getCepInfo: _.debounce(function () {
       var _this = this;
@@ -2656,11 +2653,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.matricula = {
         nome: '',
         sobrenome: '',
-        cpf: '',
-        rg: '',
-        orgao_emissor: '',
-        uf: '',
         nascimento: '',
+        // cpf:'', rg:'', orgao_emissor:'', uf:'',
         email: '',
         classe: 'batismo',
         isEvangelico: 0,
@@ -39539,7 +39533,7 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c("matricula-page")
+      _c("matricula-page", { attrs: { isEditing: _vm.isEditing } })
     ],
     1
   )
@@ -39598,7 +39592,7 @@ var render = function() {
             { staticClass: "input-group-append" },
             [
               _c("matricula-page", {
-                attrs: { edicao: _vm.matricula },
+                attrs: { edicao: _vm.matricula, isEditing: _vm.isEditing },
                 on: { retornoMatriculas: _vm.attMatriculas }
               }),
               _vm._v(" "),
@@ -39637,21 +39631,23 @@ var render = function() {
                 [_c("i", { staticClass: "fas fa-redo fa-lg" })]
               ),
               _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-outline-secondary",
-                  staticStyle: { "margin-left": "7px" },
-                  attrs: {
-                    type: "button",
-                    "data-toggle": "tooltip",
-                    "data-placement": "bottom",
-                    title: "Baixar Planilha de Matriculados"
-                  },
-                  on: { click: _vm.baixarPlanilha }
-                },
-                [_c("i", { staticClass: "fas fa-table fa-lg" })]
-              )
+              _vm.matriculados.length > 0
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-secondary",
+                      staticStyle: { "margin-left": "7px" },
+                      attrs: {
+                        type: "button",
+                        "data-toggle": "tooltip",
+                        "data-placement": "bottom",
+                        title: "Baixar Planilha de Matriculados"
+                      },
+                      on: { click: _vm.baixarPlanilha }
+                    },
+                    [_c("i", { staticClass: "fas fa-table fa-lg" })]
+                  )
+                : _vm._e()
             ],
             1
           )
@@ -39868,9 +39864,7 @@ var render = function() {
                     _vm._v(
                       "\n                            " +
                         _vm._s(
-                          _vm.matricula != null &&
-                            _vm.matricula != undefined &&
-                            !_vm.matricula.hasOwnProperty("id")
+                          _vm.editando == null || _vm.editando == false
                             ? "Matrícula EBDiscipuladora"
                             : "Editando Matricula de " + _vm.matricula.nome
                         ) +
@@ -40985,7 +40979,7 @@ var render = function() {
                     _vm._v(
                       "\n                            " +
                         _vm._s(
-                          _vm.edicao != null && !_vm.edicao.hasOwnProperty("id")
+                          _vm.editando == null || _vm.editando == false
                             ? "Matricular"
                             : "Atualizar"
                         ) +

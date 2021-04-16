@@ -20,7 +20,7 @@
         </div>
 
         <!--  MODAL -->
-        <matricula-page></matricula-page>
+        <matricula-page :isEditing="isEditing"></matricula-page>
 
         <!-- <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;"> -->
             <!-- <div v-if="sucesso==true" style="position: absolute; bottom: 0; left: 0;" class="toast hide" data-autohide="false" role="alert" aria-live="assertive" aria-atomic="true">
@@ -49,9 +49,10 @@ export default {
 
     data() {
         return {
-            erros:{},
+            erros:{}, isEditing:null,
             matricula:{
-                nome:'', sobrenome:'', cpf:'', rg:'', orgao_emissor:'', uf:'', nascimento:'',
+                nome:'', sobrenome:'', nascimento:'',
+                // cpf:'', rg:'', orgao_emissor:'', uf:'',
                 email:'', classe:'batismo', isEvangelico:0, sexo:0, conversao:'', membresia:'',
                 telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:''},
             },
@@ -60,10 +61,11 @@ export default {
 
     methods: {
         abrirModalMatricula(){
-            this.erros={}; 
+            this.erros={}; this.isEditing=false;
             if(this.matricula!=null && this.matricula.hasOwnProperty('id')){ delete this.matricula.id; }
             this.matricula={
-                nome:'', sobrenome:'', cpf:'', rg:'', orgao_emissor:'', uf:'', nascimento:'',
+                nome:'', sobrenome:'', nascimento:'',
+                // cpf:'', rg:'', orgao_emissor:'', uf:'',
                 email:'', classe:'batismo', isEvangelico:0, sexo:0, conversao:'', membresia:'',
                 telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:''},
             };

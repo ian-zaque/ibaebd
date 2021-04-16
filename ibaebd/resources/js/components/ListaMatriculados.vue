@@ -4,7 +4,9 @@
             <div class="card-header lead d-flex justify-content-between">
                 <span class="h4">Lista de Matriculados</span>
 				<div class="input-group-append">
-                    <matricula-page :edicao="matricula" @retornoMatriculas="attMatriculas"></matricula-page>
+                    <matricula-page :edicao="matricula" :isEditing="isEditing" 
+                                    @retornoMatriculas="attMatriculas">
+                    </matricula-page>
 
 					<button @click="abrirModalMatricula()" class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="bottom" title="Matricular">
 						<i class="fas fa-plus fa-lg"></i>
@@ -12,7 +14,7 @@
                     <button @click="getMatriculas" class="btn btn-outline-secondary" style="margin-left:7px;" type="button" data-toggle="tooltip" data-placement="bottom" title="Recarregar Matriculados">
                         <i class="fas fa-redo fa-lg"></i>
                     </button>
-                     <button @click="baixarPlanilha" class="btn btn-outline-secondary" style="margin-left:7px;" type="button" data-toggle="tooltip" data-placement="bottom" title="Baixar Planilha de Matriculados">
+                     <button v-if="matriculados.length > 0" @click="baixarPlanilha" class="btn btn-outline-secondary" style="margin-left:7px;" type="button" data-toggle="tooltip" data-placement="bottom" title="Baixar Planilha de Matriculados">
                         <i class="fas fa-table fa-lg"></i>
                     </button>
 				</div>
@@ -23,7 +25,7 @@
 						<span class="sr-only">Carregando...</span>
 					</div>
 				</div>
-				<div v-else-if="matriculados.length>0">
+				<div v-else-if="matriculados.length > 0">
 					<div class="left col col-12 col-md-12">
 						<table class="table table-hover table-sm table-responsive-md">
 							<thead class="thead-light">
@@ -70,7 +72,7 @@ export default {
 
     data() {
         return {
-            isRequesting:false, erros:{}, matriculados:[], matricula:null,
+            isRequesting:false, erros:{}, matriculados:[], matricula:null, isEditing:null,
         }
     },
 
@@ -92,14 +94,13 @@ export default {
         },
 
         baixarFicha(item){
-            console.log('item',item)
-            var tempMat = item;
-            if(tempMat.sexo==true){ console.log('É UMMMM')}
-            else if(tempMat.sexo==false){ console.log('É 0000')}
-            console.log('matricula antes',item)
+            // console.log('item',item)
+            // var tempMat = item;
+            // if(tempMat.sexo==true){ console.log('É UMMMM')}
+            // else if(tempMat.sexo==false){ console.log('É 0000')}
+            // console.log('matricula antes',item)
 
             this.matricula = Object.assign({},item); $('#modalMatricula').modal('show');
-            console.log('matricula depois',item)
 
             if(this.matricula.id!=null && this.matricula.id!=undefined && this.matricula.id!=''){
                 printJS({
@@ -111,15 +112,16 @@ export default {
             $('#modalMatricula').modal('hide');
         },
 
-        editarMatricula(item){ this.erros={}; this.matricula = Object.assign({},item);  $('#modalMatricula').modal('show'); },
+        editarMatricula(item){ this.isEditing=true; this.erros={}; this.matricula = Object.assign({},item);  $('#modalMatricula').modal('show'); },
 
         attMatriculas(val){ this.matriculados = val; },
 
         abrirModalMatricula(){
-            this.erros={}; 
+            this.erros={}; this.isEditing=false;
             if(this.matricula!=null && this.matricula.hasOwnProperty('id')){ delete this.matricula.id; }
             this.matricula={
-                nome:'', sobrenome:'', cpf:'', rg:'', orgao_emissor:'', uf:'', nascimento:'',
+                nome:'', sobrenome:'', nascimento:'',
+                // cpf:'', rg:'', orgao_emissor:'', uf:'',
                 email:'', classe:'batismo', isEvangelico:0, sexo:0, conversao:'', membresia:'',
                 telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:''},
             };
@@ -132,15 +134,13 @@ export default {
                     ''+val.id, 
                     val.nome+' '+val.sobrenome, 
                     val.sexo==false?'Masculino':'Feminino', 
-                    val.cpf, 
-                    val.rg, 
                     new Date(val.nascimento).toLocaleDateString(),
                     val.email==null||val.email==''?'-':val.email,
                     ''+val.telefones.tel1,
                     val.telefones.tel2==''||val.telefones.tel2==null?'-':''+val.telefones.tel2,
                     val.conversao==null||val.conversao==''?'-': new Date(val.conversao).toLocaleDateString().replace('/','-'),
                     val.isEvangelico==false?'Nao':'Sim',
-                    val.isMembro==false?'Nao':'Sim',
+                    val.membresia=='m'?'Membro':'Congregado',
                     val.endereco.logradouro +', '+ val.endereco.num+', '+ val.endereco.bairro,
                     val.endereco.cidade,
                     val.endereco.cep==''||val.endereco.cep==null?'':val.endereco.cep,
@@ -149,8 +149,8 @@ export default {
             });
 
             mat.unshift([
-                'ID','Nome','Sexo','CPF','RG','Data de Nascimento','Email','Telefone 1','Telefone 2',
-                'Data de Conversao', 'Evangelico?', 'Membro?', 'Endereco', 'Cidade', 'CEP', 'Complemento',
+                'ID','Nome','Sexo', 'Data de Nascimento','Email','Telefone Zap','Telefone 2',
+                'Data de Conversao', 'Evangelico?', 'Membresia', 'Endereco', 'Cidade', 'CEP', 'Complemento',
             ]);
             let csvContent = "data:text/csv;charset=utf-8,"  + mat.map(e => e.join(";")).join("\n");
             var encodedUri = encodeURI(csvContent);

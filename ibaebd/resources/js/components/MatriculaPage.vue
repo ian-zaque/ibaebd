@@ -5,8 +5,7 @@
 		    	<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="ModalMatriculaLabel">
-                            {{( (matricula!=null) && (matricula!=undefined) && (!matricula.hasOwnProperty('id')) ) ? 
-                            'Matrícula EBDiscipuladora':'Editando Matricula de '+ matricula.nome}}
+                            {{(editando==null||editando==false)? 'Matrícula EBDiscipuladora':'Editando Matricula de '+ matricula.nome}}
                         </h5>
 						<button @click="fechar" type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
@@ -221,7 +220,7 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" @click="fechar" :disabled="isRequesting==true" data-dismiss="modal">Fechar</button> 
 						<button type="button" class="btn btn-primary" @click="cadastrar" :disabled="isRequesting==true">
-                            {{(edicao!=null && !(edicao.hasOwnProperty('id'))) ? 'Matricular':'Atualizar'}}
+                            {{ (editando==null||editando==false) ? 'Matricular':'Atualizar'}}
                         </button>
 					</div>
 		    	</div>
@@ -239,13 +238,15 @@ export default {
 
     props:{
         edicao:{ type:Object, default:null },
+        isEditing:{ type:Boolean, default:null }
     },
 
     data() {
         return {
             isRequesting:false, sucesso:false, erros:{},
             matricula:{
-                nome:'', sobrenome:'', cpf:'', rg:'', orgao_emissor:'', uf:'', nascimento:'',
+                nome:'', sobrenome:'', nascimento:'',
+                // cpf:'', rg:'', orgao_emissor:'', uf:'',
                 email:'', classe:'batismo', isEvangelico:0, sexo:0, conversao:'', membresia:'',
                 telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:''},
             },
@@ -290,6 +291,10 @@ export default {
         },
     },
 
+    computed:{
+        editando(){ return this.isEditing; },
+    },
+
     methods: {
         getCepInfo: _.debounce(function(){
             this.isRequesting=true;
@@ -309,7 +314,8 @@ export default {
 
         fechar(){
             this.matricula={
-                nome:'', sobrenome:'', cpf:'', rg:'', orgao_emissor:'', uf:'', nascimento:'',
+                nome:'', sobrenome:'', nascimento:'',
+                // cpf:'', rg:'', orgao_emissor:'', uf:'',
                 email:'', classe:'batismo', isEvangelico:0, sexo:0, conversao:'', membresia:'',
                 telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:''},
             };
