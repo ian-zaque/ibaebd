@@ -14,7 +14,12 @@ class AlterMatricula extends Migration
     public function up()
     {
         Schema::table('matriculas', function (Blueprint $table) {
-            $table->dropColumn('isMembro');
+            $table->dropColumn('isMembro')->after('conversao');
+            $table->dropColumn('cpf');
+            $table->dropColumn('rg');
+            $table->dropColumn('orgao_emissor');
+            $table->dropColumn('uf');
+
             $table->enum('membresia',['m','c']);
         });
     }
@@ -29,6 +34,10 @@ class AlterMatricula extends Migration
         Schema::table('matriculas', function (Blueprint $table) {
             $table->boolean('isMembro');
             $table->dropColumn('membresia');
+            $table->string('cpf')->unique();
+            $table->string('rg')->unique();
+            $table->string('orgao_emissor');
+            $table->string('uf');
         });
     }
 }
