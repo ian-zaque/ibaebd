@@ -30,8 +30,8 @@ class MatriculaController extends Controller
         $dados['telefones']['tel1'] = preg_replace('/[\s,.\-\/()-]+/', '', $dados['telefones']['tel1']);
         $dados['telefones']['tel2'] = preg_replace('/[\s,.\-\/()-]+/', '', $dados['telefones']['tel2']);
         $dados['endereco']['cep'] = preg_replace('/[\s,.\-\/-]+/', '', $dados['endereco']['cep']);
-        $dados['cpf'] = preg_replace('/[\s,.\-\/-]+/', '', $dados['cpf']);
-        $dados['rg'] = preg_replace('/[\s,.\-\/-]+/', '', $dados['rg']);
+        // $dados['cpf'] = preg_replace('/[\s,.\-\/-]+/', '', $dados['cpf']);
+        // $dados['rg'] = preg_replace('/[\s,.\-\/-]+/', '', $dados['rg']);
 
         $msgsErros=[
             'required'=> 'É necessário preencher o campo :attribute',
@@ -42,8 +42,9 @@ class MatriculaController extends Controller
         ];
 
         $atributos = [
-            'nome'=> 'Nome', 'sobrenome'=>'Sobrenome', 'cpf'=>'CPF', 'rg'=>'RG', 'orgao_emissor'=>'Órgão Emissor',
-            'uf'=>'UF','classe'=>'Classe','email'=>'E-mail','nascimento'=>'Data de Nascimento', 'conversao'=>'Data de Conversão',
+            'nome'=> 'Nome', 'sobrenome'=>'Sobrenome', 'membresia'=> 'Membresia',
+            // 'cpf'=>'CPF', 'rg'=>'RG', 'orgao_emissor'=>'Órgão Emissor', 'uf'=>'UF',
+            'classe'=>'Classe','email'=>'E-mail','nascimento'=>'Data de Nascimento', 'conversao'=>'Data de Conversão',
             'sexo'=>'Sexo', 'isMembro'=>'Sou Membro da IBA!', 'isEvangelico'=>'Sou Evangélico', 'telefones.tel1'=>'Telefone 1',
             'telefones.tel2'=>'Telefone 2', 'endereco.logradouro'=>'Logradouro', 'endereco.cidade'=>'Cidade', 'endereco.bairro'=>'Bairro',
             'endereco.cep'=>'CEP', 'endereco.complemento'=>'Complemento', 'endereco.num'=>'Nº da Casa',
@@ -52,16 +53,16 @@ class MatriculaController extends Controller
         $validator = Validator::make($dados, [
             'nome' => 'string|required',
             'sobrenome' => 'string|required',
-            'cpf'=> 'string|required|',
-            'rg' => 'string|required|',
-            'orgao_emissor' => 'string|required|',
-            'uf' => 'string|required',
+            // 'cpf'=> 'string|required|',
+            // 'rg' => 'string|required|',
+            // 'orgao_emissor' => 'string|required|',
+            // 'uf' => 'string|required',
             'classe' => 'string|required',
             'email' => 'string|required|email:rfc,dns',
             'nascimento' => 'date|required',
             'conversao' => 'date|nullable',
+            'membresia' => 'required|in:m,c',
             'sexo' => 'boolean|required',
-            'isMembro' => 'boolean|required',
             'isEvangelico' => 'boolean|required',
 
             'telefones.tel1' => 'string|required',
@@ -78,10 +79,10 @@ class MatriculaController extends Controller
         if ($validator->fails()){ return response()->json($validator->errors(), 403); }
         else{
             $dadosMat = [
-                'nome'=>$dados['nome'], 'sobrenome'=>$dados['sobrenome'], 'cpf'=>$dados['cpf'], 'rg'=>$dados['rg'],
-                'orgao_emissor'=>$dados['orgao_emissor'], 'uf'=>$dados['uf'], 'classe'=>$dados['classe'],
+                'nome'=>$dados['nome'], 'sobrenome'=>$dados['sobrenome'], 'classe'=>$dados['classe'], 'membresia'=> $dados['membresia'],
+                // 'cpf'=>$dados['cpf'], 'rg'=>$dados['rg'], 'orgao_emissor'=>$dados['orgao_emissor'], 'uf'=>$dados['uf'],
                 'email'=>$dados['email'], 'nascimento'=>$dados['nascimento'], 'conversao'=>$dados['conversao'],
-                'sexo'=>$dados['sexo'], 'isMembro'=>$dados['isMembro'], 'isEvangelico'=>$dados['isEvangelico'],
+                'sexo'=>$dados['sexo'], 'isEvangelico'=>$dados['isEvangelico'],
             ];
             if($request->id){
                 $matricula = Matricula::find($request->id); $matricula->fill($dadosMat); $matricula->save();

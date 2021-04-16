@@ -52,7 +52,7 @@ export default {
             erros:{},
             matricula:{
                 nome:'', sobrenome:'', cpf:'', rg:'', orgao_emissor:'', uf:'', nascimento:'',
-                email:'', isEvangelico:false, isMembro:false, classe:'batismo', sexo:false, conversao:'',
+                email:'', classe:'batismo', isEvangelico:0, sexo:0, conversao:'', membresia:'',
                 telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:''},
             },
         }
@@ -64,8 +64,8 @@ export default {
             if(this.matricula!=null && this.matricula.hasOwnProperty('id')){ delete this.matricula.id; }
             this.matricula={
                 nome:'', sobrenome:'', cpf:'', rg:'', orgao_emissor:'', uf:'', nascimento:'',
-                email:'', isEvangelico:false, isMembro:false, classe:'batismo', sexo:false, conversao:'',
-                telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:'',},
+                email:'', classe:'batismo', isEvangelico:0, sexo:0, conversao:'', membresia:'',
+                telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:''},
             };
             $('#modalMatricula').modal('show');
         },

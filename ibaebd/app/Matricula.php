@@ -13,14 +13,16 @@ class Matricula extends Model
 
     protected $fillable = [
         'nome', 'sobrenome', 'cpf', 'rg', 'orgao_emissor', 'uf', 'email', 'classe', 'nascimento', 'conversao',
-        'isEvangelico', 'isMembro', 'sexo', 
+        'isEvangelico', 'sexo', 'membresia',
     ];
 
-    public function telefones(){
-        return $this->hasOne('App\Telefone', 'matricula_id');
-    }
+    protected $casts=[
+        'sexo' => 'boolean',
+        'isEvangelico' => 'boolean',
+    ];
 
-    public function endereco(){
-        return $this->hasOne('App\Endereco', 'matricula_id');
-    }
+    public function telefones(){ return $this->hasOne('App\Telefone', 'matricula_id'); }
+
+    public function endereco(){ return $this->hasOne('App\Endereco', 'matricula_id'); }
+
 }

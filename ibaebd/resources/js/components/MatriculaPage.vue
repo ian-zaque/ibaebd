@@ -31,14 +31,14 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col col-6 col-md-6">
+							<!-- <div class="col col-6 col-md-6">
 								<div class="form-group">
 									<label>CPF*</label>
 									<input class="form-control form-control-sm" v-mask="['###.###.###-##']" placeholder="Insira seu CPF" type="text" 
                                             v-model="matricula.cpf" required>
                                     <small v-if="erros.cpf" class="text-danger" style="font-size:10px" :hidden="(!erros.cpf)">{{erros.cpf.toString()}}</small>
 								</div>
-							</div>
+							</div> -->
                             <div class="col col-6 col-md-6">
 								<div class="form-group">
 									<label>Data de Nascimento*</label>
@@ -47,9 +47,33 @@
                                     <small v-if="erros.nascimento" class="text-danger" style="font-size:10px" :hidden="(!erros.nascimento)">{{erros.nascimento.toString()}}</small>
 								</div>
 							</div>
+                            <div class="col col-6 col-md-6">
+								<div class="form-group">
+									<label>Data de Conversão</label>
+									<input :class="'form-control form-control-sm'" placeholder="Data de conversão (opcional)" type="date" v-model="matricula.conversao">
+                                    <small v-if="erros.conversao" class="text-danger" style="font-size:10px" :hidden="(!erros.conversao)">{{erros.conversao.toString()}}</small>
+                                </div>
+							</div>
 						</div>
                         <div class="row">
-                            <div class="col col-4 col-md-4">
+                            <div class="col col-6 col-md-6">
+								<div class="form-group">
+									<label>Classe da EBD*</label>
+									<select class="form-control form-control-sm" v-model="matricula.classe">
+                                        <option selected hidden value="">Selecione a Classe da EBD</option>
+                                        <option selected :value="'batismo'">Classe de Batismo</option>
+                                    </select>
+                                    <small class="text-danger" style="font-size:10px" :hidden="(!erros.classe)">{{erros.classe}}</small>
+								</div>
+							</div>
+                            <div class="col col-6 col-md-6">
+								<div class="form-group">
+									<label>E-mail</label>
+									<input class="form-control form-control-sm" placeholder="Insira seu E-mail" type="email" v-model="matricula.email" required>
+                                    <small v-if="erros.email" class="text-danger" style="font-size:10px" :hidden="(!erros.email)">{{erros.email.toString()}}</small>
+                                </div>
+                            </div>
+                            <!-- <div class="col col-4 col-md-4">
 								<div class="form-group">
 									<label>RG*</label>
 									<input class="form-control form-control-sm" v-mask="['##.###.###-#','##.###.###-##']" placeholder="Insira seu RG"
@@ -76,77 +100,19 @@
                                     </select>
                                     <small v-if="erros.uf" class="text-danger" style="font-size:10px" :hidden="(!erros.uf)">{{erros.uf.toString()}}</small>
 								</div>
-							</div>
+							</div> -->
                         </div>
                         <hr>
                         <div class="row">
-                            <div class="col col-3 col-md-3">
-                                <label>Sexo*</label>
+                            <div class="col col-6 col-md-6">
 								<div class="form-group">
-									<div class="form-check form-check-inline">
-                                        <input v-model="matricula.sexo" class="form-check-input" type="radio" name="radio_btn_sexoF" id="radio_btn_sexoF" :value="1">
-                                        <label class="form-check-label" for="radio_btn_sexoF">Feminino</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input v-model="matricula.sexo" class="form-check-input" type="radio" name="radio_btn_sexoM" id="radio_btn_sexoM" :value="0">
-                                        <label class="form-check-label" for="radio_btn_sexoM">Masculino</label>
-                                    </div>
-								</div>
-                                <small v-if="erros.sexo" class="text-danger" style="font-size:10px" :hidden="(!erros.sexo)">{{erros.sexo.toString()}}</small>
-							</div>
-                            <div class="col col-3 col-md-3">
-                                <label>Sou evangélico?*</label>
-								<div class="form-group">
-									<div class="form-check form-check-inline">
-                                        <input v-model="matricula.isEvangelico" class="form-check-input" type="radio" name="radio_btn_evglS" id="radio_btn_evglS" :value="1">
-                                        <label class="form-check-label" for="radio_btn_evglS">Sim</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input v-model="matricula.isEvangelico" class="form-check-input" type="radio" name="radio_btn_evglN" id="radio_btn_evglN" :value="0">
-                                        <label class="form-check-label" for="radio_btn_evglN">Não</label>
-                                    </div>
-								</div>
-                                <small v-if="erros.isEvangelico" class="text-danger" style="font-size:10px" :hidden="(!erros.isEvangelico)">{{erros.isEvangelico.toString()}}</small>
-							</div>
-                            <div class="col col-3 col-md-3">
-                                <label>Sou Membro da IBA?*</label>
-								<div class="form-group">
-									<div class="form-check form-check-inline">
-                                        <input v-model="matricula.isMembro" class="form-check-input" type="radio" name="radio_btn_mbrS" id="radio_btn_mbrS" :value="1">
-                                        <label class="form-check-label" for="radio_btn_mbrS">Sim</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input v-model="matricula.isMembro" class="form-check-input" type="radio" name="radio_btn_mbrN" id="radio_btn_mbrN" :value="0">
-                                        <label class="form-check-label" for="radio_btn_mbrN">Não</label>
-                                    </div>
-								</div>
-                                <small v-if="erros.isMembro" class="text-danger" style="font-size:10px" :hidden="(!erros.isMembro)">{{erros.isMembro.toString()}}</small>
-							</div>
-                            <div class="col col-3 col-md-3">
-								<div class="form-group">
-									<label>Data de Conversão</label>
-									<input :class="'form-control form-control-sm'" placeholder="Data de conversão (opcional)" type="date" v-model="matricula.conversao">
-                                    <small v-if="erros.conversao" class="text-danger" style="font-size:10px" :hidden="(!erros.conversao)">{{erros.conversao.toString()}}</small>
-                                </div>
-							</div>
-                        </div>
-                        <div class="row">
-                            <div class="col col-3 col-md-3">
-								<div class="form-group">
-									<label>E-mail</label>
-									<input class="form-control form-control-sm" placeholder="Insira seu E-mail" type="email" v-model="matricula.email" required>
-                                    <small v-if="erros.email" class="text-danger" style="font-size:10px" :hidden="(!erros.email)">{{erros.email.toString()}}</small>
-                                </div>
-                            </div>
-                            <div class="col col-3 col-md-3">
-								<div class="form-group">
-									<label>Telefone 1*</label>
+									<label>Telefone Whatsapp*</label>
 									<input class="form-control form-control-sm" v-model="matricula.telefones.tel1"
                                             v-mask="['(##) ####-####', '(##) #####-####']" placeholder="Insira seu Telefone" type="tel" required>
                                     <small v-if="erros['telefones.tel1']" class="text-danger" style="font-size:10px" :hidden="(!erros['telefones.tel1'])">{{erros['telefones.tel1'].toString()}}</small>
                                 </div>
                             </div>
-                            <div class="col col-3 col-md-3">
+                            <div class="col col-6 col-md-6">
 								<div class="form-group">
 									<label>Telefone 2</label>
 									<input class="form-control form-control-sm" v-model="matricula.telefones.tel2" 
@@ -154,17 +120,45 @@
                                     <small v-if="erros['telefones.tel2']" class="text-danger" style="font-size:10px" :hidden="(!erros['telefones.tel2'])">{{erros['telefones.tel2'].toString()}}</small>
 								</div>
                             </div>
-                            <div class="col col-3 col-md-3">
+                        </div>
+                        <div class="row">
+                            <div class="col col-4 col-md-4">
+                                <label>Sexo*</label>
 								<div class="form-group">
-									<label>Classe da EBD*</label>
-									<select class="form-control form-control-sm" v-model="matricula.classe">
-                                        <option selected hidden value="">Selecione a Classe da EBD</option>
-                                        <option selected :value="'batismo'">Classe de Batismo</option>
-                                    </select>
-                                    <small class="text-danger" style="font-size:10px" :hidden="(!erros.classe)">{{erros.classe}}</small>
+									<div class="form-check form-check-inline">
+                                        <input v-model="matricula.sexo" class="form-check-input" type="radio" name="radio_btn_sexoF" id="radio_btn_sexoF" :value="true">
+                                        <label class="form-check-label" for="radio_btn_sexoF">Feminino</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input v-model="matricula.sexo" class="form-check-input" type="radio" name="radio_btn_sexoM" id="radio_btn_sexoM" :value="false">
+                                        <label class="form-check-label" for="radio_btn_sexoM">Masculino</label>
+                                    </div>
 								</div>
+                                <small v-if="erros.sexo" class="text-danger" style="font-size:10px" :hidden="(!erros.sexo)">{{erros.sexo.toString()}}</small>
 							</div>
-					    </div>
+                            <div class="col col-4 col-md-4">
+                                <label>Sou evangélico?*</label>
+								<div class="form-group">
+									<div class="form-check form-check-inline">
+                                        <input v-model="matricula.isEvangelico" class="form-check-input" type="radio" name="radio_btn_evglS" id="radio_btn_evglS" :value="true">
+                                        <label class="form-check-label" for="radio_btn_evglS">Sim</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input v-model="matricula.isEvangelico" class="form-check-input" type="radio" name="radio_btn_evglN" id="radio_btn_evglN" :value="false">
+                                        <label class="form-check-label" for="radio_btn_evglN">Não</label>
+                                    </div>
+								</div>
+                                <small v-if="erros.isEvangelico" class="text-danger" style="font-size:10px" :hidden="(!erros.isEvangelico)">{{erros.isEvangelico.toString()}}</small>
+							</div>
+                            <div class="col col-4 col-md-4">
+                                <label>Membresia*</label>
+								<select class="form-control form-control-sm" v-model="matricula.membresia">
+                                        <option selected hidden value="">Membro ou Congregado?</option>
+                                        <option v-for="(mem,idx) in membresias" :key="idx" :value="mem.key">{{mem.value}}</option>
+                                </select>
+                                <small v-if="erros.isMembro" class="text-danger" style="font-size:10px" :hidden="(!erros.membresia)">{{erros.membresia}}</small>
+							</div>
+                        </div>
                         <hr>
                         <div class="row">
                             <div class="col col-6 col-md-6">
@@ -252,31 +246,34 @@ export default {
             isRequesting:false, sucesso:false, erros:{},
             matricula:{
                 nome:'', sobrenome:'', cpf:'', rg:'', orgao_emissor:'', uf:'', nascimento:'',
-                email:'', isEvangelico:false, isMembro:false, classe:'batismo', sexo:false, conversao:'',
+                email:'', classe:'batismo', isEvangelico:0, sexo:0, conversao:'', membresia:'',
                 telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:''},
             },
-            orgaos_emissores:[
-                {sigla:'SSP', nome:'Secretaria de Segurança Pública'}, {sigla:'PM', nome:'Polícia Militar'},
-                {sigla:'PC', nome:'Polícia Cívil'}, {sigla:'POF', nome:'Polícia Federal'}, {sigla:'POM', nome:'Polícia Militar'},
-                {sigla:'MMA', nome:'Ministério da Marinha'}, {sigla:'MAE', nome:'Ministério da Aeronáutica'}, {sigla:'MEX', nome:'Ministério do Exército'},
-                {sigla:'CNH', nome:'Carteira Nacional de Habilitação'}, {sigla:'DIC', nome:'Diretoria de Identificação Civil'}, 
-                {sigla:'CTPS', nome:'Carteira de Trabaho e Previdência Social'}, {sigla:'MTE', nome:'Ministério do Trabalho e Emprego'},
-                {sigla:'FGTS', nome:'Fundo de Garantia do Tempo de Serviço'}, {sigla:'IFP', nome:'Instituto Félix Pacheco'},
-                {sigla:'IPF', nome:'Instituto Pereira Faustino'}, {sigla:'IML', nome:'Instituto Médico-Legal'},
-                {sigla:'SES', nome:'Carteira de Estrangeiro'}, {sigla:'SJS', nome:'Secretaria da Justiça e Segurança'},
-                {sigla:'SJTS', nome:'Secretaria da Justiça do Trabalho e Segurança'}, {sigla:'ZZZ', nome:'Outros(inclusive exterior)'},
+            membresias:[
+                {key:'m', value:'Membro'}, {key:'c', value:'Congregado'},
             ],
-            ufs:[
-                {key:"AC", value:"Acre"}, {key:"AL", value:"Alagoas"}, {key:"AP", value:"Amapá"}, {key:"AM", value:"Amazonas"},
-                {key:"BA", value:"Bahia"}, {key:"CE", value:"Ceará"}, {key:"DF", value:"Distrito Federal"},
-                {key:"ES", value:"Espírito Santo"}, {key: "GO", value:"Goiás"}, {key:"MA", value:"Maranhão"},
-                {key: "MT", value:"Mato Grosso"}, {key:"MS", value:"Mato Grosso do Sul"}, {key:"MG", value:"Minas Gerais"},
-                {key:"PA", value:"Pará"}, {key:"PB", value:"Paraíba"}, { key: "PR", value: "Paraná" },
-                {key: "PE", value: "Pernambuco" }, { key: "PI", value: "Piauí" }, { key: "RJ", value: "Rio de Janeiro" },
-                {key: "RN", value: "Rio Grande do Norte" }, { key: "RS", value: "Rio Grande do Sul" }, { key: "RO", value: "Rondônia" },
-                {key: "RR", value: "Roraima" }, { key: "SC", value: "Santa Catarina" }, { key: "SP", value: "São Paulo" },
-                {key: "SE", value: "Sergipe" }, { key: "TO", value: "Tocantins" }
-            ]
+            // orgaos_emissores:[
+            //     {sigla:'SSP', nome:'Secretaria de Segurança Pública'}, {sigla:'PM', nome:'Polícia Militar'},
+            //     {sigla:'PC', nome:'Polícia Cívil'}, {sigla:'POF', nome:'Polícia Federal'}, {sigla:'POM', nome:'Polícia Militar'},
+            //     {sigla:'MMA', nome:'Ministério da Marinha'}, {sigla:'MAE', nome:'Ministério da Aeronáutica'}, {sigla:'MEX', nome:'Ministério do Exército'},
+            //     {sigla:'CNH', nome:'Carteira Nacional de Habilitação'}, {sigla:'DIC', nome:'Diretoria de Identificação Civil'}, 
+            //     {sigla:'CTPS', nome:'Carteira de Trabaho e Previdência Social'}, {sigla:'MTE', nome:'Ministério do Trabalho e Emprego'},
+            //     {sigla:'FGTS', nome:'Fundo de Garantia do Tempo de Serviço'}, {sigla:'IFP', nome:'Instituto Félix Pacheco'},
+            //     {sigla:'IPF', nome:'Instituto Pereira Faustino'}, {sigla:'IML', nome:'Instituto Médico-Legal'},
+            //     {sigla:'SES', nome:'Carteira de Estrangeiro'}, {sigla:'SJS', nome:'Secretaria da Justiça e Segurança'},
+            //     {sigla:'SJTS', nome:'Secretaria da Justiça do Trabalho e Segurança'}, {sigla:'ZZZ', nome:'Outros(inclusive exterior)'},
+            // ],
+            // ufs:[
+            //     {key:"AC", value:"Acre"}, {key:"AL", value:"Alagoas"}, {key:"AP", value:"Amapá"}, {key:"AM", value:"Amazonas"},
+            //     {key:"BA", value:"Bahia"}, {key:"CE", value:"Ceará"}, {key:"DF", value:"Distrito Federal"},
+            //     {key:"ES", value:"Espírito Santo"}, {key: "GO", value:"Goiás"}, {key:"MA", value:"Maranhão"},
+            //     {key: "MT", value:"Mato Grosso"}, {key:"MS", value:"Mato Grosso do Sul"}, {key:"MG", value:"Minas Gerais"},
+            //     {key:"PA", value:"Pará"}, {key:"PB", value:"Paraíba"}, { key: "PR", value: "Paraná" },
+            //     {key: "PE", value: "Pernambuco" }, { key: "PI", value: "Piauí" }, { key: "RJ", value: "Rio de Janeiro" },
+            //     {key: "RN", value: "Rio Grande do Norte" }, { key: "RS", value: "Rio Grande do Sul" }, { key: "RO", value: "Rondônia" },
+            //     {key: "RR", value: "Roraima" }, { key: "SC", value: "Santa Catarina" }, { key: "SP", value: "São Paulo" },
+            //     {key: "SE", value: "Sergipe" }, { key: "TO", value: "Tocantins" }
+            // ],
         }
     },
 
@@ -313,8 +310,8 @@ export default {
         fechar(){
             this.matricula={
                 nome:'', sobrenome:'', cpf:'', rg:'', orgao_emissor:'', uf:'', nascimento:'',
-                email:'', isEvangelico:false, isMembro:false, classe:'batismo', sexo:false, conversao:'',
-                telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:'',},
+                email:'', classe:'batismo', isEvangelico:0, sexo:0, conversao:'', membresia:'',
+                telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:''},
             };
             this.erros={}; $('#modalMatricula').modal('hide');
         },

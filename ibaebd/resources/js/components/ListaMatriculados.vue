@@ -97,8 +97,10 @@ export default {
             if(tempMat.sexo==true){ console.log('É UMMMM')}
             else if(tempMat.sexo==false){ console.log('É 0000')}
             console.log('matricula antes',item)
+
             this.matricula = Object.assign({},item); $('#modalMatricula').modal('show');
             console.log('matricula depois',item)
+
             if(this.matricula.id!=null && this.matricula.id!=undefined && this.matricula.id!=''){
                 printJS({
                     printable:'corpo_modal', 
@@ -118,8 +120,8 @@ export default {
             if(this.matricula!=null && this.matricula.hasOwnProperty('id')){ delete this.matricula.id; }
             this.matricula={
                 nome:'', sobrenome:'', cpf:'', rg:'', orgao_emissor:'', uf:'', nascimento:'',
-                email:'', isEvangelico:false, isMembro:false, classe:'batismo', sexo:false, conversao:'',
-                telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:'',},
+                email:'', classe:'batismo', isEvangelico:0, sexo:0, conversao:'', membresia:'',
+                telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:''},
             };
             $('#modalMatricula').modal('show');
         },

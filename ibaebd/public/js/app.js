@@ -2032,11 +2032,11 @@ __webpack_require__.r(__webpack_exports__);
         uf: '',
         nascimento: '',
         email: '',
-        isEvangelico: false,
-        isMembro: false,
         classe: 'batismo',
-        sexo: false,
+        isEvangelico: 0,
+        sexo: 0,
         conversao: '',
+        membresia: '',
         telefones: {
           tel1: '',
           tel2: null
@@ -2069,11 +2069,11 @@ __webpack_require__.r(__webpack_exports__);
         uf: '',
         nascimento: '',
         email: '',
-        isEvangelico: false,
-        isMembro: false,
         classe: 'batismo',
-        sexo: false,
+        isEvangelico: 0,
+        sexo: 0,
         conversao: '',
+        membresia: '',
         telefones: {
           tel1: '',
           tel2: null
@@ -2261,11 +2261,11 @@ __webpack_require__.r(__webpack_exports__);
         uf: '',
         nascimento: '',
         email: '',
-        isEvangelico: false,
-        isMembro: false,
         classe: 'batismo',
-        sexo: false,
+        isEvangelico: 0,
+        sexo: 0,
         conversao: '',
+        membresia: '',
         telefones: {
           tel1: '',
           tel2: null
@@ -2550,12 +2550,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'MatriculaPage',
@@ -2582,11 +2576,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         uf: '',
         nascimento: '',
         email: '',
-        isEvangelico: false,
-        isMembro: false,
         classe: 'batismo',
-        sexo: false,
+        isEvangelico: 0,
+        sexo: 0,
         conversao: '',
+        membresia: '',
         telefones: {
           tel1: '',
           tel2: null
@@ -2600,149 +2594,35 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           cidade: ''
         }
       },
-      orgaos_emissores: [{
-        sigla: 'SSP',
-        nome: 'Secretaria de Segurança Pública'
+      membresias: [{
+        key: 'm',
+        value: 'Membro'
       }, {
-        sigla: 'PM',
-        nome: 'Polícia Militar'
-      }, {
-        sigla: 'PC',
-        nome: 'Polícia Cívil'
-      }, {
-        sigla: 'POF',
-        nome: 'Polícia Federal'
-      }, {
-        sigla: 'POM',
-        nome: 'Polícia Militar'
-      }, {
-        sigla: 'MMA',
-        nome: 'Ministério da Marinha'
-      }, {
-        sigla: 'MAE',
-        nome: 'Ministério da Aeronáutica'
-      }, {
-        sigla: 'MEX',
-        nome: 'Ministério do Exército'
-      }, {
-        sigla: 'CNH',
-        nome: 'Carteira Nacional de Habilitação'
-      }, {
-        sigla: 'DIC',
-        nome: 'Diretoria de Identificação Civil'
-      }, {
-        sigla: 'CTPS',
-        nome: 'Carteira de Trabaho e Previdência Social'
-      }, {
-        sigla: 'MTE',
-        nome: 'Ministério do Trabalho e Emprego'
-      }, {
-        sigla: 'FGTS',
-        nome: 'Fundo de Garantia do Tempo de Serviço'
-      }, {
-        sigla: 'IFP',
-        nome: 'Instituto Félix Pacheco'
-      }, {
-        sigla: 'IPF',
-        nome: 'Instituto Pereira Faustino'
-      }, {
-        sigla: 'IML',
-        nome: 'Instituto Médico-Legal'
-      }, {
-        sigla: 'SES',
-        nome: 'Carteira de Estrangeiro'
-      }, {
-        sigla: 'SJS',
-        nome: 'Secretaria da Justiça e Segurança'
-      }, {
-        sigla: 'SJTS',
-        nome: 'Secretaria da Justiça do Trabalho e Segurança'
-      }, {
-        sigla: 'ZZZ',
-        nome: 'Outros(inclusive exterior)'
-      }],
-      ufs: [{
-        key: "AC",
-        value: "Acre"
-      }, {
-        key: "AL",
-        value: "Alagoas"
-      }, {
-        key: "AP",
-        value: "Amapá"
-      }, {
-        key: "AM",
-        value: "Amazonas"
-      }, {
-        key: "BA",
-        value: "Bahia"
-      }, {
-        key: "CE",
-        value: "Ceará"
-      }, {
-        key: "DF",
-        value: "Distrito Federal"
-      }, {
-        key: "ES",
-        value: "Espírito Santo"
-      }, {
-        key: "GO",
-        value: "Goiás"
-      }, {
-        key: "MA",
-        value: "Maranhão"
-      }, {
-        key: "MT",
-        value: "Mato Grosso"
-      }, {
-        key: "MS",
-        value: "Mato Grosso do Sul"
-      }, {
-        key: "MG",
-        value: "Minas Gerais"
-      }, {
-        key: "PA",
-        value: "Pará"
-      }, {
-        key: "PB",
-        value: "Paraíba"
-      }, {
-        key: "PR",
-        value: "Paraná"
-      }, {
-        key: "PE",
-        value: "Pernambuco"
-      }, {
-        key: "PI",
-        value: "Piauí"
-      }, {
-        key: "RJ",
-        value: "Rio de Janeiro"
-      }, {
-        key: "RN",
-        value: "Rio Grande do Norte"
-      }, {
-        key: "RS",
-        value: "Rio Grande do Sul"
-      }, {
-        key: "RO",
-        value: "Rondônia"
-      }, {
-        key: "RR",
-        value: "Roraima"
-      }, {
-        key: "SC",
-        value: "Santa Catarina"
-      }, {
-        key: "SP",
-        value: "São Paulo"
-      }, {
-        key: "SE",
-        value: "Sergipe"
-      }, {
-        key: "TO",
-        value: "Tocantins"
-      }]
+        key: 'c',
+        value: 'Congregado'
+      }] // orgaos_emissores:[
+      //     {sigla:'SSP', nome:'Secretaria de Segurança Pública'}, {sigla:'PM', nome:'Polícia Militar'},
+      //     {sigla:'PC', nome:'Polícia Cívil'}, {sigla:'POF', nome:'Polícia Federal'}, {sigla:'POM', nome:'Polícia Militar'},
+      //     {sigla:'MMA', nome:'Ministério da Marinha'}, {sigla:'MAE', nome:'Ministério da Aeronáutica'}, {sigla:'MEX', nome:'Ministério do Exército'},
+      //     {sigla:'CNH', nome:'Carteira Nacional de Habilitação'}, {sigla:'DIC', nome:'Diretoria de Identificação Civil'}, 
+      //     {sigla:'CTPS', nome:'Carteira de Trabaho e Previdência Social'}, {sigla:'MTE', nome:'Ministério do Trabalho e Emprego'},
+      //     {sigla:'FGTS', nome:'Fundo de Garantia do Tempo de Serviço'}, {sigla:'IFP', nome:'Instituto Félix Pacheco'},
+      //     {sigla:'IPF', nome:'Instituto Pereira Faustino'}, {sigla:'IML', nome:'Instituto Médico-Legal'},
+      //     {sigla:'SES', nome:'Carteira de Estrangeiro'}, {sigla:'SJS', nome:'Secretaria da Justiça e Segurança'},
+      //     {sigla:'SJTS', nome:'Secretaria da Justiça do Trabalho e Segurança'}, {sigla:'ZZZ', nome:'Outros(inclusive exterior)'},
+      // ],
+      // ufs:[
+      //     {key:"AC", value:"Acre"}, {key:"AL", value:"Alagoas"}, {key:"AP", value:"Amapá"}, {key:"AM", value:"Amazonas"},
+      //     {key:"BA", value:"Bahia"}, {key:"CE", value:"Ceará"}, {key:"DF", value:"Distrito Federal"},
+      //     {key:"ES", value:"Espírito Santo"}, {key: "GO", value:"Goiás"}, {key:"MA", value:"Maranhão"},
+      //     {key: "MT", value:"Mato Grosso"}, {key:"MS", value:"Mato Grosso do Sul"}, {key:"MG", value:"Minas Gerais"},
+      //     {key:"PA", value:"Pará"}, {key:"PB", value:"Paraíba"}, { key: "PR", value: "Paraná" },
+      //     {key: "PE", value: "Pernambuco" }, { key: "PI", value: "Piauí" }, { key: "RJ", value: "Rio de Janeiro" },
+      //     {key: "RN", value: "Rio Grande do Norte" }, { key: "RS", value: "Rio Grande do Sul" }, { key: "RO", value: "Rondônia" },
+      //     {key: "RR", value: "Roraima" }, { key: "SC", value: "Santa Catarina" }, { key: "SP", value: "São Paulo" },
+      //     {key: "SE", value: "Sergipe" }, { key: "TO", value: "Tocantins" }
+      // ],
+
     };
   },
   watch: (_watch = {}, _defineProperty(_watch, 'matricula.endereco.cep', function matriculaEnderecoCep(val, old) {
@@ -2782,11 +2662,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         uf: '',
         nascimento: '',
         email: '',
-        isEvangelico: false,
-        isMembro: false,
         classe: 'batismo',
-        sexo: false,
+        isEvangelico: 0,
+        sexo: 0,
         conversao: '',
+        membresia: '',
         telefones: {
           tel1: '',
           tel2: null
@@ -40121,60 +40001,6 @@ var render = function() {
                   _c("div", { staticClass: "row" }, [
                     _c("div", { staticClass: "col col-6 col-md-6" }, [
                       _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("CPF*")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "mask",
-                              rawName: "v-mask",
-                              value: ["###.###.###-##"],
-                              expression: "['###.###.###-##']"
-                            },
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.matricula.cpf,
-                              expression: "matricula.cpf"
-                            }
-                          ],
-                          staticClass: "form-control form-control-sm",
-                          attrs: {
-                            placeholder: "Insira seu CPF",
-                            type: "text",
-                            required: ""
-                          },
-                          domProps: { value: _vm.matricula.cpf },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.matricula,
-                                "cpf",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.erros.cpf
-                          ? _c(
-                              "small",
-                              {
-                                staticClass: "text-danger",
-                                staticStyle: { "font-size": "10px" },
-                                attrs: { hidden: !_vm.erros.cpf }
-                              },
-                              [_vm._v(_vm._s(_vm.erros.cpf.toString()))]
-                            )
-                          : _vm._e()
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col col-6 col-md-6" }, [
-                      _c("div", { staticClass: "form-group" }, [
                         _c("label", [_vm._v("Data de Nascimento*")]),
                         _vm._v(" "),
                         _c("input", {
@@ -40219,518 +40045,9 @@ var render = function() {
                             )
                           : _vm._e()
                       ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col col-4 col-md-4" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("RG*")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "mask",
-                              rawName: "v-mask",
-                              value: ["##.###.###-#", "##.###.###-##"],
-                              expression: "['##.###.###-#','##.###.###-##']"
-                            },
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.matricula.rg,
-                              expression: "matricula.rg"
-                            }
-                          ],
-                          staticClass: "form-control form-control-sm",
-                          attrs: {
-                            placeholder: "Insira seu RG",
-                            type: "text",
-                            required: ""
-                          },
-                          domProps: { value: _vm.matricula.rg },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.matricula, "rg", $event.target.value)
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.erros.rg
-                          ? _c(
-                              "small",
-                              {
-                                staticClass: "text-danger",
-                                staticStyle: { "font-size": "10px" },
-                                attrs: { hidden: !_vm.erros.rg }
-                              },
-                              [_vm._v(_vm._s(_vm.erros.rg.toString()))]
-                            )
-                          : _vm._e()
-                      ])
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col col-4 col-md-4" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("Órgão Emissor*")]),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.matricula.orgao_emissor,
-                                expression: "matricula.orgao_emissor"
-                              }
-                            ],
-                            staticClass: "form-control form-control-sm",
-                            attrs: { required: "" },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.matricula,
-                                  "orgao_emissor",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _c(
-                              "option",
-                              {
-                                attrs: { selected: "", hidden: "", value: "" }
-                              },
-                              [_vm._v("Selecione o Órgão Emissor")]
-                            ),
-                            _vm._v(" "),
-                            _vm._l(_vm.orgaos_emissores, function(org, idx) {
-                              return _c(
-                                "option",
-                                { key: idx, domProps: { value: org.sigla } },
-                                [_vm._v(_vm._s(org.sigla + " - " + org.nome))]
-                              )
-                            })
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _vm.erros.orgao_emissor
-                          ? _c(
-                              "small",
-                              {
-                                staticClass: "text-danger",
-                                staticStyle: { "font-size": "10px" },
-                                attrs: { hidden: !_vm.erros.orgao_emissor }
-                              },
-                              [
-                                _vm._v(
-                                  _vm._s(_vm.erros.orgao_emissor.toString())
-                                )
-                              ]
-                            )
-                          : _vm._e()
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col col-4 col-md-4" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("UF*")]),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.matricula.uf,
-                                expression: "matricula.uf"
-                              }
-                            ],
-                            staticClass: "form-control form-control-sm",
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.matricula,
-                                  "uf",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _c(
-                              "option",
-                              {
-                                attrs: { selected: "", hidden: "", value: "" }
-                              },
-                              [_vm._v("Selecione a Unidade Federal")]
-                            ),
-                            _vm._v(" "),
-                            _vm._l(_vm.ufs, function(u, idx) {
-                              return _c(
-                                "option",
-                                { key: idx, domProps: { value: u.key } },
-                                [_vm._v(_vm._s(u.key + " - " + u.value))]
-                              )
-                            })
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _vm.erros.uf
-                          ? _c(
-                              "small",
-                              {
-                                staticClass: "text-danger",
-                                staticStyle: { "font-size": "10px" },
-                                attrs: { hidden: !_vm.erros.uf }
-                              },
-                              [_vm._v(_vm._s(_vm.erros.uf.toString()))]
-                            )
-                          : _vm._e()
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col col-3 col-md-3" }, [
-                      _c("label", [_vm._v("Sexo*")]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c(
-                          "div",
-                          { staticClass: "form-check form-check-inline" },
-                          [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.matricula.sexo,
-                                  expression: "matricula.sexo"
-                                }
-                              ],
-                              staticClass: "form-check-input",
-                              attrs: {
-                                type: "radio",
-                                name: "radio_btn_sexoF",
-                                id: "radio_btn_sexoF"
-                              },
-                              domProps: {
-                                value: 1,
-                                checked: _vm._q(_vm.matricula.sexo, 1)
-                              },
-                              on: {
-                                change: function($event) {
-                                  return _vm.$set(_vm.matricula, "sexo", 1)
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "label",
-                              {
-                                staticClass: "form-check-label",
-                                attrs: { for: "radio_btn_sexoF" }
-                              },
-                              [_vm._v("Feminino")]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "form-check form-check-inline" },
-                          [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.matricula.sexo,
-                                  expression: "matricula.sexo"
-                                }
-                              ],
-                              staticClass: "form-check-input",
-                              attrs: {
-                                type: "radio",
-                                name: "radio_btn_sexoM",
-                                id: "radio_btn_sexoM"
-                              },
-                              domProps: {
-                                value: 0,
-                                checked: _vm._q(_vm.matricula.sexo, 0)
-                              },
-                              on: {
-                                change: function($event) {
-                                  return _vm.$set(_vm.matricula, "sexo", 0)
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "label",
-                              {
-                                staticClass: "form-check-label",
-                                attrs: { for: "radio_btn_sexoM" }
-                              },
-                              [_vm._v("Masculino")]
-                            )
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _vm.erros.sexo
-                        ? _c(
-                            "small",
-                            {
-                              staticClass: "text-danger",
-                              staticStyle: { "font-size": "10px" },
-                              attrs: { hidden: !_vm.erros.sexo }
-                            },
-                            [_vm._v(_vm._s(_vm.erros.sexo.toString()))]
-                          )
-                        : _vm._e()
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col col-3 col-md-3" }, [
-                      _c("label", [_vm._v("Sou evangélico?*")]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c(
-                          "div",
-                          { staticClass: "form-check form-check-inline" },
-                          [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.matricula.isEvangelico,
-                                  expression: "matricula.isEvangelico"
-                                }
-                              ],
-                              staticClass: "form-check-input",
-                              attrs: {
-                                type: "radio",
-                                name: "radio_btn_evglS",
-                                id: "radio_btn_evglS"
-                              },
-                              domProps: {
-                                value: 1,
-                                checked: _vm._q(_vm.matricula.isEvangelico, 1)
-                              },
-                              on: {
-                                change: function($event) {
-                                  return _vm.$set(
-                                    _vm.matricula,
-                                    "isEvangelico",
-                                    1
-                                  )
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "label",
-                              {
-                                staticClass: "form-check-label",
-                                attrs: { for: "radio_btn_evglS" }
-                              },
-                              [_vm._v("Sim")]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "form-check form-check-inline" },
-                          [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.matricula.isEvangelico,
-                                  expression: "matricula.isEvangelico"
-                                }
-                              ],
-                              staticClass: "form-check-input",
-                              attrs: {
-                                type: "radio",
-                                name: "radio_btn_evglN",
-                                id: "radio_btn_evglN"
-                              },
-                              domProps: {
-                                value: 0,
-                                checked: _vm._q(_vm.matricula.isEvangelico, 0)
-                              },
-                              on: {
-                                change: function($event) {
-                                  return _vm.$set(
-                                    _vm.matricula,
-                                    "isEvangelico",
-                                    0
-                                  )
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "label",
-                              {
-                                staticClass: "form-check-label",
-                                attrs: { for: "radio_btn_evglN" }
-                              },
-                              [_vm._v("Não")]
-                            )
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _vm.erros.isEvangelico
-                        ? _c(
-                            "small",
-                            {
-                              staticClass: "text-danger",
-                              staticStyle: { "font-size": "10px" },
-                              attrs: { hidden: !_vm.erros.isEvangelico }
-                            },
-                            [_vm._v(_vm._s(_vm.erros.isEvangelico.toString()))]
-                          )
-                        : _vm._e()
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col col-3 col-md-3" }, [
-                      _c("label", [_vm._v("Sou Membro da IBA?*")]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c(
-                          "div",
-                          { staticClass: "form-check form-check-inline" },
-                          [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.matricula.isMembro,
-                                  expression: "matricula.isMembro"
-                                }
-                              ],
-                              staticClass: "form-check-input",
-                              attrs: {
-                                type: "radio",
-                                name: "radio_btn_mbrS",
-                                id: "radio_btn_mbrS"
-                              },
-                              domProps: {
-                                value: 1,
-                                checked: _vm._q(_vm.matricula.isMembro, 1)
-                              },
-                              on: {
-                                change: function($event) {
-                                  return _vm.$set(_vm.matricula, "isMembro", 1)
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "label",
-                              {
-                                staticClass: "form-check-label",
-                                attrs: { for: "radio_btn_mbrS" }
-                              },
-                              [_vm._v("Sim")]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "form-check form-check-inline" },
-                          [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.matricula.isMembro,
-                                  expression: "matricula.isMembro"
-                                }
-                              ],
-                              staticClass: "form-check-input",
-                              attrs: {
-                                type: "radio",
-                                name: "radio_btn_mbrN",
-                                id: "radio_btn_mbrN"
-                              },
-                              domProps: {
-                                value: 0,
-                                checked: _vm._q(_vm.matricula.isMembro, 0)
-                              },
-                              on: {
-                                change: function($event) {
-                                  return _vm.$set(_vm.matricula, "isMembro", 0)
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "label",
-                              {
-                                staticClass: "form-check-label",
-                                attrs: { for: "radio_btn_mbrN" }
-                              },
-                              [_vm._v("Não")]
-                            )
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _vm.erros.isMembro
-                        ? _c(
-                            "small",
-                            {
-                              staticClass: "text-danger",
-                              staticStyle: { "font-size": "10px" },
-                              attrs: { hidden: !_vm.erros.isMembro }
-                            },
-                            [_vm._v(_vm._s(_vm.erros.isMembro.toString()))]
-                          )
-                        : _vm._e()
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col col-3 col-md-3" }, [
+                    _c("div", { staticClass: "col col-6 col-md-6" }, [
                       _c("div", { staticClass: "form-group" }, [
                         _c("label", [_vm._v("Data de Conversão")]),
                         _vm._v(" "),
@@ -40779,172 +40096,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col col-3 col-md-3" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("E-mail")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.matricula.email,
-                              expression: "matricula.email"
-                            }
-                          ],
-                          staticClass: "form-control form-control-sm",
-                          attrs: {
-                            placeholder: "Insira seu E-mail",
-                            type: "email",
-                            required: ""
-                          },
-                          domProps: { value: _vm.matricula.email },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.matricula,
-                                "email",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.erros.email
-                          ? _c(
-                              "small",
-                              {
-                                staticClass: "text-danger",
-                                staticStyle: { "font-size": "10px" },
-                                attrs: { hidden: !_vm.erros.email }
-                              },
-                              [_vm._v(_vm._s(_vm.erros.email.toString()))]
-                            )
-                          : _vm._e()
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col col-3 col-md-3" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("Telefone 1*")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.matricula.telefones.tel1,
-                              expression: "matricula.telefones.tel1"
-                            },
-                            {
-                              name: "mask",
-                              rawName: "v-mask",
-                              value: ["(##) ####-####", "(##) #####-####"],
-                              expression:
-                                "['(##) ####-####', '(##) #####-####']"
-                            }
-                          ],
-                          staticClass: "form-control form-control-sm",
-                          attrs: {
-                            placeholder: "Insira seu Telefone",
-                            type: "tel",
-                            required: ""
-                          },
-                          domProps: { value: _vm.matricula.telefones.tel1 },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.matricula.telefones,
-                                "tel1",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.erros["telefones.tel1"]
-                          ? _c(
-                              "small",
-                              {
-                                staticClass: "text-danger",
-                                staticStyle: { "font-size": "10px" },
-                                attrs: { hidden: !_vm.erros["telefones.tel1"] }
-                              },
-                              [
-                                _vm._v(
-                                  _vm._s(_vm.erros["telefones.tel1"].toString())
-                                )
-                              ]
-                            )
-                          : _vm._e()
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col col-3 col-md-3" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("Telefone 2")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.matricula.telefones.tel2,
-                              expression: "matricula.telefones.tel2"
-                            },
-                            {
-                              name: "mask",
-                              rawName: "v-mask",
-                              value: ["(##) ####-####", "(##) #####-####"],
-                              expression:
-                                "['(##) ####-####', '(##) #####-####']"
-                            }
-                          ],
-                          staticClass: "form-control form-control-sm",
-                          attrs: {
-                            placeholder: "Outro telefone (opcional)",
-                            type: "tel"
-                          },
-                          domProps: { value: _vm.matricula.telefones.tel2 },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.matricula.telefones,
-                                "tel2",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.erros["telefones.tel2"]
-                          ? _c(
-                              "small",
-                              {
-                                staticClass: "text-danger",
-                                staticStyle: { "font-size": "10px" },
-                                attrs: { hidden: !_vm.erros["telefones.tel2"] }
-                              },
-                              [
-                                _vm._v(
-                                  _vm._s(_vm.erros["telefones.tel2"].toString())
-                                )
-                              ]
-                            )
-                          : _vm._e()
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col col-3 col-md-3" }, [
+                    _c("div", { staticClass: "col col-6 col-md-6" }, [
                       _c("div", { staticClass: "form-group" }, [
                         _c("label", [_vm._v("Classe da EBD*")]),
                         _vm._v(" "),
@@ -41010,6 +40162,457 @@ var render = function() {
                           [_vm._v(_vm._s(_vm.erros.classe))]
                         )
                       ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col col-6 col-md-6" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", [_vm._v("E-mail")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.matricula.email,
+                              expression: "matricula.email"
+                            }
+                          ],
+                          staticClass: "form-control form-control-sm",
+                          attrs: {
+                            placeholder: "Insira seu E-mail",
+                            type: "email",
+                            required: ""
+                          },
+                          domProps: { value: _vm.matricula.email },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.matricula,
+                                "email",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.erros.email
+                          ? _c(
+                              "small",
+                              {
+                                staticClass: "text-danger",
+                                staticStyle: { "font-size": "10px" },
+                                attrs: { hidden: !_vm.erros.email }
+                              },
+                              [_vm._v(_vm._s(_vm.erros.email.toString()))]
+                            )
+                          : _vm._e()
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col col-6 col-md-6" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", [_vm._v("Telefone Whatsapp*")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.matricula.telefones.tel1,
+                              expression: "matricula.telefones.tel1"
+                            },
+                            {
+                              name: "mask",
+                              rawName: "v-mask",
+                              value: ["(##) ####-####", "(##) #####-####"],
+                              expression:
+                                "['(##) ####-####', '(##) #####-####']"
+                            }
+                          ],
+                          staticClass: "form-control form-control-sm",
+                          attrs: {
+                            placeholder: "Insira seu Telefone",
+                            type: "tel",
+                            required: ""
+                          },
+                          domProps: { value: _vm.matricula.telefones.tel1 },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.matricula.telefones,
+                                "tel1",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.erros["telefones.tel1"]
+                          ? _c(
+                              "small",
+                              {
+                                staticClass: "text-danger",
+                                staticStyle: { "font-size": "10px" },
+                                attrs: { hidden: !_vm.erros["telefones.tel1"] }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(_vm.erros["telefones.tel1"].toString())
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col col-6 col-md-6" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", [_vm._v("Telefone 2")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.matricula.telefones.tel2,
+                              expression: "matricula.telefones.tel2"
+                            },
+                            {
+                              name: "mask",
+                              rawName: "v-mask",
+                              value: ["(##) ####-####", "(##) #####-####"],
+                              expression:
+                                "['(##) ####-####', '(##) #####-####']"
+                            }
+                          ],
+                          staticClass: "form-control form-control-sm",
+                          attrs: {
+                            placeholder: "Outro telefone (opcional)",
+                            type: "tel"
+                          },
+                          domProps: { value: _vm.matricula.telefones.tel2 },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.matricula.telefones,
+                                "tel2",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.erros["telefones.tel2"]
+                          ? _c(
+                              "small",
+                              {
+                                staticClass: "text-danger",
+                                staticStyle: { "font-size": "10px" },
+                                attrs: { hidden: !_vm.erros["telefones.tel2"] }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(_vm.erros["telefones.tel2"].toString())
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col col-4 col-md-4" }, [
+                      _c("label", [_vm._v("Sexo*")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "div",
+                          { staticClass: "form-check form-check-inline" },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.matricula.sexo,
+                                  expression: "matricula.sexo"
+                                }
+                              ],
+                              staticClass: "form-check-input",
+                              attrs: {
+                                type: "radio",
+                                name: "radio_btn_sexoF",
+                                id: "radio_btn_sexoF"
+                              },
+                              domProps: {
+                                value: true,
+                                checked: _vm._q(_vm.matricula.sexo, true)
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(_vm.matricula, "sexo", true)
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "form-check-label",
+                                attrs: { for: "radio_btn_sexoF" }
+                              },
+                              [_vm._v("Feminino")]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-check form-check-inline" },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.matricula.sexo,
+                                  expression: "matricula.sexo"
+                                }
+                              ],
+                              staticClass: "form-check-input",
+                              attrs: {
+                                type: "radio",
+                                name: "radio_btn_sexoM",
+                                id: "radio_btn_sexoM"
+                              },
+                              domProps: {
+                                value: false,
+                                checked: _vm._q(_vm.matricula.sexo, false)
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(_vm.matricula, "sexo", false)
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "form-check-label",
+                                attrs: { for: "radio_btn_sexoM" }
+                              },
+                              [_vm._v("Masculino")]
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm.erros.sexo
+                        ? _c(
+                            "small",
+                            {
+                              staticClass: "text-danger",
+                              staticStyle: { "font-size": "10px" },
+                              attrs: { hidden: !_vm.erros.sexo }
+                            },
+                            [_vm._v(_vm._s(_vm.erros.sexo.toString()))]
+                          )
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col col-4 col-md-4" }, [
+                      _c("label", [_vm._v("Sou evangélico?*")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "div",
+                          { staticClass: "form-check form-check-inline" },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.matricula.isEvangelico,
+                                  expression: "matricula.isEvangelico"
+                                }
+                              ],
+                              staticClass: "form-check-input",
+                              attrs: {
+                                type: "radio",
+                                name: "radio_btn_evglS",
+                                id: "radio_btn_evglS"
+                              },
+                              domProps: {
+                                value: true,
+                                checked: _vm._q(
+                                  _vm.matricula.isEvangelico,
+                                  true
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(
+                                    _vm.matricula,
+                                    "isEvangelico",
+                                    true
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "form-check-label",
+                                attrs: { for: "radio_btn_evglS" }
+                              },
+                              [_vm._v("Sim")]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-check form-check-inline" },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.matricula.isEvangelico,
+                                  expression: "matricula.isEvangelico"
+                                }
+                              ],
+                              staticClass: "form-check-input",
+                              attrs: {
+                                type: "radio",
+                                name: "radio_btn_evglN",
+                                id: "radio_btn_evglN"
+                              },
+                              domProps: {
+                                value: false,
+                                checked: _vm._q(
+                                  _vm.matricula.isEvangelico,
+                                  false
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(
+                                    _vm.matricula,
+                                    "isEvangelico",
+                                    false
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "form-check-label",
+                                attrs: { for: "radio_btn_evglN" }
+                              },
+                              [_vm._v("Não")]
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm.erros.isEvangelico
+                        ? _c(
+                            "small",
+                            {
+                              staticClass: "text-danger",
+                              staticStyle: { "font-size": "10px" },
+                              attrs: { hidden: !_vm.erros.isEvangelico }
+                            },
+                            [_vm._v(_vm._s(_vm.erros.isEvangelico.toString()))]
+                          )
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col col-4 col-md-4" }, [
+                      _c("label", [_vm._v("Membresia*")]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.matricula.membresia,
+                              expression: "matricula.membresia"
+                            }
+                          ],
+                          staticClass: "form-control form-control-sm",
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.matricula,
+                                "membresia",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "option",
+                            { attrs: { selected: "", hidden: "", value: "" } },
+                            [_vm._v("Membro ou Congregado?")]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.membresias, function(mem, idx) {
+                            return _c(
+                              "option",
+                              { key: idx, domProps: { value: mem.key } },
+                              [_vm._v(_vm._s(mem.value))]
+                            )
+                          })
+                        ],
+                        2
+                      ),
+                      _vm._v(" "),
+                      _vm.erros.isMembro
+                        ? _c(
+                            "small",
+                            {
+                              staticClass: "text-danger",
+                              staticStyle: { "font-size": "10px" },
+                              attrs: { hidden: !_vm.erros.membresia }
+                            },
+                            [_vm._v(_vm._s(_vm.erros.membresia))]
+                          )
+                        : _vm._e()
                     ])
                   ]),
                   _vm._v(" "),
