@@ -4,12 +4,21 @@
 		  	<div class="modal-dialog modal-lg" role="document">
 		    	<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="ModalMatriculaLabel">
-                            {{(editando==null||editando==false)? 'Matrícula EBDiscipuladora':'Editando Matricula de '+ matricula.nome}}
-                        </h5>
-						<button @click="fechar" type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
+                        <div class="d-flex justify-content-start">
+                            <h5 class="modal-title" id="ModalMatriculaLabel">
+                                    {{(editando==null||editando==false)? 'Matrícula EBDiscipuladora':
+                                        'Editando Matricula de '+ matricula.nome}}
+                            </h5>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button v-if="(editando!=null&&editando!=false)" @click="imprimirFicha" type="button" style="margin-right:4px;" class="btn btn-outline-secondary" 
+                                data-toggle="tooltip" data-placement="bottom" title="Imprimir Ficha">
+                                    <i class="fas fa-print fa-lg"></i>
+                            </button>
+                            <button @click="fechar" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>                            
+                        </div>
 					</div>
 					<div  class="modal-body">
                     <form action="#" id="corpo_modal">
@@ -68,7 +77,8 @@
                             <div class="col col-6 col-md-6">
 								<div class="form-group">
 									<label>E-mail</label>
-									<input class="form-control form-control-sm" placeholder="Insira seu E-mail" type="email" v-model="matricula.email" required>
+									<input class="form-control form-control-sm" :placeholder="isPrinting==false?'Insira seu E-mail':''" type="email" 
+                                            v-model="matricula.email" required>
                                     <small v-if="erros.email" class="text-danger" style="font-size:10px" :hidden="(!erros.email)">{{erros.email.toString()}}</small>
                                 </div>
                             </div>
@@ -114,8 +124,8 @@
                             <div class="col col-6 col-md-6">
 								<div class="form-group">
 									<label>Telefone 2</label>
-									<input class="form-control form-control-sm" v-model="matricula.telefones.tel2" 
-                                            v-mask="['(##) ####-####', '(##) #####-####']" placeholder="Outro telefone (opcional)" type="tel">
+									<input class="form-control form-control-sm" :placeholder="isPrinting==false?'Outro telefone (opcional)':''" 
+                                        v-model="matricula.telefones.tel2" v-mask="['(##) ####-####', '(##) #####-####']"  type="tel">
                                     <small v-if="erros['telefones.tel2']" class="text-danger" style="font-size:10px" :hidden="(!erros['telefones.tel2'])">{{erros['telefones.tel2'].toString()}}</small>
 								</div>
                             </div>
@@ -178,7 +188,7 @@
                             <div class="col col-3 col-md-3">
 								<div class="form-group">
 									<label>CEP</label>
-									<input class="form-control form-control-sm" v-mask="'#####-###'" placeholder="Insira o CEP" type="text" 
+									<input class="form-control form-control-sm" v-mask="'#####-###'" :placeholder="isPrinting==false?'Insira o CEP':''" type="text" 
                                         v-model="matricula.endereco.cep">
                                     <small v-if="erros['endereco.cep']" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.cep'])">{{erros['endereco.cep'].toString()}}</small>
 								</div>
@@ -188,21 +198,24 @@
                             <div class="col col-4 col-md-4">
 								<div class="form-group">
 									<label>Cidade*</label>
-									<input class="form-control form-control-sm" placeholder="Insira a Cidade" type="text" v-model="matricula.endereco.cidade" required>
+									<input class="form-control form-control-sm" :placeholder="isPrinting==false?'Insira a Cidade':''" type="text" 
+                                            v-model="matricula.endereco.cidade" required>
                                     <small v-if="erros['endereco.cidade']" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.cidade'])">{{erros['endereco.cidade'].toString()}}</small>
 								</div>
 							</div>
                             <div class="col col-4 col-md-4">
 								<div class="form-group">
 									<label>Bairro*</label>
-									<input class="form-control form-control-sm" placeholder="Insira o Bairro" type="text" v-model="matricula.endereco.bairro" required>
+									<input class="form-control form-control-sm" :placeholder="isPrinting==false?'Insira o Bairro':''" type="text" 
+                                            v-model="matricula.endereco.bairro" required>
                                     <small v-if="erros['endereco.bairro']" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.bairro'])">{{erros['endereco.bairro'].toString()}}</small>
 								</div>
 							</div>
                             <div class="col col-4 col-md-4">
 								<div class="form-group">
 									<label>Complemento</label>
-                                    <textarea class="form form-control" placeholder="Complemento (opcional)" type="text" rows="1" v-model="matricula.endereco.complemento"></textarea>
+                                    <textarea class="form form-control" :placeholder="isPrinting==false?'Complemento (opcional)':''" type="text" rows="1" 
+                                            v-model="matricula.endereco.complemento"></textarea>
                                     <small v-if="erros['endereco.complemento']" class="text-danger" style="font-size:10px" :hidden="(!erros['endereco.complemento'])">{{erros['endereco.complemento'].toString()}}</small>
 								</div>
 							</div>
@@ -230,11 +243,13 @@
 </template>
 <script>
 import {TheMask} from 'vue-the-mask'
+import print from 'print-js'
 
 export default {
     name:'MatriculaPage',
 
     components:{ TheMask },
+    directives:{ print },
 
     props:{
         edicao:{ type:Object, default:null },
@@ -243,7 +258,7 @@ export default {
 
     data() {
         return {
-            isRequesting:false, sucesso:false, erros:{},
+            isRequesting:false, sucesso:false, erros:{}, isPrinting:false,
             matricula:{
                 nome:'', sobrenome:'', nascimento:'',
                 // cpf:'', rg:'', orgao_emissor:'', uf:'',
@@ -298,19 +313,42 @@ export default {
     methods: {
         getCepInfo: _.debounce(function(){
             this.isRequesting=true;
-            axios.get('http://viacep.com.br/ws/'+this.matricula.endereco.cep+'/json')
-                .then(res=>{
-                    this.isRequesting=false; this.erros={};
-                    this.matricula.endereco.logradouro = res.data.logradouro;
-                    this.matricula.endereco.complemento = res.data.complemento;
-                    this.matricula.endereco.bairro = res.data.bairro;
-                    this.matricula.endereco.cidade = res.data.localidade;
-                })
-                .catch(err=>{ 
-                    this.isRequesting=false; console.error(err); 
-                    this.erros.endereco.cep=['O CEP informado é inválido!']; 
-                })
-        },1000),
+            if(this.matricula.cep!=''){
+                axios.get('http://viacep.com.br/ws/'+this.matricula.endereco.cep+'/json')
+                    .then(res=>{
+                        this.isRequesting=false; this.erros={};
+                        this.matricula.endereco.logradouro = res.data.logradouro;
+                        this.matricula.endereco.complemento = res.data.complemento;
+                        this.matricula.endereco.bairro = res.data.bairro;
+                        this.matricula.endereco.cidade = res.data.localidade;
+                    })
+                    .catch(err=>{ 
+                        this.isRequesting=false; console.error(err); 
+                        this.erros.endereco.cep=['O CEP informado é inválido!']; 
+                    })
+            }
+        },1500),
+
+        imprimirFicha(){
+            this.isPrinting = true;
+            var arrayCss=[
+                "https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css",
+            ]
+            printJS({
+                printable:'corpo_modal', 
+                type:'html',
+                header:'IBA - EBDiscipuladora - ' + this.matricula.nome +' '+ this.matricula.sobrenome,
+                documentTitle:'Ficha de Matrícula de '+ this.matricula.nome +' '+ this.matricula.sobrenome,
+                css:arrayCss,
+                modalMessage:'Carregando...',
+                onPrintDialogClose: ()=>{ this.isPrinting=false; },
+                onError: (err) =>{ 
+                    alert("Houve um erro ao imprimir esta ficha!!! Tente Novamente"); this.isPrinting=false;
+                    $('#modalMatricula').modal('show');
+                },
+            });
+            this.isPrinting=false;
+        },
 
         fechar(){
             this.matricula={

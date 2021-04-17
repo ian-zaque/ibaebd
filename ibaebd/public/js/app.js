@@ -1929,39 +1929,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/HomePage.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/HomePage.vue?vue&type=script&lang=js& ***!
@@ -2099,8 +2066,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var print_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! print-js */ "./node_modules/print-js/dist/print.js");
-/* harmony import */ var print_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(print_js__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2165,10 +2130,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ListaMatriculados',
   data: function data() {
@@ -2210,25 +2171,6 @@ __webpack_require__.r(__webpack_exports__);
           _this2.erros = {};
         });
       }
-    },
-    baixarFicha: function baixarFicha(item) {
-      // console.log('item',item)
-      // var tempMat = item;
-      // if(tempMat.sexo==true){ console.log('É UMMMM')}
-      // else if(tempMat.sexo==false){ console.log('É 0000')}
-      // console.log('matricula antes',item)
-      this.matricula = Object.assign({}, item);
-      $('#modalMatricula').modal('show');
-
-      if (this.matricula.id != null && this.matricula.id != undefined && this.matricula.id != '') {
-        printJS({
-          printable: 'corpo_modal',
-          type: 'html',
-          header: 'IGREJA BATISTA ALVORADA - EBDiscipuladora'
-        });
-      }
-
-      $('#modalMatricula').modal('hide');
     },
     editarMatricula: function editarMatricula(item) {
       this.isEditing = true;
@@ -2307,6 +2249,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
 /* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var print_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! print-js */ "./node_modules/print-js/dist/print.js");
+/* harmony import */ var print_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(print_js__WEBPACK_IMPORTED_MODULE_1__);
 var _watch;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2541,11 +2485,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'MatriculaPage',
   components: {
     TheMask: vue_the_mask__WEBPACK_IMPORTED_MODULE_0__["TheMask"]
+  },
+  directives: {
+    print: print_js__WEBPACK_IMPORTED_MODULE_1___default.a
   },
   props: {
     edicao: {
@@ -2562,6 +2523,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       isRequesting: false,
       sucesso: false,
       erros: {},
+      isPrinting: false,
       matricula: {
         nome: '',
         sobrenome: '',
@@ -2636,19 +2598,45 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       this.isRequesting = true;
-      axios.get('http://viacep.com.br/ws/' + this.matricula.endereco.cep + '/json').then(function (res) {
-        _this.isRequesting = false;
-        _this.erros = {};
-        _this.matricula.endereco.logradouro = res.data.logradouro;
-        _this.matricula.endereco.complemento = res.data.complemento;
-        _this.matricula.endereco.bairro = res.data.bairro;
-        _this.matricula.endereco.cidade = res.data.localidade;
-      })["catch"](function (err) {
-        _this.isRequesting = false;
-        console.error(err);
-        _this.erros.endereco.cep = ['O CEP informado é inválido!'];
+
+      if (this.matricula.cep != '') {
+        axios.get('http://viacep.com.br/ws/' + this.matricula.endereco.cep + '/json').then(function (res) {
+          _this.isRequesting = false;
+          _this.erros = {};
+          _this.matricula.endereco.logradouro = res.data.logradouro;
+          _this.matricula.endereco.complemento = res.data.complemento;
+          _this.matricula.endereco.bairro = res.data.bairro;
+          _this.matricula.endereco.cidade = res.data.localidade;
+        })["catch"](function (err) {
+          _this.isRequesting = false;
+          console.error(err);
+          _this.erros.endereco.cep = ['O CEP informado é inválido!'];
+        });
+      }
+    }, 1500),
+    imprimirFicha: function imprimirFicha() {
+      var _this2 = this;
+
+      this.isPrinting = true;
+      var arrayCss = ["https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"];
+      printJS({
+        printable: 'corpo_modal',
+        type: 'html',
+        header: 'IBA - EBDiscipuladora - ' + this.matricula.nome + ' ' + this.matricula.sobrenome,
+        documentTitle: 'Ficha de Matrícula de ' + this.matricula.nome + ' ' + this.matricula.sobrenome,
+        css: arrayCss,
+        modalMessage: 'Carregando...',
+        onPrintDialogClose: function onPrintDialogClose() {
+          _this2.isPrinting = false;
+        },
+        onError: function onError(err) {
+          alert("Houve um erro ao imprimir esta ficha!!! Tente Novamente");
+          _this2.isPrinting = false;
+          $('#modalMatricula').modal('show');
+        }
       });
-    }, 1000),
+      this.isPrinting = false;
+    },
     fechar: function fechar() {
       this.matricula = {
         nome: '',
@@ -2678,25 +2666,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       $('#modalMatricula').modal('hide');
     },
     cadastrar: function cadastrar() {
-      var _this2 = this;
+      var _this3 = this;
 
       if (confirm('Deseja confirmar a matrícula?')) {
         this.isRequesting = true;
         this.erros = {};
         axios.post('/atualizar', this.matricula).then(function (res) {
-          _this2.isRequesting = false;
-          _this2.sucesso = true;
-          _this2.erros = {};
+          _this3.isRequesting = false;
+          _this3.sucesso = true;
+          _this3.erros = {};
           alert('Matrícula efetuada com sucesso!!!');
           $('#modalMatricula').modal('hide');
 
-          if (_this2.edicao != null) {
-            _this2.$emit('retornoMatriculas', res.data);
+          if (_this3.edicao != null) {
+            _this3.$emit('retornoMatriculas', res.data);
           }
         })["catch"](function (err) {
-          _this2.isRequesting = false;
-          _this2.erros = Object.values(err);
-          _this2.erros = _this2.erros[2].data;
+          _this3.isRequesting = false;
+          _this3.erros = Object.values(err);
+          _this3.erros = _this3.erros[2].data;
         });
       }
     }
@@ -39403,53 +39391,6 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&":
-/*!*******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e& ***!
-  \*******************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example component.\n                "
-              )
-            ])
-          ])
-        ])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/HomePage.vue?vue&type=template&id=fa44bb0e&":
 /*!***********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/HomePage.vue?vue&type=template&id=fa44bb0e& ***!
@@ -39706,30 +39647,6 @@ var render = function() {
                                       type: "button",
                                       "data-toggle": "tooltip",
                                       "data-placement": "bottom",
-                                      title: "Baixar Ficha de " + mat.nome
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.baixarFicha(mat)
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("i", {
-                                      staticClass: "fas fa-id-badge fa-lg"
-                                    })
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-outline-secondary",
-                                    staticStyle: { "margin-right": "4px" },
-                                    attrs: {
-                                      type: "button",
-                                      "data-toggle": "tooltip",
-                                      "data-placement": "bottom",
                                       title: "Editar"
                                     },
                                     on: {
@@ -39854,42 +39771,64 @@ var render = function() {
           [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-header" }, [
-                _c(
-                  "h5",
-                  {
-                    staticClass: "modal-title",
-                    attrs: { id: "ModalMatriculaLabel" }
-                  },
-                  [
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(
-                          _vm.editando == null || _vm.editando == false
-                            ? "Matrícula EBDiscipuladora"
-                            : "Editando Matricula de " + _vm.matricula.nome
-                        ) +
-                        "\n                        "
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      "aria-label": "Close"
+                _c("div", { staticClass: "d-flex justify-content-start" }, [
+                  _c(
+                    "h5",
+                    {
+                      staticClass: "modal-title",
+                      attrs: { id: "ModalMatriculaLabel" }
                     },
-                    on: { click: _vm.fechar }
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("×")
-                    ])
-                  ]
-                )
+                    [
+                      _vm._v(
+                        "\n                                    " +
+                          _vm._s(
+                            _vm.editando == null || _vm.editando == false
+                              ? "Matrícula EBDiscipuladora"
+                              : "Editando Matricula de " + _vm.matricula.nome
+                          ) +
+                          "\n                            "
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "d-flex justify-content-end" }, [
+                  _vm.editando != null && _vm.editando != false
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-outline-secondary",
+                          staticStyle: { "margin-right": "4px" },
+                          attrs: {
+                            type: "button",
+                            "data-toggle": "tooltip",
+                            "data-placement": "bottom",
+                            title: "Imprimir Ficha"
+                          },
+                          on: { click: _vm.imprimirFicha }
+                        },
+                        [_c("i", { staticClass: "fas fa-print fa-lg" })]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "close",
+                      attrs: {
+                        type: "button",
+                        "data-dismiss": "modal",
+                        "aria-label": "Close"
+                      },
+                      on: { click: _vm.fechar }
+                    },
+                    [
+                      _c("span", { attrs: { "aria-hidden": "true" } }, [
+                        _vm._v("×")
+                      ])
+                    ]
+                  )
+                ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
@@ -40173,7 +40112,10 @@ var render = function() {
                           ],
                           staticClass: "form-control form-control-sm",
                           attrs: {
-                            placeholder: "Insira seu E-mail",
+                            placeholder:
+                              _vm.isPrinting == false
+                                ? "Insira seu E-mail"
+                                : "",
                             type: "email",
                             required: ""
                           },
@@ -40291,7 +40233,10 @@ var render = function() {
                           ],
                           staticClass: "form-control form-control-sm",
                           attrs: {
-                            placeholder: "Outro telefone (opcional)",
+                            placeholder:
+                              _vm.isPrinting == false
+                                ? "Outro telefone (opcional)"
+                                : "",
                             type: "tel"
                           },
                           domProps: { value: _vm.matricula.telefones.tel2 },
@@ -40743,7 +40688,11 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control form-control-sm",
-                          attrs: { placeholder: "Insira o CEP", type: "text" },
+                          attrs: {
+                            placeholder:
+                              _vm.isPrinting == false ? "Insira o CEP" : "",
+                            type: "text"
+                          },
                           domProps: { value: _vm.matricula.endereco.cep },
                           on: {
                             input: function($event) {
@@ -40794,7 +40743,8 @@ var render = function() {
                           ],
                           staticClass: "form-control form-control-sm",
                           attrs: {
-                            placeholder: "Insira a Cidade",
+                            placeholder:
+                              _vm.isPrinting == false ? "Insira a Cidade" : "",
                             type: "text",
                             required: ""
                           },
@@ -40848,7 +40798,8 @@ var render = function() {
                           ],
                           staticClass: "form-control form-control-sm",
                           attrs: {
-                            placeholder: "Insira o Bairro",
+                            placeholder:
+                              _vm.isPrinting == false ? "Insira o Bairro" : "",
                             type: "text",
                             required: ""
                           },
@@ -40902,7 +40853,10 @@ var render = function() {
                           ],
                           staticClass: "form form-control",
                           attrs: {
-                            placeholder: "Complemento (opcional)",
+                            placeholder:
+                              _vm.isPrinting == false
+                                ? "Complemento (opcional)"
+                                : "",
                             type: "text",
                             rows: "1"
                           },
@@ -53214,8 +53168,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
  */
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
-Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('empty-space', __webpack_require__(/*! ./components/EmptySpace.vue */ "./resources/js/components/EmptySpace.vue")["default"]);
 Vue.component('home-page', __webpack_require__(/*! ./components/HomePage.vue */ "./resources/js/components/HomePage.vue")["default"]);
 Vue.component('matricula-page', __webpack_require__(/*! ./components/MatriculaPage.vue */ "./resources/js/components/MatriculaPage.vue")["default"]);
@@ -53341,75 +53295,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EmptySpace_vue_vue_type_template_id_7eda2838___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EmptySpace_vue_vue_type_template_id_7eda2838___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/ExampleComponent.vue":
-/*!******************************************************!*\
-  !*** ./resources/js/components/ExampleComponent.vue ***!
-  \******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ExampleComponent.vue?vue&type=template&id=299e239e& */ "./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&");
-/* harmony import */ var _ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ExampleComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/ExampleComponent.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************!*\
-  !*** ./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ExampleComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&":
-/*!*************************************************************************************!*\
-  !*** ./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e& ***!
-  \*************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ExampleComponent.vue?vue&type=template&id=299e239e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

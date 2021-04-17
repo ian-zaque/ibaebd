@@ -58,7 +58,7 @@ class MatriculaController extends Controller
             // 'orgao_emissor' => 'string|required|',
             // 'uf' => 'string|required',
             'classe' => 'string|required',
-            'email' => 'string|required|email:rfc,dns',
+            'email' => 'string|nullable|email:rfc,dns',
             'nascimento' => 'date|required',
             'conversao' => 'date|nullable',
             'membresia' => 'required|in:m,c',

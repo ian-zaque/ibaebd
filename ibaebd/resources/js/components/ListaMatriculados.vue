@@ -43,9 +43,6 @@
                                     <td>{{mat.classe=='batismo'?'Batismo':'erro'}}</td>
 									<td class="content-right">
 										<div class="input-group-append justify-content-right" id="button-addon4">
-                                            <button @click="baixarFicha(mat)" type="button" style="margin-right:4px;" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" :title="'Baixar Ficha de '+mat.nome">
-                                                <i class="fas fa-id-badge fa-lg"></i>
-                                            </button>
 											<button @click="editarMatricula(mat)" type="button" style="margin-right:4px;" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Editar">
 												<i class="fas fa-edit fa-lg"></i>
 											</button>
@@ -66,7 +63,6 @@
 </template>
 
 <script>
-import print from 'print-js'
 export default {
     name:'ListaMatriculados',
 
@@ -91,25 +87,6 @@ export default {
                     .then(res=>{ this.isRequesting=false; this.matriculados=res.data; this.erros={}; })
                     .catch(err=>{ this.isRequesting=false; console.error(err); this.erros={}; })
             }
-        },
-
-        baixarFicha(item){
-            // console.log('item',item)
-            // var tempMat = item;
-            // if(tempMat.sexo==true){ console.log('É UMMMM')}
-            // else if(tempMat.sexo==false){ console.log('É 0000')}
-            // console.log('matricula antes',item)
-
-            this.matricula = Object.assign({},item); $('#modalMatricula').modal('show');
-
-            if(this.matricula.id!=null && this.matricula.id!=undefined && this.matricula.id!=''){
-                printJS({
-                    printable:'corpo_modal', 
-                    type:'html',
-                    header:'IGREJA BATISTA ALVORADA - EBDiscipuladora'
-                }); 
-            }
-            $('#modalMatricula').modal('hide');
         },
 
         editarMatricula(item){ this.isEditing=true; this.erros={}; this.matricula = Object.assign({},item);  $('#modalMatricula').modal('show'); },
