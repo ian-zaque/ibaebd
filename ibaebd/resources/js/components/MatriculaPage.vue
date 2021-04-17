@@ -7,7 +7,7 @@
                         <div class="d-flex justify-content-start">
                             <h5 class="modal-title" id="ModalMatriculaLabel">
                                     {{(editando==null||editando==false)? 'Matrícula EBDiscipuladora':
-                                        'Editando Matricula de '+ matricula.nome}}
+                                        'Editando Matricula de '+ edicao.nome}}
                             </h5>
                         </div>
                         <div class="d-flex justify-content-end">
@@ -295,8 +295,9 @@ export default {
 
     watch:{
         ['matricula.endereco.cep'](val,old){
-            if(val!='' && val!=old && val!=null && val!=undefined && (val.replace(/\s/g, '').length) && val.indexOf('-')!=-1 && val.length == 9){
-                this.getCepInfo();
+            if(val!='' && val!=old && val!=null && val!=undefined && (val.replace(/\s/g, '').length) &&
+                val.indexOf('-')!=-1 && val.length == 9){
+                    this.getCepInfo();
             }
         },
         edicao(val){
@@ -308,12 +309,14 @@ export default {
 
     computed:{
         editando(){ return this.isEditing; },
+        matriculaClone(){ 
+            this.matricula=Object.assign({},this.edicao); return 'foi';
+        }
     },
 
     methods: {
         getCepInfo: _.debounce(function(){
-            this.isRequesting=true;
-            if(this.matricula.cep!=''){
+            if(this.matricula.cep!=''&&this.matricula.cep!=null){
                 axios.get('http://viacep.com.br/ws/'+this.matricula.endereco.cep+'/json')
                     .then(res=>{
                         this.isRequesting=false; this.erros={};
@@ -337,8 +340,8 @@ export default {
             printJS({
                 printable:'corpo_modal', 
                 type:'html',
-                header:'IBA - EBDiscipuladora - ' + this.matricula.nome +' '+ this.matricula.sobrenome,
-                documentTitle:'Ficha de Matrícula de '+ this.matricula.nome +' '+ this.matricula.sobrenome,
+                header:'IBA-Matrícula de ' + this.edicao.nome +' '+ this.edicao.sobrenome,
+                documentTitle:'Ficha de Matrícula de '+ this.edicao.nome +' '+ this.edicao.sobrenome,
                 css:arrayCss,
                 modalMessage:'Carregando...',
                 onPrintDialogClose: ()=>{ this.isPrinting=false; },

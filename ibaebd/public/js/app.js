@@ -2591,15 +2591,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: {
     editando: function editando() {
       return this.isEditing;
+    },
+    matriculaClone: function matriculaClone() {
+      this.matricula = Object.assign({}, this.edicao);
+      return 'foi';
     }
   },
   methods: {
     getCepInfo: _.debounce(function () {
       var _this = this;
 
-      this.isRequesting = true;
-
-      if (this.matricula.cep != '') {
+      if (this.matricula.cep != '' && this.matricula.cep != null) {
         axios.get('http://viacep.com.br/ws/' + this.matricula.endereco.cep + '/json').then(function (res) {
           _this.isRequesting = false;
           _this.erros = {};
@@ -2622,8 +2624,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       printJS({
         printable: 'corpo_modal',
         type: 'html',
-        header: 'IBA - EBDiscipuladora - ' + this.matricula.nome + ' ' + this.matricula.sobrenome,
-        documentTitle: 'Ficha de Matrícula de ' + this.matricula.nome + ' ' + this.matricula.sobrenome,
+        header: 'IBA-Matrícula de ' + this.edicao.nome + ' ' + this.edicao.sobrenome,
+        documentTitle: 'Ficha de Matrícula de ' + this.edicao.nome + ' ' + this.edicao.sobrenome,
         css: arrayCss,
         modalMessage: 'Carregando...',
         onPrintDialogClose: function onPrintDialogClose() {
@@ -39784,7 +39786,7 @@ var render = function() {
                           _vm._s(
                             _vm.editando == null || _vm.editando == false
                               ? "Matrícula EBDiscipuladora"
-                              : "Editando Matricula de " + _vm.matricula.nome
+                              : "Editando Matricula de " + _vm.edicao.nome
                           ) +
                           "\n                            "
                       )
