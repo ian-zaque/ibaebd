@@ -50130,11 +50130,6 @@ Vue.config.isReservedAttr = isReservedAttr;
 Vue.config.getTagNamespace = getTagNamespace;
 Vue.config.isUnknownElement = isUnknownElement;
 
-if (process.env.MIX_ENV_MODE === 'production') {
-  Vue.config.devtools = false;
-  Vue.config.debug = false;
-  Vue.config.silent = true; 
-}
 
 // install platform runtime directives & components
 extend(Vue.options.directives, platformDirectives);
