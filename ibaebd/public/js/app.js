@@ -1893,7 +1893,8 @@ module.exports = {
   merge: merge,
   deepMerge: deepMerge,
   extend: extend,
-  trim: trim
+  trim: trim,
+  mode: 'production',
 };
 
 
