@@ -23,6 +23,7 @@ window.Vue = require('vue');
 Vue.component('empty-space',require('./components/EmptySpace.vue').default);
 Vue.component('home-page',require('./components/HomePage.vue').default);
 Vue.component('matricula-page',require('./components/MatriculaPage.vue').default);
+Vue.component('matricula-manhaDivertida',require('./components/MatriculaManhaDivertida.vue').default);
 Vue.component('lista-matriculados',require('./components/ListaMatriculados.vue').default);
 
 /**
