@@ -2,10 +2,11 @@
     <div>
         <div class="card">
             <div class="card-header lead d-flex justify-content-between">
-                <span class="h4">Lista de Matriculados</span>
+                <span class="h4">Inscritos na Manhã Divertida</span>
 				<div class="input-group-append">
-                    <matricula-page :edicao="matricula" :isEditing="isEditing" @retornoMatriculas="attMatriculas">
-                    </matricula-page>
+                    <matricula-manhaDivertida :edicao="matricula" :isEditingManha="isEditingManha" 
+                        @retornoInscricoesManhaDivertida="attMatriculas">
+                    </matricula-manhaDivertida>
 
 					<button @click="abrirModalMatricula()" class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="bottom" title="Matricular">
 						<i class="fas fa-plus fa-lg"></i>
@@ -29,17 +30,17 @@
 						<table class="table table-hover table-sm table-responsive-md">
 							<thead class="thead-light">
 								<tr>
-									<th scope="col col-1">Matrícula</th>
+									<th scope="col col-1">Inscrição</th>
 									<th scope="col">Nome</th>
-                                    <th scope="col">Classe</th>
+									<th scope="col">Idade</th>
 									<th scope="col">Ações</th>
 								</tr>
 							</thead>
 							<tbody v-for="(mat, idx) in matriculados" :key="idx">
 								<tr>
 									<td>{{mat.id}}</td>
-									<td>{{mat.nome + ' ' + mat.sobrenome}}</td>
-                                    <td>{{mat.classe=='batismo'?'Batismo':'erro'}}</td>
+                                    <td>{{mat.nome + ' ' + mat.sobrenome}}</td>
+                                    <td>{{mat.idade + ' anos'}}</td>
 									<td class="content-right">
 										<div class="input-group-append justify-content-right" id="button-addon4">
 											<button @click="editarMatricula(mat)" type="button" style="margin-right:4px;" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Editar">
@@ -63,76 +64,72 @@
 
 <script>
 export default {
-    name:'ListaMatriculados',
+    name:'ListaManhaDivertida',
 
     data() {
         return {
-            isRequesting:false, erros:{}, matriculados:[], matricula:null, isEditing:null,
+            isRequesting:false, erros:{}, matriculados:[], isEditingManha:null,
+            matricula:{
+                nome:'', sobrenome:'', idade:'', nome_responsavel:'', nome_pai:'', nome_mae:'', banho_mangueira:true, contato:'',
+            },
         }
     },
 
     methods:{
         getMatriculas(){
             this.isRequesting=true;
-            axios.get('/getMatriculas')
+            axios.get('/inscricaoManhaDivertida')
                 .then(res=>{ this.isRequesting=false; this.matriculados=res.data; this.erros={}; })
                 .catch(err=>{ this.isRequesting=false; console.error(err); })
         },
 
         deletar(id){
-            if(confirm('Deseja deletar esta Matrícula?')){
+            if(confirm('Deseja deletar esta Inscrição?')){
                 this.erros={}; this.isRequesting=true;
-                axios.delete('/deletar/'+id)
+                axios.delete('/inscricaoManhaDivertida/deletar/'+id)
                     .then(res=>{ this.isRequesting=false; this.matriculados=res.data; this.erros={}; })
                     .catch(err=>{ this.isRequesting=false; console.error(err); this.erros={}; })
             }
         },
 
-        editarMatricula(item){ this.isEditing=true; this.erros={}; this.matricula = Object.assign({},item);  $('#modalMatricula').modal('show'); },
+        editarMatricula(item){ 
+            this.isEditingManha=true; this.erros={}; this.matricula = Object.assign({},item); 
+            $('#modalManhaDivertida').modal('show');
+        },
 
         attMatriculas(val){ this.matriculados = val; },
 
         abrirModalMatricula(){
-            this.erros={}; this.isEditing=false;
+            this.erros={}; this.isEditingManha=false;
             if(this.matricula!=null && this.matricula.hasOwnProperty('id')){ delete this.matricula.id; }
             this.matricula={
-                nome:'', sobrenome:'', nascimento:'',
-                // cpf:'', rg:'', orgao_emissor:'', uf:'',
-                email:'', classe:'batismo', isEvangelico:0, sexo:0, conversao:'', membresia:'',
-                telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:''},
+               nome:'', sobrenome:'', idade:'', nome_responsavel:'', nome_pai:'', nome_mae:'', banho_mangueira:true, contato:'',
             };
-            $('#modalMatricula').modal('show');
+            $('#modalManhaDivertida').modal('show');
         },
 
         baixarPlanilha(){
             var mat = this.matriculados.map(function(val){
                 return [
                     ''+val.id, 
-                    val.nome+' '+val.sobrenome, 
-                    val.sexo==false?'Masculino':'Feminino', 
-                    new Date(val.nascimento).toLocaleDateString(),
-                    val.email==null||val.email==''?'-':val.email,
-                    ''+val.telefones.tel1,
-                    val.telefones.tel2==''||val.telefones.tel2==null?'-':''+val.telefones.tel2,
-                    val.conversao==null||val.conversao==''?'-': new Date(val.conversao).toLocaleDateString().replace('/','-'),
-                    val.isEvangelico==false?'Nao':'Sim',
-                    val.membresia=='m'?'Membro':'Congregado',
-                    val.endereco.logradouro +', '+ val.endereco.num+', '+ val.endereco.bairro,
-                    val.endereco.cidade,
-                    val.endereco.cep==''||val.endereco.cep==null?'':val.endereco.cep,
-                    val.endereco.complemento==''||val.endereco.complemento==null?'':val.endereco.complemento
+                    val.nome+' '+val.sobrenome,
+                    val.idade,
+                    val.banho_mangueira ==false?'Nao':'Sim',
+                    val.idade <= 5? val.nome_responsavel :'-',
+                    val.contato,
+                    val.nome_pai,
+                    val.nome_mae,    
                 ];
             });
 
             mat.unshift([
-                'ID','Nome','Sexo', 'Data de Nascimento','Email','Telefone Zap','Telefone 2',
-                'Data de Conversao', 'Evangelico?', 'Membresia', 'Endereco', 'Cidade', 'CEP', 'Complemento',
+               'ID', 'Nome', 'Idade', 'Banho de Mangueira?', 'Nome do Responsavel', 'Contato', 'Nome do Pai', 'Nome da Mae',
             ]);
             let csvContent = "data:text/csv;charset=utf-8,"  + mat.map(e => e.join(";")).join("\n");
             var encodedUri = encodeURI(csvContent);
             var link = document.createElement("a");
             link.setAttribute("href", encodedUri);
-            link.setAttribute("download", "Planilha_Matricula_IBA_EBD.csv");
+            link.setAttribute("download", "Planilha_Manha_Divertida.csv");
             document.body.appendChild(link);
 
             link.click();

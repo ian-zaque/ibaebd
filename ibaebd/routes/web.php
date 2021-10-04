@@ -17,11 +17,25 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/ebd', function () {
+    return view('ebd_discipuladora');
+});
+
+Route::get('/manha_divertida', function () {
+    return view('manha_divertida');
+});
+
 Auth::routes();
 
 Route::post('/atualizar','MatriculaController@atualizar');
+Route::post('/inscricaoManhaDivertida/atualizar','InscricaoManhaDivertidaController@atualizar');
 
 Route::group(['middleware'=>'auth'],function(){
     Route::get('/getMatriculas','MatriculaController@getMatriculas')->middleware('verified');
     Route::delete('/deletar/{id}','MatriculaController@deletar');
+});
+
+Route::group(['middleware'=>'auth'],function(){
+    Route::get('/inscricaoManhaDivertida','InscricaoManhaDivertidaController@getInscricoesManhaDivertida')->middleware('verified');
+    Route::delete('/inscricaoManhaDivertida/deletar/{id}','InscricaoManhaDivertidaController@deletar');
 });

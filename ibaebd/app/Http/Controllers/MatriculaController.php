@@ -68,12 +68,12 @@ class MatriculaController extends Controller
             'telefones.tel1' => 'string|required',
             'telefones.tel2' => 'string|nullable',
 
-            'endereco.logradouro' =>' string|required',
-            'endereco.cidade' =>' string|required',
-            'endereco.bairro' =>' string|required',
-            'endereco.cep' =>' string|required',
-            'endereco.complemento' =>' string|required',
-            'endereco.num' =>' string|required',
+            'endereco.logradouro' => 'string|required',
+            'endereco.cidade' => 'string|required',
+            'endereco.bairro' => 'string|required',
+            'endereco.cep' => 'string|required',
+            'endereco.complemento' => 'string|required',
+            'endereco.num' => 'string|required',
         ],$msgsErros, $atributos);
 
         if ($validator->fails()){ return response()->json($validator->errors(), 403); }

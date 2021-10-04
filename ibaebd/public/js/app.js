@@ -2086,8 +2086,194 @@ __webpack_require__.r(__webpack_exports__);
     abrirModalManhaDivertida: function abrirModalManhaDivertida() {
       this.erros = {};
       this.isEditingManha = false;
+      this.matricula = {
+        nome: '',
+        sobrenome: '',
+        idade: '',
+        nome_responsavel: '',
+        nome_pai: '',
+        nome_mae: '',
+        banho_mangueira: true,
+        contato: ''
+      };
       $('#modalManhaDivertida').modal('show');
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ListaManhaDivertida.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ListaManhaDivertida.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'ListaManhaDivertida',
+  data: function data() {
+    return {
+      isRequesting: false,
+      erros: {},
+      matriculados: [],
+      isEditingManha: null,
+      matricula: {
+        nome: '',
+        sobrenome: '',
+        idade: '',
+        nome_responsavel: '',
+        nome_pai: '',
+        nome_mae: '',
+        banho_mangueira: true,
+        contato: ''
+      }
+    };
+  },
+  methods: {
+    getMatriculas: function getMatriculas() {
+      var _this = this;
+
+      this.isRequesting = true;
+      axios.get('/inscricaoManhaDivertida').then(function (res) {
+        _this.isRequesting = false;
+        _this.matriculados = res.data;
+        _this.erros = {};
+      })["catch"](function (err) {
+        _this.isRequesting = false;
+        console.error(err);
+      });
+    },
+    deletar: function deletar(id) {
+      var _this2 = this;
+
+      if (confirm('Deseja deletar esta Inscrição?')) {
+        this.erros = {};
+        this.isRequesting = true;
+        axios["delete"]('/inscricaoManhaDivertida/deletar/' + id).then(function (res) {
+          _this2.isRequesting = false;
+          _this2.matriculados = res.data;
+          _this2.erros = {};
+        })["catch"](function (err) {
+          _this2.isRequesting = false;
+          console.error(err);
+          _this2.erros = {};
+        });
+      }
+    },
+    editarMatricula: function editarMatricula(item) {
+      this.isEditingManha = true;
+      this.erros = {};
+      this.matricula = Object.assign({}, item);
+      $('#modalManhaDivertida').modal('show');
+    },
+    attMatriculas: function attMatriculas(val) {
+      this.matriculados = val;
+    },
+    abrirModalMatricula: function abrirModalMatricula() {
+      this.erros = {};
+      this.isEditingManha = false;
+
+      if (this.matricula != null && this.matricula.hasOwnProperty('id')) {
+        delete this.matricula.id;
+      }
+
+      this.matricula = {
+        nome: '',
+        sobrenome: '',
+        idade: '',
+        nome_responsavel: '',
+        nome_pai: '',
+        nome_mae: '',
+        banho_mangueira: true,
+        contato: ''
+      };
+      $('#modalManhaDivertida').modal('show');
+    },
+    baixarPlanilha: function baixarPlanilha() {
+      var mat = this.matriculados.map(function (val) {
+        return ['' + val.id, val.nome + ' ' + val.sobrenome, val.idade, val.banho_mangueira == false ? 'Nao' : 'Sim', val.idade <= 5 ? val.nome_responsavel : '-', val.contato, val.nome_pai, val.nome_mae];
+      });
+      mat.unshift(['ID', 'Nome', 'Idade', 'Banho de Mangueira?', 'Nome do Responsavel', 'Contato', 'Nome do Pai', 'Nome da Mae']);
+      var csvContent = "data:text/csv;charset=utf-8," + mat.map(function (e) {
+        return e.join(";");
+      }).join("\n");
+      var encodedUri = encodeURI(csvContent);
+      var link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", "Planilha_Manha_Divertida.csv");
+      document.body.appendChild(link);
+      link.click();
+    }
+  },
+  mounted: function mounted() {
+    this.getMatriculas();
   }
 });
 
@@ -2102,7 +2288,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -2348,6 +2533,79 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2377,7 +2635,12 @@ __webpack_require__.r(__webpack_exports__);
       matricula: {
         nome: '',
         sobrenome: '',
-        nascimento: ''
+        idade: '',
+        nome_responsavel: '',
+        nome_pai: '',
+        nome_mae: '',
+        banho_mangueira: true,
+        contato: ''
       }
     };
   },
@@ -2416,7 +2679,7 @@ __webpack_require__.r(__webpack_exports__);
         onError: function onError(err) {
           alert("Houve um erro ao imprimir esta ficha!!! Tente Novamente");
           _this.isPrinting = false;
-          $('#modalMatricula').modal('show');
+          $('#modalManhaDivertida').modal('show');
         }
       });
       this.isPrinting = false;
@@ -2425,26 +2688,31 @@ __webpack_require__.r(__webpack_exports__);
       this.matricula = {
         nome: '',
         sobrenome: '',
-        nascimento: ''
+        idade: '',
+        nome_responsavel: '',
+        nome_pai: '',
+        nome_mae: '',
+        banho_mangueira: true,
+        contato: ''
       };
       this.erros = {};
-      $('#modalMatricula').modal('hide');
+      $('#modalManhaDivertida').modal('hide');
     },
     cadastrar: function cadastrar() {
       var _this2 = this;
 
-      if (confirm('Deseja confirmar a matrícula?')) {
+      if (confirm('Deseja confirmar a inscrição?')) {
         this.isRequesting = true;
         this.erros = {};
-        axios.post('/atualizar', this.matricula).then(function (res) {
+        axios.post('/inscricaoManhaDivertida/atualizar', this.matricula).then(function (res) {
           _this2.isRequesting = false;
           _this2.sucesso = true;
           _this2.erros = {};
-          alert('Matrícula efetuada com sucesso!!!');
-          $('#modalMatricula').modal('hide');
+          alert('Inscrição efetuada com sucesso!!!');
+          $('#modalManhaDivertida').modal('hide');
 
           if (_this2.edicao != null) {
-            _this2.$emit('retornoMatriculas', res.data);
+            _this2.$emit('retornoInscricoesManhaDivertida', res.data);
           }
         })["catch"](function (err) {
           _this2.isRequesting = false;
@@ -39792,7 +40060,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-12 " }, [
+        _c("div", { staticClass: "col-12" }, [
           _c("div", { staticClass: "d-flex justify-content-between" }, [
             _c(
               "p",
@@ -39856,6 +40124,235 @@ var staticRenderFns = [
             }
           })
         ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ListaManhaDivertida.vue?vue&type=template&id=0f033965&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ListaManhaDivertida.vue?vue&type=template&id=0f033965& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "card" }, [
+      _c(
+        "div",
+        { staticClass: "card-header lead d-flex justify-content-between" },
+        [
+          _c("span", { staticClass: "h4" }, [
+            _vm._v("Inscritos na Manhã Divertida")
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "input-group-append" },
+            [
+              _c("matricula-manhaDivertida", {
+                attrs: {
+                  edicao: _vm.matricula,
+                  isEditingManha: _vm.isEditingManha
+                },
+                on: { retornoInscricoesManhaDivertida: _vm.attMatriculas }
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: {
+                    type: "button",
+                    "data-toggle": "tooltip",
+                    "data-placement": "bottom",
+                    title: "Matricular"
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.abrirModalMatricula()
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fas fa-plus fa-lg" })]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-secondary",
+                  staticStyle: { "margin-left": "7px" },
+                  attrs: {
+                    type: "button",
+                    "data-toggle": "tooltip",
+                    "data-placement": "bottom",
+                    title: "Recarregar Matriculados"
+                  },
+                  on: { click: _vm.getMatriculas }
+                },
+                [_c("i", { staticClass: "fas fa-redo fa-lg" })]
+              ),
+              _vm._v(" "),
+              _vm.matriculados.length > 0
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-secondary",
+                      staticStyle: { "margin-left": "7px" },
+                      attrs: {
+                        type: "button",
+                        "data-toggle": "tooltip",
+                        "data-placement": "bottom",
+                        title: "Baixar Planilha de Matriculados"
+                      },
+                      on: { click: _vm.baixarPlanilha }
+                    },
+                    [_c("i", { staticClass: "fas fa-table fa-lg" })]
+                  )
+                : _vm._e()
+            ],
+            1
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _vm.isRequesting == true
+          ? _c("div", { staticClass: "d-flex justify-content-center" }, [
+              _vm._m(0)
+            ])
+          : _vm.matriculados.length > 0
+          ? _c("div", [
+              _c("div", { staticClass: "left col col-12 col-md-12" }, [
+                _c(
+                  "table",
+                  {
+                    staticClass:
+                      "table table-hover table-sm table-responsive-md"
+                  },
+                  [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _vm._l(_vm.matriculados, function(mat, idx) {
+                      return _c("tbody", { key: idx }, [
+                        _c("tr", [
+                          _c("td", [_vm._v(_vm._s(mat.id))]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(_vm._s(mat.nome + " " + mat.sobrenome))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(mat.idade + " anos"))]),
+                          _vm._v(" "),
+                          _c("td", { staticClass: "content-right" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "input-group-append justify-content-right",
+                                attrs: { id: "button-addon4" }
+                              },
+                              [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-outline-secondary",
+                                    staticStyle: { "margin-right": "4px" },
+                                    attrs: {
+                                      type: "button",
+                                      "data-toggle": "tooltip",
+                                      "data-placement": "bottom",
+                                      title: "Editar"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.editarMatricula(mat)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-edit fa-lg"
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-outline-danger",
+                                    attrs: {
+                                      disabled: _vm.isRequesting == true,
+                                      type: "button",
+                                      "data-toggle": "tooltip",
+                                      "data-placement": "bottom",
+                                      title: "Deletar"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.deletar(mat.id)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-trash-alt fa-lg"
+                                    })
+                                  ]
+                                )
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    })
+                  ],
+                  2
+                )
+              ])
+            ])
+          : _c("div", [_c("empty-space")], 1)
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "spinner-border m-5", attrs: { role: "status" } },
+      [_c("span", { staticClass: "sr-only" }, [_vm._v("Carregando...")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-light" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col col-1" } }, [_vm._v("Inscrição")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nome")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Idade")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Ações")])
       ])
     ])
   }
@@ -40210,7 +40707,7 @@ var render = function() {
                           ],
                           staticClass: "form-control form-control-sm",
                           attrs: {
-                            placeholder: "Insira seu Nome",
+                            placeholder: "Insira o Nome da criança",
                             type: "text",
                             required: ""
                           },
@@ -40258,7 +40755,7 @@ var render = function() {
                           ],
                           staticClass: "form-control form-control-sm",
                           attrs: {
-                            placeholder: "Insira seu Sobrenome",
+                            placeholder: "Insira o Sobrenome da criança",
                             type: "text",
                             required: ""
                           },
@@ -40290,11 +40787,403 @@ var render = function() {
                           : _vm._e()
                       ])
                     ])
-                  ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col col-5 col-md-5" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", [_vm._v("Idade da Criança*")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.matricula.idade,
+                              expression: "matricula.idade"
+                            }
+                          ],
+                          staticClass: "form-control form-control-sm",
+                          attrs: {
+                            placeholder: "Insira a Idade da criança",
+                            min: 3,
+                            max: 12,
+                            type: "number",
+                            required: ""
+                          },
+                          domProps: { value: _vm.matricula.idade },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.matricula,
+                                "idade",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.erros.idade
+                          ? _c(
+                              "small",
+                              {
+                                staticClass: "text-danger",
+                                staticStyle: { "font-size": "10px" },
+                                attrs: { hidden: !_vm.erros.idade }
+                              },
+                              [_vm._v(_vm._s(_vm.erros.idade.toString()))]
+                            )
+                          : _vm._e()
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm.matricula.idade <= 5
+                      ? _c("div", { staticClass: "col col-7 col-md-7" }, [
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("label", [_vm._v("Nome do Responsável**")]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.matricula.nome_responsavel,
+                                  expression: "matricula.nome_responsavel"
+                                }
+                              ],
+                              staticClass: "form-control form-control-sm",
+                              attrs: {
+                                placeholder: "Responsável pela criança",
+                                type: "text"
+                              },
+                              domProps: {
+                                value: _vm.matricula.nome_responsavel
+                              },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.matricula,
+                                    "nome_responsavel",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("small", [
+                              _vm._v(
+                                "**Para crianças entre 3 e 5 anos de idade"
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _vm.erros.nome_responsavel
+                              ? _c(
+                                  "small",
+                                  {
+                                    staticClass: "text-danger",
+                                    staticStyle: { "font-size": "10px" },
+                                    attrs: {
+                                      hidden: !_vm.erros.nome_responsavel
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.erros.nome_responsavel.toString()
+                                      )
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
+                          ])
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col col-12 col-md-12" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", [_vm._v("Pai da Criança")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.matricula.nome_pai,
+                              expression: "matricula.nome_pai"
+                            }
+                          ],
+                          staticClass: "form-control form-control-sm",
+                          attrs: {
+                            placeholder: "Insira o nome do pai da criança",
+                            type: "text"
+                          },
+                          domProps: { value: _vm.matricula.nome_pai },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.matricula,
+                                "nome_pai",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.erros.nome_pai
+                          ? _c(
+                              "small",
+                              {
+                                staticClass: "text-danger",
+                                staticStyle: { "font-size": "10px" },
+                                attrs: { hidden: !_vm.erros.nome_pai }
+                              },
+                              [_vm._v(_vm._s(_vm.erros.nome_pai.toString()))]
+                            )
+                          : _vm._e()
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col col-12 col-md-12" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", [_vm._v("Mãe da Criança")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.matricula.nome_mae,
+                              expression: "matricula.nome_mae"
+                            }
+                          ],
+                          staticClass: "form-control form-control-sm",
+                          attrs: {
+                            placeholder: "Insira o nome da mãe da criança",
+                            type: "text"
+                          },
+                          domProps: { value: _vm.matricula.nome_mae },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.matricula,
+                                "nome_mae",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.erros.nome_mae
+                          ? _c(
+                              "small",
+                              {
+                                staticClass: "text-danger",
+                                staticStyle: { "font-size": "10px" },
+                                attrs: { hidden: !_vm.erros.nome_mae }
+                              },
+                              [_vm._v(_vm._s(_vm.erros.nome_mae.toString()))]
+                            )
+                          : _vm._e()
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col col-6 col-md-6" }, [
+                      _c("label", [
+                        _vm._v("A criança pode tomar banho de mangueira? *")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "div",
+                          { staticClass: "form-check form-check-inline" },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.matricula.banho_mangueira,
+                                  expression: "matricula.banho_mangueira"
+                                }
+                              ],
+                              staticClass: "form-check-input",
+                              attrs: { type: "radio", id: "radio_btn_s" },
+                              domProps: {
+                                value: true,
+                                checked: _vm._q(
+                                  _vm.matricula.banho_mangueira,
+                                  true
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(
+                                    _vm.matricula,
+                                    "banho_mangueira",
+                                    true
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "form-check-label",
+                                attrs: { for: "radio_btn_s" }
+                              },
+                              [_vm._v("Sim")]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-check form-check-inline" },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.matricula.banho_mangueira,
+                                  expression: "matricula.banho_mangueira"
+                                }
+                              ],
+                              staticClass: "form-check-input",
+                              attrs: { type: "radio", id: "radio_btn_n" },
+                              domProps: {
+                                value: false,
+                                checked: _vm._q(
+                                  _vm.matricula.banho_mangueira,
+                                  false
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(
+                                    _vm.matricula,
+                                    "banho_mangueira",
+                                    false
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "form-check-label",
+                                attrs: { for: "radio_btn_n" }
+                              },
+                              [_vm._v("Não")]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm.erros.banho_mangueira
+                          ? _c(
+                              "small",
+                              {
+                                staticClass: "text-danger",
+                                staticStyle: { "font-size": "10px" },
+                                attrs: { hidden: !_vm.erros.banho_mangueira }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(_vm.erros.banho_mangueira.toString())
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col col-6 col-md-6" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", [_vm._v("Contato")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.matricula.contato,
+                              expression: "matricula.contato"
+                            },
+                            {
+                              name: "mask",
+                              rawName: "v-mask",
+                              value: ["(##) ####-####", "(##) #####-####"],
+                              expression:
+                                "['(##) ####-####', '(##) #####-####']"
+                            }
+                          ],
+                          staticClass: "form-control form-control-sm",
+                          attrs: {
+                            placeholder: "Insira seu Telefone",
+                            type: "tel",
+                            required: ""
+                          },
+                          domProps: { value: _vm.matricula.contato },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.matricula,
+                                "contato",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.erros.contato
+                          ? _c(
+                              "small",
+                              {
+                                staticClass: "text-danger",
+                                staticStyle: { "font-size": "10px" },
+                                attrs: { hidden: !_vm.erros.contato }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                        " +
+                                    _vm._s(_vm.erros.contato.toString()) +
+                                    "\n                                    "
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(0)
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(0),
+              _vm._m(1),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
                 _c(
@@ -40347,8 +41236,20 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12 text-left" }, [
+        _c("p", { staticClass: "bd-lead" }, [
+          _vm._v("Trazer muda de roupa e toalha!")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col col-12 col-md-12" }, [
-        _c("div", { staticStyle: { "margin-right": "15px" } }, [
+        _c("div", { staticStyle: { "margin-right": "13px" } }, [
           _c("p", { staticClass: "small text-danger" }, [
             _vm._v("*Obrigatório!")
           ])
@@ -53801,8 +54702,9 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 Vue.component('empty-space', __webpack_require__(/*! ./components/EmptySpace.vue */ "./resources/js/components/EmptySpace.vue")["default"]);
 Vue.component('home-page', __webpack_require__(/*! ./components/HomePage.vue */ "./resources/js/components/HomePage.vue")["default"]);
 Vue.component('matricula-page', __webpack_require__(/*! ./components/MatriculaPage.vue */ "./resources/js/components/MatriculaPage.vue")["default"]);
-Vue.component('matricula-manhaDivertida', __webpack_require__(/*! ./components/MatriculaManhaDivertida.vue */ "./resources/js/components/MatriculaManhaDivertida.vue")["default"]);
 Vue.component('lista-matriculados', __webpack_require__(/*! ./components/ListaMatriculados.vue */ "./resources/js/components/ListaMatriculados.vue")["default"]);
+Vue.component('matricula-manhaDivertida', __webpack_require__(/*! ./components/MatriculaManhaDivertida.vue */ "./resources/js/components/MatriculaManhaDivertida.vue")["default"]);
+Vue.component('lista-manha-divertida', __webpack_require__(/*! ./components/ListaManhaDivertida.vue */ "./resources/js/components/ListaManhaDivertida.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -53993,6 +54895,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HomePage_vue_vue_type_template_id_fa44bb0e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HomePage_vue_vue_type_template_id_fa44bb0e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ListaManhaDivertida.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/ListaManhaDivertida.vue ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ListaManhaDivertida_vue_vue_type_template_id_0f033965___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ListaManhaDivertida.vue?vue&type=template&id=0f033965& */ "./resources/js/components/ListaManhaDivertida.vue?vue&type=template&id=0f033965&");
+/* harmony import */ var _ListaManhaDivertida_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ListaManhaDivertida.vue?vue&type=script&lang=js& */ "./resources/js/components/ListaManhaDivertida.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ListaManhaDivertida_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ListaManhaDivertida_vue_vue_type_template_id_0f033965___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ListaManhaDivertida_vue_vue_type_template_id_0f033965___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ListaManhaDivertida.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ListaManhaDivertida.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/ListaManhaDivertida.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ListaManhaDivertida_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ListaManhaDivertida.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ListaManhaDivertida.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ListaManhaDivertida_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ListaManhaDivertida.vue?vue&type=template&id=0f033965&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/ListaManhaDivertida.vue?vue&type=template&id=0f033965& ***!
+  \****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListaManhaDivertida_vue_vue_type_template_id_0f033965___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ListaManhaDivertida.vue?vue&type=template&id=0f033965& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ListaManhaDivertida.vue?vue&type=template&id=0f033965&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListaManhaDivertida_vue_vue_type_template_id_0f033965___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListaManhaDivertida_vue_vue_type_template_id_0f033965___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

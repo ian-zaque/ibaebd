@@ -35,7 +35,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        @guest
+                            @if (Route::has('register'))
+                                <p></p>
+                            @endif
+                            @else
+                                <a class="nav-link" href="{{ url('/manha_divertida') }}">Manhã Divertida</a>
+                                <a class="nav-link" href="{{ url('/ebd') }}">EBD Discipuladora</a>
+                        @endguest
                     </ul>
 
                     <!-- Right Side Of Navbar -->

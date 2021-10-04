@@ -28,7 +28,7 @@
 
                 <div class="container">
                     <div class="row">
-                        <div class="col-12 ">
+                        <div class="col-12">
                             <div class="d-flex justify-content-between">
                                 <p class="bd-lead" style="font-size:30px;">Dia: 16 de Outubro</p>
                                 <p class="bd-lead" style="font-size:30px;">Horário: 08:30 às 12:30</p>
@@ -104,6 +104,9 @@ export default {
 
         abrirModalManhaDivertida(){
             this.erros={}; this.isEditingManha= false;
+            this.matricula = {
+               nome:'', sobrenome:'', idade:'', nome_responsavel:'', nome_pai:'', nome_mae:'', banho_mangueira:true, contato:'',
+            }
             $('#modalManhaDivertida').modal('show');
         },
     },

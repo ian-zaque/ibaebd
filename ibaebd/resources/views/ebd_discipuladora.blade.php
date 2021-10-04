@@ -7,7 +7,7 @@
                 @guest
                     <home-page></home-page>
                 @else
-                    <lista-manhaDivertida></lista-manhaDivertida>
+                    <lista-matriculados></lista-matriculados>
                 @endguest
             </div>
         </div>

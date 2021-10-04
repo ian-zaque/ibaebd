@@ -21,10 +21,14 @@ window.Vue = require('vue');
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('empty-space',require('./components/EmptySpace.vue').default);
+
 Vue.component('home-page',require('./components/HomePage.vue').default);
+
 Vue.component('matricula-page',require('./components/MatriculaPage.vue').default);
-Vue.component('matricula-manhaDivertida',require('./components/MatriculaManhaDivertida.vue').default);
 Vue.component('lista-matriculados',require('./components/ListaMatriculados.vue').default);
+
+Vue.component('matricula-manhaDivertida',require('./components/MatriculaManhaDivertida.vue').default);
+Vue.component('lista-manha-divertida',require('./components/ListaManhaDivertida.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

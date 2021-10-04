@@ -17,21 +17,18 @@ class UserSeeder extends Seeder
             'name' => 'Secretaria IBA',
             'email' => 'ibalvorada1242@gmail.com',
             'password' => Hash::make('secibajo316'),
-
         ]);
 
         DB::table('users')->insert([
             'name' => 'MEC IBA',
             'email' => 'cidaeleli88@outlook.com',
             'password' => Hash::make('mecibajo316'),
-
         ]);
 
         DB::table('users')->insert([
             'name' => 'admin',
             'email' => 'admin@admin.com',
             'password' => Hash::make('admingn11'),
-
         ]);
 
     }
