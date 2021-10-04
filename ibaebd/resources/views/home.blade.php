@@ -4,11 +4,11 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col">
-                @guest
+                {{-- @guest --}}
                     <home-page></home-page>
-                @else
+                {{-- @else
                     <lista-manhaDivertida></lista-manhaDivertida>
-                @endguest
+                @endguest --}}
             </div>
         </div>
     </div>

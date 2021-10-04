@@ -45,6 +45,10 @@ class InscricaoManhaDivertidaController extends Controller
 
         ],$msgsErros, $atributos);
 
+        $validator->sometimes('nome_responsavel', 'required', function($dados){
+            return $dados['idade'] >= 3 && $dados['idade'] <= 5;
+        });
+
         if ($validator->fails()){ return response()->json($validator->errors(), 403); }
         else{
             $dadosMat = [

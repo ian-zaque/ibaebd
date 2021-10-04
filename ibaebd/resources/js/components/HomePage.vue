@@ -48,7 +48,8 @@
 
                     <div class="row">
                         <div class="col">
-                            <img src="imagens/logo_iba.png" style="margin-bottom:15px;" width="120px" height="170px" class="img-fluid float-center">
+                            <img src="imagens/logo_iba.png" style="margin-bottom:15px;" width="120px" height="170px" class="img-fluid float-left">
+                            <img src="imagens/criancas_brincando.jpg" style="margin-bottom:15px;" width="120px" height="170px" class="img-fluid float-right">
                         </div>
                     </div>
                 </div>
