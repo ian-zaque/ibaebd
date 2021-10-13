@@ -3732,7 +3732,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }), _defineProperty(_watch, "edicao", function edicao(val) {
     if (val != null && val != {}) {
-      this.matricula = Object.assign({}, val);
+      this.matricula = JSON.parse(JSON.stringify(val));
     }
   }), _watch),
   computed: {
@@ -3740,7 +3740,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.isEditingCasais;
     },
     matriculaClone: function matriculaClone() {
-      this.matricula = Object.assign({}, this.edicao);
+      console.log('asdasdasd');
+      this.matricula = JSON.parse(JSON.stringify(this.edicao));
       return 'foi';
     }
   },

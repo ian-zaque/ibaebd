@@ -277,7 +277,7 @@ export default {
         },
         edicao(val){
             if(val!=null && val!={}){
-                this.matricula=Object.assign({},val);
+                this.matricula= JSON.parse(JSON.stringify(val));
             }
         },
     },
@@ -285,7 +285,8 @@ export default {
     computed:{
         editando(){ return this.isEditingCasais; },
         matriculaClone(){ 
-            this.matricula=Object.assign({},this.edicao); return 'foi';
+            console.log('asdasdasd')
+            this.matricula= JSON.parse(JSON.stringify(this.edicao)); return 'foi';
         }
     },
 
