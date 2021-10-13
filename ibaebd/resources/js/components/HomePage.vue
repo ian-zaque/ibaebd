@@ -5,13 +5,12 @@
             <p class="card-text" style="font-size:15px;">Feira de Santana - Bahia</p>
         </div>
 
-         <div v-if="showEbdDiscipuladora" class="card text-center" style="border-radius:15px; margin-bottom:8px;">
+        <div v-if="showEbdDiscipuladora" class="card text-center" style="border-radius:15px; margin-bottom:8px;">
             <div class="card-body">                
                 <p class="card-text " style="font-size:35px;">EBDiscipuladora</p>
 
                 <div class="container">
-                    <img src="imagens/logo_iba.png" style="margin-bottom:15px;" width="120px" height="170px" class="img-fluid float-left">
-                    <img src="imagens/logo_ebd.jpg" style="margin-top:10px; margin-right:-20px;" width="170px" height="220px" class="img-fluid float-right">
+                    <img src="imagens/logo_ebd.jpg" style="margin-top:10px; margin-right:-20px;" width="170px" height="220px" class="img-fluid float-center">
                 </div>
                 
                 <div class="d-grid gap-2">
@@ -22,7 +21,7 @@
             </div>
         </div>
 
-        <div v-if="showManhaDivertida" class="card text-center" style="border-radius:15px;">
+        <div v-if="showManhaDivertida" class="card text-center" style="border-radius:15px; margin-bottom:8px;">
             <div class="card-body">
                 <p class="card-text" style="font-size:55px; color:#fc8618; font-family:fantasy;">Manhã Divertida!</p>
 
@@ -48,8 +47,7 @@
 
                     <div class="row">
                         <div class="col">
-                            <img src="imagens/logo_iba.png" style="margin-bottom:15px;" width="120px" height="170px" class="img-fluid float-left">
-                            <img src="imagens/criancas_brincando.jpg" style="margin-bottom:15px;" width="120px" height="170px" class="img-fluid float-right">
+                            <img src="imagens/criancas_brincando.jpg" style="margin-bottom:15px;" width="120px" height="170px" class="img-fluid float-center">
                         </div>
                     </div>
                 </div>
@@ -63,9 +61,26 @@
             </div>
         </div>
 
+        <div v-if="showSoPraCasais" class="card text-center" style="border-radius:15px; margin-bottom:8px;">
+            <img src="imagens/so_pra_casais.jpeg" class="card-img">
+            <div class="card-img-overlay d-flex align-items-end">
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary btn-block" @click="abrirModalSoPraCasais()" id="btn_casais" style="font-size:30px;" type="button">
+                        Inscreva-se!
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <!--  MODAL MATRICULA EBD DISCIPULADORA -->
         <matricula-page :isEditing="isEditing"></matricula-page>
+
+        <!--  MODAL MANHA DIVERTIDA -->
         <matricula-manhaDivertida :isEditingManha="isEditingManha"></matricula-manhaDivertida>
+
+        <!--  MODAL SO PRA CASAIS  -->
+        <matricula-casais :isEditingCasais="isEditingCasais"> </matricula-casais>
+
     </div>
 </template>
 <script>
@@ -78,7 +93,7 @@ export default {
 
     data() {
         return {
-            erros:{}, isEditing:null, isEditingManha:null,
+            erros:{}, isEditing:null, isEditingManha:null, isEditingCasais:null,
             matricula:{
                 nome:'', sobrenome:'', nascimento:'',
                 // cpf:'', rg:'', orgao_emissor:'', uf:'',
@@ -86,7 +101,7 @@ export default {
                 telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:''},
             },
 
-            showManhaDivertida:true, showEbdDiscipuladora:false,
+            showManhaDivertida:true, showEbdDiscipuladora:false, showSoPraCasais: true,
         }
     },
 
@@ -109,6 +124,20 @@ export default {
                nome:'', sobrenome:'', idade:'', nome_responsavel:'', nome_pai:'', nome_mae:'', banho_mangueira:true, contato:'',
             }
             $('#modalManhaDivertida').modal('show');
+        },
+
+        abrirModalSoPraCasais(){
+            this.erros={}; this.isEditingCasais= false;
+            this.matricula = {
+               esposo:{
+                    nome:'', sobrenome:'', igreja:'', telefone:'', nascimento:'', membresia :'',
+                },
+                esposa:{
+                    nome:'', sobrenome:'', igreja:'', telefone:'', nascimento:'', membresia :'',
+                },
+                logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:'',
+            }
+            $('#modalSoPraCasais').modal('show');
         },
     },
 
