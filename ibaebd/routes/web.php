@@ -21,7 +21,7 @@ Route::get('/ebd', function () { return view('ebd_discipuladora'); });
 
 Route::get('/manha_divertida', function () { return view('manha_divertida'); });
 
-Route::get('/socasais', function () { return view('casais'); });
+Route::get('/socasais', function () { return view('casais');});
 
 Auth::routes();
 
