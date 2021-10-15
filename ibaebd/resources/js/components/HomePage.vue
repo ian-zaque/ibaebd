@@ -63,9 +63,10 @@
 
         <div v-if="showSoPraCasais" class="card text-center" style="border-radius:15px; margin-bottom:8px;">
             <img src="imagens/so_pra_casais.jpeg" class="card-img">
-            <div class="card-img-overlay d-flex align-items-end">
-                <div class="d-grid gap-2">
-                    <button class="btn btn-primary btn-block" @click="abrirModalSoPraCasais()" id="btn_casais" style="font-size:30px;" type="button">
+            <div class="card-img-overlay d-flex justify-content-center align-items-end">
+                <div class="container">
+                    <button class="btn btn-primary btn-block" @click="abrirModalSoPraCasais()" style="font-size:15px;" 
+                        id="btn_casais" type="button">
                         Inscreva-se!
                     </button>
                 </div>
