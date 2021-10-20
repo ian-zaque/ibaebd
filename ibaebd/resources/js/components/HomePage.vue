@@ -102,7 +102,7 @@ export default {
                 telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:''},
             },
 
-            showManhaDivertida:true, showEbdDiscipuladora:false, showSoPraCasais: true,
+            showManhaDivertida:false, showEbdDiscipuladora:false, showSoPraCasais: true,
         }
     },
 

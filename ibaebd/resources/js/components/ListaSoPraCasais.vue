@@ -82,7 +82,7 @@ export default {
         deletar(id){
             if(confirm('Deseja deletar esta Inscrição?')){
                 this.erros={}; this.isRequesting=true;
-                axios.delete('/deletar/'+id)
+                axios.delete('/casais/deletar/'+id)
                     .then(res=>{ this.isRequesting=false; this.matriculados=res.data; this.erros={}; })
                     .catch(err=>{ this.isRequesting=false; console.error(err); this.erros={}; })
             }

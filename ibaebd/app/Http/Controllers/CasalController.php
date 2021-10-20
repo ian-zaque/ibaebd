@@ -101,7 +101,10 @@ class CasalController extends Controller
     }
 
     public function deletar($id){
-        Casal::find($id)->delete();
+        $casal = Casal::find($id);
+        Esposo::find($casal->esposo_id)->delete();
+        Esposa::find($casal->esposa_id)->delete();
+        $casal->delete();
         return $this->getCasais();
     }
 

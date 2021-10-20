@@ -297,7 +297,7 @@ export default {
                     .then(res=>{
                         this.isRequesting=false; this.erros={};
                         this.matricula.logradouro = res.data.logradouro;
-                        this.matricula.complemento = res.data.complemento;
+                        // this.matricula.complemento = res.data.complemento;
                         this.matricula.bairro = res.data.bairro;
                         this.matricula.cidade = res.data.localidade;
                     })
