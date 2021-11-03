@@ -2,7 +2,7 @@
     <div>
         <div class="card">
             <div class="card-header lead d-flex justify-content-between">
-                <span class="h4">Lista Só Pra Casais</span>
+                <span class="h4">Lista Só Pra Casais - {{ matriculados.length > 0 ? matriculados.length + ' casais matriculados' : '' }}</span>
 				<div class="input-group-append">
                     <matricula-casais :edicao="matricula" :isEditingCasais="isEditingCasais" @retornoInscricoesSoPraCasais="attInscricoes">
                     </matricula-casais>
