@@ -143,7 +143,8 @@ export default {
                 'Data de Casamento', 'Qtd. FIlhos', 
                 'Endereco', 'Cidade', 'CEP', 'Complemento',
             ]);
-            let csvContent = "data:text/csv;charset=utf-8,"  + mat.map(e => e.join(";")).join("\n");
+            var universalBOM = "\uFEFF";
+            let csvContent = "data:text/csv;charset=utf-8,"  + universalBOM+ mat.map(e => e.join(";")).join("\n");
             var encodedUri = encodeURI(csvContent);
             var link = document.createElement("a");
             link.setAttribute("href", encodedUri);
