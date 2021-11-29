@@ -73,6 +73,22 @@
             </div>
         </div>
 
+        <div v-if="showCafeComunhao" class="card text-center" style="border-radius:15px; margin-bottom:8px;">
+            <div class="card-body">                
+                <!-- <p class="card-text " style="font-size:35px;">Café e Comunhão</p> -->
+
+                <div class="container">
+                    <img src="imagens/cafeComunhao_large.jpeg" style="margin-bottom:8px;" class="img-fluid float-center">
+                </div>
+                
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary btn-block" @click="abrirModalCafeComunhao()" id="btn_matricula" style="font-size:30px;" type="button">
+                        Faça sua doação!
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <!--  MODAL MATRICULA EBD DISCIPULADORA -->
         <matricula-page :isEditing="isEditing"></matricula-page>
 
@@ -81,6 +97,9 @@
 
         <!--  MODAL SO PRA CASAIS  -->
         <matricula-casais :isEditingCasais="isEditingCasais"> </matricula-casais>
+
+        <!--  MODAL CAFE & COMUNHAO  -->
+        <matricula-cafeComunhao :isEditingCafeComunhao="isEditingCafeComunhao"> </matricula-cafeComunhao>
 
     </div>
 </template>
@@ -94,7 +113,7 @@ export default {
 
     data() {
         return {
-            erros:{}, isEditing:null, isEditingManha:null, isEditingCasais:null,
+            erros:{}, isEditing:null, isEditingManha:null, isEditingCasais:null, isEditingCafeComunhao:null,
             matricula:{
                 nome:'', sobrenome:'', nascimento:'',
                 // cpf:'', rg:'', orgao_emissor:'', uf:'',
@@ -102,7 +121,7 @@ export default {
                 telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:''},
             },
 
-            showManhaDivertida:false, showEbdDiscipuladora:false, showSoPraCasais: true,
+            showManhaDivertida:false, showEbdDiscipuladora:false, showSoPraCasais: false, showCafeComunhao: true,
         }
     },
 
@@ -140,6 +159,15 @@ export default {
             }
             $('#modalSoPraCasais').modal('show');
         },
+
+        abrirModalCafeComunhao(){
+            this.erros={}; this.isEditingCafeComunhao = false;
+            this.matricula = {
+               nome: '', sobrenome: '', contato:'', qtd_participantes: null, payment: null, valor:null, doacoes: new Array(8).fill(false),
+            }
+            $('#modalCafeComunhao').modal('show');
+        },
+
     },
 
 }

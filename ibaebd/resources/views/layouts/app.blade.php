@@ -41,9 +41,10 @@
                                 <p></p>
                             @endif
                             @else
-                                <a class="nav-link" href="{{ url('/manha_divertida') }}">Manhã Divertida</a>
+                                {{-- <a class="nav-link" href="{{ url('/manha_divertida') }}">Manhã Divertida</a>
                                 <a class="nav-link" href="{{ url('/socasais') }}">Só Pra Casais</a>
-                                <a class="nav-link" href="{{ url('/ebd') }}">EBD Discipuladora</a>
+                                <a class="nav-link" href="{{ url('/ebd') }}">EBD Discipuladora</a> --}}
+                                <a class="nav-link" href="{{ url('/cafe_comunhao') }}">Café & Comunhão</a>
                         @endguest
                     </ul>
 

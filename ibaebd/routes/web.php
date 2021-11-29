@@ -23,11 +23,14 @@ Route::get('/manha_divertida', function () { return view('manha_divertida'); });
 
 Route::get('/socasais', function () { return view('casais');});
 
+Route::get('/cafe_comunhao', function () { return view('cafeComunhao');});
+
 Auth::routes();
 
 Route::post('/atualizar','MatriculaController@atualizar');
 Route::post('/inscricaoManhaDivertida/atualizar','InscricaoManhaDivertidaController@atualizar');
 Route::post('/casais/atualizar','CasalController@atualizar');
+Route::post('/cafeComunhao/atualizar','CafeComunhaoController@store');
 
 Route::group(['middleware'=>'auth'],function(){
     Route::get('/getMatriculas','MatriculaController@getMatriculas')->middleware('verified');
@@ -52,4 +55,9 @@ Route::group(['middleware'=>'auth'],function(){
 Route::group(['middleware'=>'auth'],function(){
     Route::get('/casais','CasalController@getCasais')->middleware('verified');
     Route::delete('/casais/deletar/{id}','CasalController@deletar');
+});
+
+Route::group(['middleware'=>'auth'],function(){
+    Route::get('/cafeComunhao','CafeComunhaoController@getCafeComunhaos')->middleware('verified');
+    Route::delete('/cafeComunhao/deletar/{id}','CafeComunhaoController@deletar');
 });

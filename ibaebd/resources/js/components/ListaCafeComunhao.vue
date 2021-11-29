@@ -2,11 +2,10 @@
     <div>
         <div class="card">
             <div class="card-header lead d-flex justify-content-between">
-                <span class="h4">Inscritos na Manhã Divertida</span>
+                <span class="h4">Lista do Café & Comunhão</span>
 				<div class="input-group-append">
-                    <matricula-manhaDivertida :edicao="matricula" :isEditingManha="isEditingManha" 
-                        @retornoInscricoesManhaDivertida="attMatriculas">
-                    </matricula-manhaDivertida>
+                    <matricula-cafeComunhao :edicao="matricula" :isEditing="isEditing" @retornoCadastrosCafeComunhao="attMatriculas">
+                    </matricula-cafeComunhao>
 
 					<button @click="abrirModalMatricula()" class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="bottom" title="Matricular">
 						<i class="fas fa-plus fa-lg"></i>
@@ -26,21 +25,19 @@
 					</div>
 				</div>
 				<div v-else-if="matriculados.length > 0">
-					<div class="col col-12 col-md-12">
-						<table class="table table-hover table-sm">
+					<div class="left col col-12 col-md-12">
+						<table class="table table-hover table-responsive-md">
 							<thead class="thead-light">
 								<tr>
-									<th scope="col col-1">Inscrição</th>
+									<th scope="col col-1">ID</th>
 									<th scope="col">Nome</th>
-									<th scope="col">Idade</th>
 									<th scope="col">Ações</th>
 								</tr>
 							</thead>
 							<tbody v-for="(mat, idx) in matriculados" :key="idx">
 								<tr>
 									<td>{{mat.id}}</td>
-                                    <td>{{mat.nome + ' ' + mat.sobrenome}}</td>
-                                    <td>{{mat.idade + ' anos'}}</td>
+									<td>{{mat.nome + ' ' + mat.sobrenome}}</td>
 									<td class="content-right">
 										<div class="input-group-append justify-content-right" id="button-addon4">
 											<button @click="editarMatricula(mat)" type="button" style="margin-right:4px;" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Editar">
@@ -64,72 +61,71 @@
 
 <script>
 export default {
-    name:'ListaManhaDivertida',
+    name:'ListaCafeComunhao',
 
     data() {
         return {
-            isRequesting:false, erros:{}, matriculados:[], isEditingManha:null,
-            matricula:{
-                nome:'', sobrenome:'', idade:'', nome_responsavel:'', nome_pai:'', nome_mae:'', banho_mangueira:true, contato:'',
-            },
+            isRequesting:false, erros:{}, matriculados:[], matricula:null, isEditing:null,
+            opcoesDoacao:[
+                'Bolo', 'Queijo', 'Presunto', 'Banana da Terra', 'Suco', 'Frutas', 'Pão de Queijo',
+            ],
         }
     },
 
     methods:{
         getMatriculas(){
             this.isRequesting=true;
-            axios.get('/inscricaoManhaDivertida')
+            axios.get('/cafeComunhao')
                 .then(res=>{ this.isRequesting=false; this.matriculados=res.data; this.erros={}; })
                 .catch(err=>{ this.isRequesting=false; console.error(err); })
         },
 
         deletar(id){
-            if(confirm('Deseja deletar esta Inscrição?')){
+            if(confirm('Deseja deletar esta Matrícula?')){
                 this.erros={}; this.isRequesting=true;
-                axios.delete('/inscricaoManhaDivertida/deletar/'+id)
+                axios.delete('/cafeComunhao/deletar/'+id)
                     .then(res=>{ this.isRequesting=false; this.matriculados=res.data; this.erros={}; })
                     .catch(err=>{ this.isRequesting=false; console.error(err); this.erros={}; })
             }
         },
 
-        editarMatricula(item){ 
-            this.isEditingManha=true; this.erros={}; this.matricula = Object.assign({},item); 
-            $('#modalManhaDivertida').modal('show');
-        },
+        editarMatricula(item){ this.isEditing=true; this.erros={}; this.matricula = Object.assign({},item);  $('#modalCafeComunhao').modal('show'); },
 
-        attMatriculas(val){ this.matriculados = val; },
+        attMatriculas(val){ this.matriculados = val; this.isRequesting=false; },
 
         abrirModalMatricula(){
-            this.erros={}; this.isEditingManha=false;
+            this.erros={}; this.isEditing=false;
             if(this.matricula!=null && this.matricula.hasOwnProperty('id')){ delete this.matricula.id; }
             this.matricula={
-               nome:'', sobrenome:'', idade:'', nome_responsavel:'', nome_pai:'', nome_mae:'', banho_mangueira:true, contato:'',
+                nome: '', sobrenome: '', contato:'', qtd_participantes: null, payment: null, valor:null, doacoes:new Array(7).fill(false),
             };
-            $('#modalManhaDivertida').modal('show');
+            $('#modalCafeComunhao').modal('show');
         },
 
         baixarPlanilha(){
+            var vm = this
             var mat = this.matriculados.map(function(val){
                 return [
                     ''+val.id, 
-                    val.nome+' '+val.sobrenome,
-                    val.idade,
-                    val.banho_mangueira ==false?'Nao':'Sim',
-                    val.idade <= 5? val.nome_responsavel :'-',
+                    val.nome+' '+val.sobrenome, 
                     val.contato,
-                    val.nome_pai,
-                    val.nome_mae,    
+                    val.qtd_participantes,
+                    val.payment,
+                    val.valor,
+                    vm.opcoesDoacao.filter(function(v,idx){ if(val.doacoes[idx] == true){ return v } }).filter(function(item,i){ return item != undefined })
                 ];
             });
 
             mat.unshift([
-               'ID', 'Nome', 'Idade', 'Banho de Mangueira?', 'Nome do Responsavel', 'Contato', 'Nome do Pai', 'Nome da Mae',
+                'ID','Nome','Contato', 'Qtd. de Participantes','Forma de Doação','Valor de Doação','Opções de Doações',
             ]);
-            let csvContent = "data:text/csv;charset=utf-8,"  + mat.map(e => e.join(";")).join("\n");
+
+            var universalBOM = "\uFEFF";
+            let csvContent = "data:text/csv;charset=utf-8,"  + universalBOM+ mat.map(e => e.join(";")).join("\n");
             var encodedUri = encodeURI(csvContent);
             var link = document.createElement("a");
             link.setAttribute("href", encodedUri);
-            link.setAttribute("download", "Planilha_Manha_Divertida.csv");
+            link.setAttribute("download", "Planilha_Cafe_Comunhao.csv");
             document.body.appendChild(link);
 
             link.click();
