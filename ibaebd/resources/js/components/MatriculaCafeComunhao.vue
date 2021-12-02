@@ -27,6 +27,14 @@
                         <p class="card-text">Em Espécie - 2ª à 6ª na Secretaria da IBA ou domingo no estacionamento</p>
                     </div>
 
+                    <div class="card-body text-center">
+                        <div class="col col-12 col-md-12">
+                            <div class="form-group">
+                                <video width="60%" height="100%" src="videos/cafe_comunhao_info.mp4" controls> </video>
+                            </div>
+                        </div>
+                    </div>
+
                     <form action="#" id="corpo_modal">
 						<div class="row">
 							<div class="col col-6 col-md-6">
@@ -104,18 +112,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col col-6 col-md-6">
-                                <div class="form-group">
-                                    <video width="360" height="280" src="videos/cafe_comunhao_info.mp4" controls> </video>
-                                </div>
-                            </div>
                         </div>
 
                     </form>
                     </div>
 
                     <div class="row">
-                        <div class="col col-12 col-md-12">
+                        <div class="col col-12">
                             <div style="margin-right:13px;">
                                 <p class="small text-danger">*Obrigatório!</p>
                             </div>

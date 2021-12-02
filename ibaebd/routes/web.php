@@ -33,6 +33,7 @@ Route::post('/casais/atualizar','CasalController@atualizar');
 Route::post('/cafeComunhao/atualizar','CafeComunhaoController@store');
 
 Route::group(['middleware'=>'auth'],function(){
+    Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
     Route::get('/getMatriculas','MatriculaController@getMatriculas')->middleware('verified');
     Route::delete('/deletar/{id}','MatriculaController@deletar');
 });
