@@ -93,7 +93,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col col-12 col-md-12">
+                            <div class="col col-6 col-md-6">
                                 <div class="form-group">
                                     <label>Opções de Doação</label>
                                     <div v-for="(option, idx) in opcoesDoacao" :key="idx" class="form-check">
@@ -102,6 +102,11 @@
                                             {{ option.name + ' - ' + 'R$' + option.value }}
                                         </label>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col col-6 col-md-6">
+                                <div class="form-group">
+                                    <video width="360" height="280" src="videos/cafe_comunhao_info.mp4" controls> </video>
                                 </div>
                             </div>
                         </div>
