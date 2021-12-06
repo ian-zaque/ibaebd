@@ -2,7 +2,7 @@
     <div>
         <div class="card">
             <div class="card-header lead d-flex justify-content-between">
-                <span class="h4">Lista do Café & Comunhão</span>
+                <span class="h4">Lista do Café & Comunhão {{ matriculados.length > 0 ? '- ' + matriculados.length +  ' doações' : '' }}</span>
 				<div class="input-group-append">
                     <matricula-cafeComunhao :edicao="matricula" :isEditing="isEditing" @retornoCadastrosCafeComunhao="attMatriculas">
                     </matricula-cafeComunhao>
@@ -110,7 +110,7 @@ export default {
                     val.nome+' '+val.sobrenome, 
                     val.contato,
                     val.qtd_participantes,
-                    val.payment,
+                    val.payment == false ? 'Espécie' : 'Pix',
                     val.valor,
                     vm.opcoesDoacao.filter(function(v,idx){ if(val.doacoes[idx] == true){ return v } }).filter(function(item,i){ return item != undefined })
                 ];
@@ -125,7 +125,7 @@ export default {
             var encodedUri = encodeURI(csvContent);
             var link = document.createElement("a");
             link.setAttribute("href", encodedUri);
-            link.setAttribute("download", "Planilha_Cafe_Comunhao.csv");
+            link.setAttribute("download", "Planilha_Cafe_Comunhao.xls");
             document.body.appendChild(link);
 
             link.click();
