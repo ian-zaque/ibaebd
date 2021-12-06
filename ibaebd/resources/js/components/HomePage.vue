@@ -81,6 +81,9 @@
                     <img src="imagens/cafeComunhao_large.jpeg" style="margin-bottom:8px;" class="img-fluid float-center">
                 </div>
                 
+                <p class="card-text">Pix do valor - <b> 157.967.105-59 </b> (Edvaldo Barbosa Costa) </p>
+                <p class="card-text">Em Espécie - 2ª à 6ª na Secretaria da IBA ou domingo no estacionamento</p>
+
                 <div class="d-grid gap-2">
                     <button class="btn btn-primary btn-block" @click="abrirModalCafeComunhao()" id="btn_matricula" style="font-size:30px;" type="button">
                         Faça sua doação!
