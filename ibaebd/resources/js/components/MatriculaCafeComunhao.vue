@@ -212,19 +212,21 @@ export default {
                 axios.post('/cafeComunhao/atualizar',this.matricula)
                     .then(res=>{
                         this.isRequesting=false; this.sucesso=true; this.erros={};
+
+                        $('#modalCafeComunhao').modal('hide');
                         alert('Cadastro efetuado com sucesso!!!');
 
                         // PIX
                         if(this.matricula.payment == true || this.matricula.payment == 1){
-                            alert("Lembre-se de realizar o PIX no valor de R$"+ this.matricula.valor.toFixed(2)) 
+                            alert("Lembre-se de realizar o PIX no valor de R$"+ this.matricula.valor)
                         }
 
-                        $('#modalCafeComunhao').modal('hide');
                         this.matricula = {
                             nome: '', sobrenome: '', contato:'', qtd_participantes: null, payment: null, valor:null, doacoes: new Array(7).fill(false),
                         }
 
-                        if(this.edicao!=null){
+                        if(this.isEditingCafeComunhao!=null && this.isEditingCafeComunhao == true){
+                            console.log("asdasdasd",res)
                             this.$emit('retornoCadastrosCafeComunhao', res.data); 
                         }
                     })

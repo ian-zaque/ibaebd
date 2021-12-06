@@ -4,7 +4,7 @@
             <div class="card-header lead d-flex justify-content-between">
                 <span class="h4">Lista do Café & Comunhão {{ matriculados.length > 0 ? '- ' + matriculados.length +  ' doações' : '' }}</span>
 				<div class="input-group-append">
-                    <matricula-cafeComunhao :edicao="matricula" :isEditing="isEditing" @retornoCadastrosCafeComunhao="attMatriculas">
+                    <matricula-cafeComunhao :isEditingCafeComunhao="isEditing" :edicao="matricula" @retornoCadastrosCafeComunhao="attMatriculas">
                     </matricula-cafeComunhao>
 
 					<button @click="abrirModalMatricula()" class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="bottom" title="Matricular">
