@@ -124,7 +124,7 @@ export default {
                 telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:''},
             },
 
-            showManhaDivertida:false, showEbdDiscipuladora:false, showSoPraCasais: true, showCafeComunhao: false,
+            showManhaDivertida:false, showEbdDiscipuladora:true, showSoPraCasais: false, showCafeComunhao: false,
         }
     },
 
