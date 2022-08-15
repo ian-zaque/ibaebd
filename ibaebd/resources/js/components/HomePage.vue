@@ -92,17 +92,51 @@
             </div>
         </div>
 
+        <div v-if="showEbdMusicos" class="card text-center" style="border-radius:15px; margin-bottom:8px;">
+            <div class="card-body">
+                <p class="card-text" style="font-size:55px;">Classe de EBD para músicos</p>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center">
+                                <p class="bd-lead" style="font-size:30px;">Período: Semestral (8 encontros em 2 meses)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top:8px;">
+                        <div class="col-12">
+                            <p class="d-flex justify-content-center" style="font-size:18px;">
+                                A IGREJA BATISTA ALVORADA através de um trabalho conjunto entre o Ministério de Música e Adoração e 
+                                o Ministério de Educação Cristã, lançarão a CLASSE de EBD PARA MÚSICOS
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary btn-block" id="btn_manha" type="button" @click="abrirModalEbdMusicos()" style="font-size:35px;">
+                        Inscrição aqui!
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <!--  MODAL MATRICULA EBD DISCIPULADORA -->
-        <matricula-page :isEditing="isEditing"></matricula-page>
+        <!-- <matricula-page :isEditing="isEditing"></matricula-page> -->
 
         <!--  MODAL MANHA DIVERTIDA -->
-        <matricula-manhaDivertida :isEditingManha="isEditingManha"></matricula-manhaDivertida>
+        <!-- <matricula-manhaDivertida :isEditingManha="isEditingManha"></matricula-manhaDivertida> -->
 
         <!--  MODAL SO PRA CASAIS  -->
-        <matricula-casais :isEditingCasais="isEditingCasais"> </matricula-casais>
+        <!-- <matricula-casais :isEditingCasais="isEditingCasais"> </matricula-casais> -->
 
         <!--  MODAL CAFE & COMUNHAO  -->
-        <matricula-cafeComunhao :isEditingCafeComunhao="isEditingCafeComunhao"> </matricula-cafeComunhao>
+        <!-- <matricula-cafeComunhao :isEditingCafeComunhao="isEditingCafeComunhao"> </matricula-cafeComunhao> -->
+
+        <!-- MODAL EBD MUSICOS -->
+        <matricula-ebdMusicos :isEditingEbdMusicos="isEditingEbdMusicos" :edicao="null"> </matricula-ebdMusicos>
 
     </div>
 </template>
@@ -116,15 +150,14 @@ export default {
 
     data() {
         return {
-            erros:{}, isEditing:null, isEditingManha:null, isEditingCasais:null, isEditingCafeComunhao:null,
+            erros:{}, isEditing:null, isEditingManha:null, isEditingCasais:null, isEditingCafeComunhao:null, isEditingEbdMusicos: false,
             matricula:{
-                nome:'', sobrenome:'', nascimento:'',
-                // cpf:'', rg:'', orgao_emissor:'', uf:'',
-                email:'', classe:'batismo', isEvangelico:0, sexo:0, conversao:'', membresia:'',
-                telefones:{tel1:'',tel2:null,}, endereco:{logradouro:'', bairro:'', num:'', cep:'', complemento:'', cidade:''},
+               nome: '', sobrenome: '', nascimento:'', email:'', telefone:'', grupo_mma:[], tempo_mma:'', instrumento:[],
+               naipe_vocal:'', pgm:'', tempo_pgm:'', preferencia_horario:'', versiculo:'',
             },
 
-            showManhaDivertida:false, showEbdDiscipuladora:true, showSoPraCasais: false, showCafeComunhao: false,
+            showManhaDivertida:false, showEbdDiscipuladora:false, showSoPraCasais: false, showCafeComunhao: false,
+            showEbdMusicos: true,
         }
     },
 
@@ -169,6 +202,15 @@ export default {
                nome: '', sobrenome: '', contato:'', qtd_participantes: null, payment: null, valor:null, doacoes: new Array(8).fill(false),
             }
             $('#modalCafeComunhao').modal('show');
+        },
+
+        abrirModalEbdMusicos(){
+            this.erros={}; this.isEditingEbdMusicos = false;
+            this.matricula = {
+               nome: '', sobrenome: '', nascimento:'', email:'', telefone:'', grupo_mma:[], tempo_mma:'', instrumento:[],
+               naipe_vocal:'', pgm:'', tempo_pgm:'', preferencia_horario:'', versiculo:'',
+            }
+            $('#modalEbdMusicos').modal('show');
         },
 
     },

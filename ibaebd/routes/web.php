@@ -21,9 +21,11 @@ Route::get('/ebd', function () { return view('ebd_discipuladora'); });
 
 Route::get('/manha_divertida', function () { return view('manha_divertida'); });
 
-Route::get('/socasais', function () { return view('casais');});
+Route::get('/socasais', function () { return view('casais'); });
 
-Route::get('/cafe_comunhao', function () { return view('cafeComunhao');});
+Route::get('/cafe_comunhao', function () { return view('cafeComunhao'); });
+
+Route::get('/ebd_musicos', function () { return view('ebdMusicos'); });
 
 Auth::routes();
 
@@ -31,6 +33,7 @@ Route::post('/atualizar','MatriculaController@atualizar');
 Route::post('/inscricaoManhaDivertida/atualizar','InscricaoManhaDivertidaController@atualizar');
 Route::post('/casais/atualizar','CasalController@atualizar');
 Route::post('/cafeComunhao/atualizar','CafeComunhaoController@store');
+Route::post('/ebdMusicos/atualizar','EbdMusicosController@atualizar');
 
 Route::group(['middleware'=>'auth'],function(){
     Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
@@ -61,4 +64,9 @@ Route::group(['middleware'=>'auth'],function(){
 Route::group(['middleware'=>'auth'],function(){
     Route::get('/cafeComunhao','CafeComunhaoController@getCafeComunhaos')->middleware('verified');
     Route::delete('/cafeComunhao/deletar/{id}','CafeComunhaoController@deletar');
+});
+
+Route::group(['middleware'=>'auth'],function(){
+    Route::get('/ebdMusicos','EbdMusicosController@getEbdMusicos')->middleware('verified');
+    Route::delete('/ebdMusicos/deletar/{id}','EbdMusicosController@deletar');
 });

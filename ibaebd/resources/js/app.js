@@ -36,6 +36,9 @@ Vue.component('lista-casais',require('./components/ListaSoPraCasais.vue').defaul
 Vue.component('matricula-cafeComunhao',require('./components/MatriculaCafeComunhao.vue').default);
 Vue.component('lista-cafe-comunhao',require('./components/ListaCafeComunhao.vue').default);
 
+Vue.component('matricula-ebdMusicos',require('./components/MatriculaEbdMusicos.vue').default);
+Vue.component('lista-ebd-musicos',require('./components/ListaEbdMusicos.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
